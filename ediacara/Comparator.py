@@ -1,3 +1,6 @@
+import pandas
+
+
 class ComparatorGroup:
     """Analyse alignments to a set of references.
 
@@ -20,12 +23,27 @@ class ComparatorGroup:
 
     def create_comparator(self, reference_name):
         subset_paf = self.paf[self.paf["target_name"] == reference_name]
-        subset_tsv = self.tsv[self.tsv[0] == reference_name]
+        subset_tsv = self.tsv[self.tsv[0] == reference_name]  # first column is name
         alignment = {"paf": subset_paf, "tsv": subset_tsv}
 
         comparator = Comparator({reference_name: self.references[reference_name]}, alignment)
 
         return comparator
+
+    @staticmethod
+    def load_tsv(tsv_path):
+        """Create a dataframe from a tsv file of depth counts.
+
+
+        **Parameters**
+
+        **tsv_path**
+        > Path to output of `samtools depth -aa` (`str`).
+        """
+        tsv = pandas.read_csv(tsv_path, sep="\t", header=None)
+        tsv.columns = ["name", "position", "depth"]
+
+        return tsv
 
 
 class Comparator:

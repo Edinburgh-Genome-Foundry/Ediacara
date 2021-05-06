@@ -1,1 +1,1 @@
-from .Comparator import Comparator
+from .Comparator import Comparator, ComparatorGroup
