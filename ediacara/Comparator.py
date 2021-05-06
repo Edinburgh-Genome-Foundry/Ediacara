@@ -15,6 +15,7 @@ class ComparatorGroup:
     was created from the output of `paftools.js sam2paf` and the TSV dataframe was
     created from the output of `samtools depth -aa`.
     """
+
     def __init__(self, references, alignments):
         self.references = references
         self.paf = alignments["paf"]
@@ -26,9 +27,44 @@ class ComparatorGroup:
         subset_tsv = self.tsv[self.tsv[0] == reference_name]  # first column is name
         alignment = {"paf": subset_paf, "tsv": subset_tsv}
 
-        comparator = Comparator({reference_name: self.references[reference_name]}, alignment)
+        comparator = Comparator(
+            {reference_name: self.references[reference_name]}, alignment
+        )
 
         return comparator
+
+    @staticmethod
+    def load_paf(paf_path):
+        """Create a dataframe from a paf file of alignments.
+
+
+        **Parameters**
+
+        **paf_path**
+        > Path (`str`) to PAF file: `paftools.js sam2paf aln.sam > aln.paf`.
+        """
+        paf = pandas.read_csv(paf_path, sep="\t", header=None)
+
+        # First 12 columns are defined by the format:
+        columns_12 = [
+            "query_name",
+            "query_length",
+            "query_start",
+            "query_end",
+            "strand",
+            "target_name",
+            "target_length",
+            "target_start",
+            "target_end",
+            "mapping_matches",
+            "mapping_size",
+            "mapping_quality",
+        ]
+        # For additional columns optionally created during alignment:
+        columns_13plus = [str(index) for index in range(12, len(paf.columns))]
+        paf.columns = columns_12 + columns_13plus
+
+        return paf
 
     @staticmethod
     def load_tsv(tsv_path):
@@ -59,6 +95,7 @@ class Comparator:
     > Dictionary of pandas dataframes: {"paf": df_paf, "tsv": df_tsv}. The dataframes
     contain entries only for the reference.
     """
+
     def __init__(self, reference, alignment):
         self.reference = reference
         self.paf = alignment["paf"]
