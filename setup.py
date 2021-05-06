@@ -13,5 +13,11 @@ setup(
     long_description_content_type="text/x-rst",
     keywords="biology",
     packages=find_packages(exclude="docs"),
-    install_requires=["pandas"],
+    install_requires=[
+        "matplotlib",
+        "numpy",
+        "pandas",
+        "biopython",
+        "dna_features_viewer",
+    ],
 )
