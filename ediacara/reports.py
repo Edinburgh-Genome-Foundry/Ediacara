@@ -1,6 +1,7 @@
 from datetime import datetime
 import os
 
+import matplotlib.pyplot as plt
 import pandas
 
 from pdf_reports import (
@@ -8,6 +9,7 @@ from pdf_reports import (
     pug_to_html,
     write_report,
 )
+import pdf_reports.tools as pdf_tools
 
 from .version import __version__
 
@@ -45,10 +47,15 @@ def write_pdf_report(target, comparator, csv_path=None):
     **csv_path**
     > Path to CSV output of results (`str`). Default no CSV.
     """
+    fig = comparator.plot_coverage()
+    figure_data = pdf_tools.figure_data(fig, fmt="svg")
+    plt.close(fig)
+
     html = end_pug_to_html(
         REPORT_TEMPLATE,
         id=comparator.record.id,
         reference_length=len(comparator.record),
+        figure_data=figure_data,
     )
 
     # if csv_path is not None:

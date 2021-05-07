@@ -122,7 +122,7 @@ class Comparator:
         # Plot
         ######
         fig, (ax1, ax2, ax3) = plt.subplots(
-            3, 1, figsize=(12, 6), sharex=True, gridspec_kw={"height_ratios": [4, 1, 1]}
+            3, 1, figsize=(7, 4), sharex=True, gridspec_kw={"height_ratios": [4, 1, 1]}
         )
         graphic_record = dna_features_viewer.BiopythonTranslator().translate_record(
             self.record
@@ -169,6 +169,8 @@ class Comparator:
             linestyle="--",
             linewidth=0.8,
         )
+
+        return fig
 
     def get_weak_read_histogram_data(self, cutoff):
         """Create data for the plotting function.
