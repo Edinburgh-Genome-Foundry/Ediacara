@@ -1,0 +1,1700 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.0">
+    
+    
+      
+        <title>Comparator - Ediacara</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.b5d04df8.min.css">
+      
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.9ab2c1f8.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#4caf50">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="green" data-md-color-accent="lightgreen">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#module-ediacaracomparator" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../../.." title="Ediacara" class="md-header-nav__button md-logo" aria-label="Ediacara">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Ediacara
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Comparator
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/Edinburgh-Genome-Foundry/Ediacara/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ediacara
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Ediacara" class="md-nav__button md-logo" aria-label="Ediacara">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Ediacara
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/Edinburgh-Genome-Foundry/Ediacara/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ediacara
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Reference
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Reference" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-1" type="checkbox" id="nav-2-1" checked>
+    
+    <label class="md-nav__link" for="nav-2-1">
+      Ediacara
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Ediacara" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Ediacara
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Comparator
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Comparator" class="md-nav__link md-nav__link--active">
+      Comparator
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comparator" class="md-nav__link">
+    Comparator
+  </a>
+  
+    <nav class="md-nav" aria-label="Comparator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get_weak_read_histogram_data" class="md-nav__link">
+    get_weak_read_histogram_data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plot_coverage" class="md-nav__link">
+    plot_coverage
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparatorgroup" class="md-nav__link">
+    ComparatorGroup
+  </a>
+  
+    <nav class="md-nav" aria-label="ComparatorGroup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#static-methods" class="md-nav__link">
+    Static methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Static methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load_paf" class="md-nav__link">
+    load_paf
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load_tsv" class="md-nav__link">
+    load_tsv
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods_1" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create_comparator" class="md-nav__link">
+    create_comparator
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../reports/" title="Reports" class="md-nav__link">
+      Reports
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version/" title="Version" class="md-nav__link">
+      Version
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comparator" class="md-nav__link">
+    Comparator
+  </a>
+  
+    <nav class="md-nav" aria-label="Comparator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get_weak_read_histogram_data" class="md-nav__link">
+    get_weak_read_histogram_data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plot_coverage" class="md-nav__link">
+    plot_coverage
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparatorgroup" class="md-nav__link">
+    ComparatorGroup
+  </a>
+  
+    <nav class="md-nav" aria-label="ComparatorGroup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#static-methods" class="md-nav__link">
+    Static methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Static methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load_paf" class="md-nav__link">
+    load_paf
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load_tsv" class="md-nav__link">
+    load_tsv
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods_1" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create_comparator" class="md-nav__link">
+    create_comparator
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/Edinburgh-Genome-Foundry/Ediacara/edit/master/reference/ediacara/Comparator.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="module-ediacaracomparator">Module ediacara.Comparator</h1>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">statistics</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span>
+
+<span class="kn">import</span> <span class="nn">Bio</span>
+
+<span class="kn">import</span> <span class="nn">dna_features_viewer</span>
+
+<span class="k">class</span> <span class="nc">ComparatorGroup</span><span class="p">:</span>
+
+    <span class="sd">&quot;&quot;&quot;Analyse alignments to a set of references.</span>
+
+<span class="sd">    **Parameters**</span>
+
+<span class="sd">    **references**</span>
+
+<span class="sd">    &gt; Dictionary of name: Biopython record.</span>
+
+<span class="sd">    **alignments**</span>
+
+<span class="sd">    &gt; Dictionary of pandas dataframes: {&quot;paf&quot;: df_paf, &quot;tsv&quot;: df_tsv}. The PAF dataframe</span>
+
+<span class="sd">    was created from the output of `paftools.js sam2paf` and the TSV dataframe was</span>
+
+<span class="sd">    created from the output of `samtools depth -aa`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">references</span><span class="p">,</span> <span class="n">alignments</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">references</span> <span class="o">=</span> <span class="n">references</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">paf</span> <span class="o">=</span> <span class="n">alignments</span><span class="p">[</span><span class="s2">&quot;paf&quot;</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">tsv</span> <span class="o">=</span> <span class="n">alignments</span><span class="p">[</span><span class="s2">&quot;tsv&quot;</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">comparators</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">create_comparator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reference_name</span><span class="p">):</span>
+
+        <span class="n">subset_paf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">paf</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">paf</span><span class="p">[</span><span class="s2">&quot;target_name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">reference_name</span><span class="p">]</span>
+
+        <span class="n">subset_tsv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tsv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">tsv</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">reference_name</span><span class="p">]</span>
+
+        <span class="n">alignment</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;paf&quot;</span><span class="p">:</span> <span class="n">subset_paf</span><span class="p">,</span> <span class="s2">&quot;tsv&quot;</span><span class="p">:</span> <span class="n">subset_tsv</span><span class="p">}</span>
+
+        <span class="n">comparator</span> <span class="o">=</span> <span class="n">Comparator</span><span class="p">(</span>
+
+            <span class="p">{</span><span class="n">reference_name</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">references</span><span class="p">[</span><span class="n">reference_name</span><span class="p">]},</span> <span class="n">alignment</span>
+
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">comparator</span>
+
+    <span class="nd">@staticmethod</span>
+
+    <span class="k">def</span> <span class="nf">load_paf</span><span class="p">(</span><span class="n">paf_path</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Create a dataframe from a paf file of alignments.</span>
+
+<span class="sd">        **Parameters**</span>
+
+<span class="sd">        **paf_path**</span>
+
+<span class="sd">        &gt; Path (`str`) to PAF file: `paftools.js sam2paf aln.sam &gt; aln.paf`.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">paf</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">paf_path</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+        <span class="c1"># First 12 columns are defined by the format:</span>
+
+        <span class="n">columns_12</span> <span class="o">=</span> <span class="p">[</span>
+
+            <span class="s2">&quot;query_name&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;query_length&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;query_start&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;query_end&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;strand&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;target_name&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;target_length&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;target_start&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;target_end&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;mapping_matches&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;mapping_size&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;mapping_quality&quot;</span><span class="p">,</span>
+
+        <span class="p">]</span>
+
+        <span class="c1"># For additional columns optionally created during alignment:</span>
+
+        <span class="n">columns_13plus</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">paf</span><span class="o">.</span><span class="n">columns</span><span class="p">))]</span>
+
+        <span class="n">paf</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">columns_12</span> <span class="o">+</span> <span class="n">columns_13plus</span>
+
+        <span class="k">return</span> <span class="n">paf</span>
+
+    <span class="nd">@staticmethod</span>
+
+    <span class="k">def</span> <span class="nf">load_tsv</span><span class="p">(</span><span class="n">tsv_path</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Create a dataframe from a tsv file of depth counts.</span>
+
+<span class="sd">        **Parameters**</span>
+
+<span class="sd">        **tsv_path**</span>
+
+<span class="sd">        &gt; Path to output of `samtools depth -aa` (`str`).</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">tsv</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">tsv_path</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+        <span class="n">tsv</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;position&quot;</span><span class="p">,</span> <span class="s2">&quot;depth&quot;</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">tsv</span>
+
+<span class="k">class</span> <span class="nc">Comparator</span><span class="p">:</span>
+
+    <span class="sd">&quot;&quot;&quot;Analyse alignments to a reference.</span>
+
+<span class="sd">    **Parameters**</span>
+
+<span class="sd">    **reference**</span>
+
+<span class="sd">    &gt; Dictionary of one name: one Biopython record.</span>
+
+<span class="sd">    **alignment**</span>
+
+<span class="sd">    &gt; Dictionary of pandas dataframes: {&quot;paf&quot;: df_paf, &quot;tsv&quot;: df_tsv}. The dataframes</span>
+
+<span class="sd">    contain entries only for the reference.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">alignment</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">reference</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">record</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">reference</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">paf</span> <span class="o">=</span> <span class="n">alignment</span><span class="p">[</span><span class="s2">&quot;paf&quot;</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">tsv</span> <span class="o">=</span> <span class="n">alignment</span><span class="p">[</span><span class="s2">&quot;tsv&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">plot_coverage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Plot the reference with the coverage and weak reads.&quot;&quot;&quot;</span>
+
+        <span class="n">xx</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="kp">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">record</span><span class="o">.</span><span class="n">seq</span><span class="p">))</span>  <span class="c1"># for the plot x axis</span>
+
+        <span class="n">yy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tsv</span><span class="p">[</span><span class="s2">&quot;depth&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>  <span class="c1"># for plotting coverage</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;zz&quot;</span><span class="p">):</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_weak_read_histogram_data</span><span class="p">(</span><span class="n">cutoff</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+
+            <span class="c1"># for plotting weak reads (less than 80% of the read maps)</span>
+
+        <span class="c1"># Plot</span>
+
+        <span class="c1">######</span>
+
+        <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span>
+
+            <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;height_ratios&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]}</span>
+
+        <span class="p">)</span>
+
+        <span class="n">graphic_record</span> <span class="o">=</span> <span class="n">dna_features_viewer</span><span class="o">.</span><span class="n">BiopythonTranslator</span><span class="p">()</span><span class="o">.</span><span class="n">translate_record</span><span class="p">(</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">record</span>
+
+        <span class="p">)</span>
+
+        <span class="n">graphic_record</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">with_ruler</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">strand_in_label_threshold</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+        <span class="c1"># Plot coverage</span>
+
+        <span class="n">ax2</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+
+        <span class="n">median_yy</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="kp">median</span><span class="p">(</span><span class="n">yy</span><span class="p">)</span>
+
+        <span class="n">stdev_yy</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="n">stdev</span><span class="p">(</span><span class="n">yy</span><span class="p">)</span>
+
+        <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Coverage [x]&quot;</span><span class="p">)</span>
+
+        <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Base [bp]&quot;</span><span class="p">)</span>
+
+        <span class="n">ax2</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span>
+
+            <span class="n">y</span><span class="o">=</span><span class="n">median_yy</span><span class="p">,</span> <span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span>
+
+        <span class="p">)</span>
+
+        <span class="n">ax2</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span>
+
+            <span class="n">y</span><span class="o">=</span><span class="n">median_yy</span> <span class="o">-</span> <span class="n">stdev_yy</span><span class="p">,</span>
+
+            <span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+
+            <span class="n">xmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+
+            <span class="n">color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span>
+
+            <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span>
+
+            <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+
+        <span class="p">)</span>
+
+        <span class="n">ax2</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span>
+
+            <span class="n">y</span><span class="o">=</span><span class="n">median_yy</span> <span class="o">+</span> <span class="n">stdev_yy</span><span class="p">,</span>
+
+            <span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+
+            <span class="n">xmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+
+            <span class="n">color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span>
+
+            <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span>
+
+            <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+
+        <span class="p">)</span>
+
+        <span class="c1"># Plot low-quality reads:</span>
+
+        <span class="n">ax3</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">zz</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+
+        <span class="n">ax3</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Weak reads&quot;</span><span class="p">)</span>
+
+        <span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Base [bp]&quot;</span><span class="p">)</span>
+
+        <span class="n">ax3</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span>
+
+            <span class="n">y</span><span class="o">=</span><span class="n">median_yy</span> <span class="o">*</span> <span class="mf">0.15</span><span class="p">,</span>  <span class="c1"># 15% of max coverage as guide</span>
+
+            <span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+
+            <span class="n">xmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+
+            <span class="n">color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span>
+
+            <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span>
+
+            <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">fig</span>
+
+    <span class="k">def</span> <span class="nf">get_weak_read_histogram_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Create data for the plotting function.</span>
+
+<span class="sd">        **Parameters**</span>
+
+<span class="sd">        **cutoff**</span>
+
+<span class="sd">        &gt; (`float`). Recommended: 0.8.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># For each read, calculate the proportion of bases that map, then create an array</span>
+
+        <span class="c1"># for each read that is below the cutoff. The sum of these arrays will give the</span>
+
+        <span class="c1"># depth of aligning bad reads for each base of the reference.</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">proportion_maps</span> <span class="o">=</span> <span class="p">(</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">paf</span><span class="p">[</span><span class="s2">&quot;mapping_matches&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">paf</span><span class="p">[</span><span class="s2">&quot;query_length&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+
+        <span class="p">)</span>
+
+        <span class="n">filtered_paf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">paf</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">proportion_maps</span> <span class="o">&lt;</span> <span class="n">cutoff</span><span class="p">]</span>
+
+        <span class="n">array_length</span> <span class="o">=</span> <span class="n">filtered_paf</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;target_length&quot;</span><span class="p">]</span>
+
+        <span class="n">histogram_array</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">filtered_paf</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+
+            <span class="n">read_array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">array_length</span>
+
+            <span class="n">start</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;target_start&quot;</span><span class="p">]</span>
+
+            <span class="n">end</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;target_end&quot;</span><span class="p">]</span>
+
+            <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
+
+            <span class="n">read_array</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span>
+
+            <span class="n">histogram_array</span><span class="o">.</span><span class="kp">append</span><span class="p">(</span><span class="n">read_array</span><span class="p">)</span>
+
+        <span class="n">histogram_numpy_array</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="kp">array</span><span class="p">(</span><span class="n">histogram_array</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">zz</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="kp">sum</span><span class="p">(</span><span class="n">histogram_numpy_array</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+
+
+</details>
+<h2 id="classes">Classes</h2>
+<h3 id="comparator">Comparator</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Comparator</span><span class="p">(</span>
+    <span class="n">reference</span><span class="p">,</span>
+    <span class="n">alignment</span>
+<span class="p">)</span>
+</code></pre></div>
+
+
+<p>Analyse alignments to a reference.</p>
+<p><strong>Parameters</strong></p>
+<p><strong>reference</strong></p>
+<blockquote>
+<p>Dictionary of one name: one Biopython record.</p>
+</blockquote>
+<p><strong>alignment</strong></p>
+<blockquote>
+<p>Dictionary of pandas dataframes: {"paf": df_paf, "tsv": df_tsv}. The dataframes
+contain entries only for the reference.</p>
+</blockquote>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nl">Comparator</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">    </span><span class="ss">&quot;&quot;&quot;Analyse alignments to a reference.</span>
+
+<span class="ss">    **Parameters**</span>
+
+<span class="ss">    **reference**</span>
+
+<span class="ss">    &gt; Dictionary of one name: one Biopython record.</span>
+
+<span class="ss">    **alignment**</span>
+
+<span class="ss">    &gt; Dictionary of pandas dataframes: {&quot;</span><span class="n">paf</span><span class="ss">&quot;: df_paf, &quot;</span><span class="n">tsv</span><span class="ss">&quot;: df_tsv}. The dataframes</span>
+
+<span class="ss">    contain entries only for the reference.</span>
+
+<span class="ss">    &quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">reference</span><span class="p">,</span><span class="w"> </span><span class="n">alignment</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">next</span><span class="p">(</span><span class="n">iter</span><span class="p">(</span><span class="n">reference</span><span class="p">))</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">record</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">next</span><span class="p">(</span><span class="n">iter</span><span class="p">(</span><span class="n">reference</span><span class="p">.</span><span class="k">values</span><span class="p">()))</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">paf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alignment</span><span class="o">[</span><span class="n">&quot;paf&quot;</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">tsv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alignment</span><span class="o">[</span><span class="n">&quot;tsv&quot;</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">plot_coverage</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot;Plot the reference with the coverage and weak reads.&quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">xx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numpy</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">record</span><span class="p">.</span><span class="n">seq</span><span class="p">))</span><span class="w">  </span><span class="err">#</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">axis</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">yy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">tsv</span><span class="o">[</span><span class="n">&quot;depth&quot;</span><span class="o">]</span><span class="p">.</span><span class="n">to_list</span><span class="p">()</span><span class="w">  </span><span class="err">#</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">plotting</span><span class="w"> </span><span class="n">coverage</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">hasattr</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;zz&quot;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">get_weak_read_histogram_data</span><span class="p">(</span><span class="n">cutoff</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">plotting</span><span class="w"> </span><span class="n">weak</span><span class="w"> </span><span class="k">reads</span><span class="w"> </span><span class="p">(</span><span class="k">less</span><span class="w"> </span><span class="k">than</span><span class="w"> </span><span class="mi">80</span><span class="o">%</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">read</span><span class="w"> </span><span class="n">maps</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="n">Plot</span><span class="w"></span>
+
+<span class="w">        </span><span class="err">######</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">fig</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">ax1</span><span class="p">,</span><span class="w"> </span><span class="n">ax2</span><span class="p">,</span><span class="w"> </span><span class="n">ax3</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plt</span><span class="p">.</span><span class="n">subplots</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">            </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">),</span><span class="w"> </span><span class="n">sharex</span><span class="o">=</span><span class="k">True</span><span class="p">,</span><span class="w"> </span><span class="n">gridspec_kw</span><span class="o">=</span><span class="err">{</span><span class="ss">&quot;height_ratios&quot;</span><span class="err">:</span><span class="w"> </span><span class="o">[</span><span class="n">4, 1, 1</span><span class="o">]</span><span class="err">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">graphic_record</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dna_features_viewer</span><span class="p">.</span><span class="n">BiopythonTranslator</span><span class="p">().</span><span class="n">translate_record</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">record</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">graphic_record</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span><span class="w"> </span><span class="n">with_ruler</span><span class="o">=</span><span class="k">False</span><span class="p">,</span><span class="w"> </span><span class="n">strand_in_label_threshold</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="n">Plot</span><span class="w"> </span><span class="n">coverage</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ax2</span><span class="p">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span><span class="w"> </span><span class="n">yy</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">median_yy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">statistics</span><span class="p">.</span><span class="n">median</span><span class="p">(</span><span class="n">yy</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">stdev_yy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">statistics</span><span class="p">.</span><span class="nf">stdev</span><span class="p">(</span><span class="n">yy</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ax2</span><span class="p">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ax2</span><span class="p">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="ss">&quot;Coverage [x]&quot;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ax2</span><span class="p">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="ss">&quot;Base [bp]&quot;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ax2</span><span class="p">.</span><span class="n">axhline</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">y</span><span class="o">=</span><span class="n">median_yy</span><span class="p">,</span><span class="w"> </span><span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="ss">&quot;grey&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linestyle</span><span class="o">=</span><span class="ss">&quot;-&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ax2</span><span class="p">.</span><span class="n">axhline</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">y</span><span class="o">=</span><span class="n">median_yy</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">stdev_yy</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">xmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">color</span><span class="o">=</span><span class="ss">&quot;grey&quot;</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">linestyle</span><span class="o">=</span><span class="ss">&quot;--&quot;</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ax2</span><span class="p">.</span><span class="n">axhline</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">y</span><span class="o">=</span><span class="n">median_yy</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">stdev_yy</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">xmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">color</span><span class="o">=</span><span class="ss">&quot;grey&quot;</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">linestyle</span><span class="o">=</span><span class="ss">&quot;--&quot;</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="n">Plot</span><span class="w"> </span><span class="n">low</span><span class="o">-</span><span class="n">quality</span><span class="w"> </span><span class="k">reads</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ax3</span><span class="p">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">zz</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="ss">&quot;red&quot;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ax3</span><span class="p">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ax3</span><span class="p">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="ss">&quot;Weak reads&quot;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ax3</span><span class="p">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="ss">&quot;Base [bp]&quot;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ax3</span><span class="p">.</span><span class="n">axhline</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">y</span><span class="o">=</span><span class="n">median_yy</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.15</span><span class="p">,</span><span class="w">  </span><span class="err">#</span><span class="w"> </span><span class="mi">15</span><span class="o">%</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nf">max</span><span class="w"> </span><span class="n">coverage</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">guide</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">xmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">color</span><span class="o">=</span><span class="ss">&quot;grey&quot;</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">linestyle</span><span class="o">=</span><span class="ss">&quot;--&quot;</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">fig</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">get_weak_read_histogram_data</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">cutoff</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot;Create data for the plotting function.</span>
+
+<span class="ss">        **Parameters**</span>
+
+<span class="ss">        **cutoff**</span>
+
+<span class="ss">        &gt; (`float`). Recommended: 0.8.</span>
+
+<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="k">For</span><span class="w"> </span><span class="k">each</span><span class="w"> </span><span class="k">read</span><span class="p">,</span><span class="w"> </span><span class="n">calculate</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">proportion</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">bases</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="k">map</span><span class="p">,</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="k">create</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="k">array</span><span class="w"></span>
+
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">each</span><span class="w"> </span><span class="k">read</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">below</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">cutoff</span><span class="p">.</span><span class="w"> </span><span class="n">The</span><span class="w"> </span><span class="nf">sum</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">these</span><span class="w"> </span><span class="n">arrays</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">give</span><span class="w"> </span><span class="n">the</span><span class="w"></span>
+
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="k">depth</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">aligning</span><span class="w"> </span><span class="n">bad</span><span class="w"> </span><span class="k">reads</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">each</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">reference</span><span class="p">.</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">proportion_maps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">paf</span><span class="o">[</span><span class="n">&quot;mapping_matches&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">paf</span><span class="o">[</span><span class="n">&quot;query_length&quot;</span><span class="o">]</span><span class="p">.</span><span class="n">to_list</span><span class="p">()</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">filtered_paf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">paf</span><span class="o">[</span><span class="n">self.proportion_maps &lt; cutoff</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">array_length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filtered_paf</span><span class="p">.</span><span class="n">iloc</span><span class="o">[</span><span class="n">0</span><span class="o">][</span><span class="n">&quot;target_length&quot;</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">histogram_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">[]</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="k">index</span><span class="p">,</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">filtered_paf</span><span class="p">.</span><span class="n">iterrows</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">read_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">array_length</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">row</span><span class="o">[</span><span class="n">&quot;target_start&quot;</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">row</span><span class="o">[</span><span class="n">&quot;target_end&quot;</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="k">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="k">start</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">read_array</span><span class="o">[</span><span class="n">start:end</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">values</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">histogram_array</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">read_array</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">histogram_numpy_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numpy</span><span class="p">.</span><span class="k">array</span><span class="p">(</span><span class="n">histogram_array</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">zz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numpy</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="n">histogram_numpy_array</span><span class="p">,</span><span class="w"> </span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+
+
+</details>
+<hr />
+<h4 id="methods">Methods</h4>
+<h5 id="get_weak_read_histogram_data">get_weak_read_histogram_data</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_weak_read_histogram_data</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">cutoff</span>
+<span class="p">)</span>
+</code></pre></div>
+
+
+<p>Create data for the plotting function.</p>
+<p><strong>Parameters</strong></p>
+<p><strong>cutoff</strong></p>
+<blockquote>
+<p>(<code>float</code>). Recommended: 0.8.</p>
+</blockquote>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">get_weak_read_histogram_data</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">)</span><span class="o">:</span>
+
+        <span class="s2">&quot;</span><span class="se">&quot;&quot;</span><span class="s2">Create data for the plotting function.</span>
+
+<span class="s2">        **Parameters**</span>
+
+<span class="s2">        **cutoff**</span>
+
+<span class="s2">        &gt; (`float`). Recommended: 0.8.</span>
+
+<span class="s2">        </span><span class="se">&quot;&quot;</span><span class="s2">&quot;</span>
+
+        <span class="c1"># For each read, calculate the proportion of bases that map, then create an array</span>
+
+        <span class="c1"># for each read that is below the cutoff. The sum of these arrays will give the</span>
+
+        <span class="c1"># depth of aligning bad reads for each base of the reference.</span>
+
+        <span class="n">self</span><span class="p">.</span><span class="n">proportion_maps</span> <span class="o">=</span> <span class="p">(</span>
+
+            <span class="n">self</span><span class="p">.</span><span class="n">paf</span><span class="err">[</span><span class="s2">&quot;mapping_matches&quot;</span><span class="err">]</span> <span class="o">/</span> <span class="n">self</span><span class="p">.</span><span class="n">paf</span><span class="err">[</span><span class="s2">&quot;query_length&quot;</span><span class="err">]</span><span class="p">.</span><span class="n">to_list</span><span class="p">()</span>
+
+        <span class="p">)</span>
+
+        <span class="n">filtered_paf</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">paf</span><span class="err">[</span><span class="n">self</span><span class="p">.</span><span class="n">proportion_maps</span> <span class="o">&lt;</span> <span class="n">cutoff</span><span class="err">]</span>
+
+        <span class="n">array_length</span> <span class="o">=</span> <span class="n">filtered_paf</span><span class="p">.</span><span class="n">iloc</span><span class="err">[</span><span class="mi">0</span><span class="err">][</span><span class="s2">&quot;target_length&quot;</span><span class="err">]</span>
+
+        <span class="n">histogram_array</span> <span class="o">=</span> <span class="err">[]</span>
+
+        <span class="k">for</span> <span class="k">index</span><span class="p">,</span> <span class="k">row</span> <span class="k">in</span> <span class="n">filtered_paf</span><span class="p">.</span><span class="n">iterrows</span><span class="p">()</span><span class="o">:</span>
+
+            <span class="n">read_array</span> <span class="o">=</span> <span class="err">[</span><span class="mi">0</span><span class="err">]</span> <span class="o">*</span> <span class="n">array_length</span>
+
+            <span class="k">start</span> <span class="o">=</span> <span class="k">row</span><span class="err">[</span><span class="s2">&quot;target_start&quot;</span><span class="err">]</span>
+
+            <span class="k">end</span> <span class="o">=</span> <span class="k">row</span><span class="err">[</span><span class="s2">&quot;target_end&quot;</span><span class="err">]</span>
+
+            <span class="k">values</span> <span class="o">=</span> <span class="err">[</span><span class="mi">1</span><span class="err">]</span> <span class="o">*</span> <span class="p">(</span><span class="k">end</span> <span class="o">-</span> <span class="k">start</span><span class="p">)</span>
+
+            <span class="n">read_array</span><span class="err">[</span><span class="k">start</span><span class="o">:</span><span class="k">end</span><span class="err">]</span> <span class="o">=</span> <span class="k">values</span>
+
+            <span class="n">histogram_array</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">read_array</span><span class="p">)</span>
+
+        <span class="n">histogram_numpy_array</span> <span class="o">=</span> <span class="n">numpy</span><span class="p">.</span><span class="k">array</span><span class="p">(</span><span class="n">histogram_array</span><span class="p">)</span>
+
+        <span class="n">self</span><span class="p">.</span><span class="n">zz</span> <span class="o">=</span> <span class="n">numpy</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="n">histogram_numpy_array</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+
+
+</details>
+<h5 id="plot_coverage">plot_coverage</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">plot_coverage</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span>
+</code></pre></div>
+
+
+<p>Plot the reference with the coverage and weak reads.</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">plot_coverage</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot;Plot the reference with the coverage and weak reads.&quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">xx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numpy</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">record</span><span class="p">.</span><span class="n">seq</span><span class="p">))</span><span class="w">  </span><span class="err">#</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">axis</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">yy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">tsv</span><span class="o">[</span><span class="n">&quot;depth&quot;</span><span class="o">]</span><span class="p">.</span><span class="n">to_list</span><span class="p">()</span><span class="w">  </span><span class="err">#</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">plotting</span><span class="w"> </span><span class="n">coverage</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">hasattr</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;zz&quot;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">get_weak_read_histogram_data</span><span class="p">(</span><span class="n">cutoff</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">plotting</span><span class="w"> </span><span class="n">weak</span><span class="w"> </span><span class="k">reads</span><span class="w"> </span><span class="p">(</span><span class="k">less</span><span class="w"> </span><span class="k">than</span><span class="w"> </span><span class="mi">80</span><span class="o">%</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">read</span><span class="w"> </span><span class="n">maps</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="n">Plot</span><span class="w"></span>
+
+<span class="w">        </span><span class="err">######</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">fig</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">ax1</span><span class="p">,</span><span class="w"> </span><span class="n">ax2</span><span class="p">,</span><span class="w"> </span><span class="n">ax3</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plt</span><span class="p">.</span><span class="n">subplots</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">            </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">),</span><span class="w"> </span><span class="n">sharex</span><span class="o">=</span><span class="k">True</span><span class="p">,</span><span class="w"> </span><span class="n">gridspec_kw</span><span class="o">=</span><span class="err">{</span><span class="ss">&quot;height_ratios&quot;</span><span class="err">:</span><span class="w"> </span><span class="o">[</span><span class="n">4, 1, 1</span><span class="o">]</span><span class="err">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">graphic_record</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dna_features_viewer</span><span class="p">.</span><span class="n">BiopythonTranslator</span><span class="p">().</span><span class="n">translate_record</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">record</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">graphic_record</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span><span class="w"> </span><span class="n">with_ruler</span><span class="o">=</span><span class="k">False</span><span class="p">,</span><span class="w"> </span><span class="n">strand_in_label_threshold</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="n">Plot</span><span class="w"> </span><span class="n">coverage</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ax2</span><span class="p">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span><span class="w"> </span><span class="n">yy</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">median_yy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">statistics</span><span class="p">.</span><span class="n">median</span><span class="p">(</span><span class="n">yy</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">stdev_yy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">statistics</span><span class="p">.</span><span class="nf">stdev</span><span class="p">(</span><span class="n">yy</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ax2</span><span class="p">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ax2</span><span class="p">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="ss">&quot;Coverage [x]&quot;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ax2</span><span class="p">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="ss">&quot;Base [bp]&quot;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ax2</span><span class="p">.</span><span class="n">axhline</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">y</span><span class="o">=</span><span class="n">median_yy</span><span class="p">,</span><span class="w"> </span><span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="ss">&quot;grey&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linestyle</span><span class="o">=</span><span class="ss">&quot;-&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ax2</span><span class="p">.</span><span class="n">axhline</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">y</span><span class="o">=</span><span class="n">median_yy</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">stdev_yy</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">xmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">color</span><span class="o">=</span><span class="ss">&quot;grey&quot;</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">linestyle</span><span class="o">=</span><span class="ss">&quot;--&quot;</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ax2</span><span class="p">.</span><span class="n">axhline</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">y</span><span class="o">=</span><span class="n">median_yy</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">stdev_yy</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">xmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">color</span><span class="o">=</span><span class="ss">&quot;grey&quot;</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">linestyle</span><span class="o">=</span><span class="ss">&quot;--&quot;</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="n">Plot</span><span class="w"> </span><span class="n">low</span><span class="o">-</span><span class="n">quality</span><span class="w"> </span><span class="k">reads</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ax3</span><span class="p">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">zz</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="ss">&quot;red&quot;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ax3</span><span class="p">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ax3</span><span class="p">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="ss">&quot;Weak reads&quot;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ax3</span><span class="p">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="ss">&quot;Base [bp]&quot;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ax3</span><span class="p">.</span><span class="n">axhline</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">y</span><span class="o">=</span><span class="n">median_yy</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.15</span><span class="p">,</span><span class="w">  </span><span class="err">#</span><span class="w"> </span><span class="mi">15</span><span class="o">%</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nf">max</span><span class="w"> </span><span class="n">coverage</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">guide</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">xmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">color</span><span class="o">=</span><span class="ss">&quot;grey&quot;</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">linestyle</span><span class="o">=</span><span class="ss">&quot;--&quot;</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">fig</span><span class="w"></span>
+</code></pre></div>
+
+
+</details>
+<h3 id="comparatorgroup">ComparatorGroup</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ComparatorGroup</span><span class="p">(</span>
+    <span class="n">references</span><span class="p">,</span>
+    <span class="n">alignments</span>
+<span class="p">)</span>
+</code></pre></div>
+
+
+<p>Analyse alignments to a set of references.</p>
+<p><strong>Parameters</strong></p>
+<p><strong>references</strong></p>
+<blockquote>
+<p>Dictionary of name: Biopython record.</p>
+</blockquote>
+<p><strong>alignments</strong></p>
+<blockquote>
+<p>Dictionary of pandas dataframes: {"paf": df_paf, "tsv": df_tsv}. The PAF dataframe
+was created from the output of <code>paftools.js sam2paf</code> and the TSV dataframe was
+created from the output of <code>samtools depth -aa</code>.</p>
+</blockquote>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="n">ComparatorGroup</span><span class="p">:</span>
+
+    <span class="sd">&quot;&quot;&quot;Analyse alignments to a set of references.</span>
+
+<span class="sd">    **Parameters**</span>
+
+<span class="sd">    **references**</span>
+
+<span class="sd">    &gt; Dictionary of name: Biopython record.</span>
+
+<span class="sd">    **alignments**</span>
+
+<span class="sd">    &gt; Dictionary of pandas dataframes: {&quot;paf&quot;: df_paf, &quot;tsv&quot;: df_tsv}. The PAF dataframe</span>
+
+<span class="sd">    was created from the output of `paftools.js sam2paf` and the TSV dataframe was</span>
+
+<span class="sd">    created from the output of `samtools depth -aa`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">def</span> <span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">references</span><span class="p">,</span> <span class="n">alignments</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">references</span> <span class="o">=</span> <span class="n">references</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">paf</span> <span class="o">=</span> <span class="n">alignments</span><span class="p">[</span><span class="s2">&quot;paf&quot;</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">tsv</span> <span class="o">=</span> <span class="n">alignments</span><span class="p">[</span><span class="s2">&quot;tsv&quot;</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">comparators</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">def</span> <span class="n">create_comparator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reference_name</span><span class="p">):</span>
+
+        <span class="n">subset_paf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">paf</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">paf</span><span class="p">[</span><span class="s2">&quot;target_name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">reference_name</span><span class="p">]</span>
+
+        <span class="n">subset_tsv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tsv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">tsv</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">reference_name</span><span class="p">]</span>
+
+        <span class="n">alignment</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;paf&quot;</span><span class="p">:</span> <span class="n">subset_paf</span><span class="p">,</span> <span class="s2">&quot;tsv&quot;</span><span class="p">:</span> <span class="n">subset_tsv</span><span class="p">}</span>
+
+        <span class="n">comparator</span> <span class="o">=</span> <span class="n">Comparator</span><span class="p">(</span>
+
+            <span class="p">{</span><span class="n">reference_name</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">references</span><span class="p">[</span><span class="n">reference_name</span><span class="p">]},</span> <span class="n">alignment</span>
+
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">comparator</span>
+
+    <span class="err">@</span><span class="n">staticmethod</span>
+
+    <span class="n">def</span> <span class="n">load_paf</span><span class="p">(</span><span class="n">paf_path</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Create a dataframe from a paf file of alignments.</span>
+
+<span class="sd">        **Parameters**</span>
+
+<span class="sd">        **paf_path**</span>
+
+<span class="sd">        &gt; Path (`str`) to PAF file: `paftools.js sam2paf aln.sam &gt; aln.paf`.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">paf</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">paf_path</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">None</span><span class="p">)</span>
+
+        <span class="c1"># First 12 columns are defined by the format:</span>
+
+        <span class="n">columns_12</span> <span class="o">=</span> <span class="p">[</span>
+
+            <span class="s2">&quot;query_name&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;query_length&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;query_start&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;query_end&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;strand&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;target_name&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;target_length&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;target_start&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;target_end&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;mapping_matches&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;mapping_size&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;mapping_quality&quot;</span><span class="p">,</span>
+
+        <span class="p">]</span>
+
+        <span class="c1"># For additional columns optionally created during alignment:</span>
+
+        <span class="n">columns_13plus</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="n">len</span><span class="p">(</span><span class="n">paf</span><span class="o">.</span><span class="n">columns</span><span class="p">))]</span>
+
+        <span class="n">paf</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">columns_12</span> <span class="o">+</span> <span class="n">columns_13plus</span>
+
+        <span class="k">return</span> <span class="n">paf</span>
+
+    <span class="err">@</span><span class="n">staticmethod</span>
+
+    <span class="n">def</span> <span class="n">load_tsv</span><span class="p">(</span><span class="n">tsv_path</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Create a dataframe from a tsv file of depth counts.</span>
+
+<span class="sd">        **Parameters**</span>
+
+<span class="sd">        **tsv_path**</span>
+
+<span class="sd">        &gt; Path to output of `samtools depth -aa` (`str`).</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">tsv</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">tsv_path</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">None</span><span class="p">)</span>
+
+        <span class="n">tsv</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;position&quot;</span><span class="p">,</span> <span class="s2">&quot;depth&quot;</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">tsv</span>
+</code></pre></div>
+
+
+</details>
+<hr />
+<h4 id="static-methods">Static methods</h4>
+<h5 id="load_paf">load_paf</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">load_paf</span><span class="p">(</span>
+    <span class="n">paf_path</span>
+<span class="p">)</span>
+</code></pre></div>
+
+
+<p>Create a dataframe from a paf file of alignments.</p>
+<p><strong>Parameters</strong></p>
+<p><strong>paf_path</strong></p>
+<blockquote>
+<p>Path (<code>str</code>) to PAF file: <code>paftools.js sam2paf aln.sam &gt; aln.paf</code>.</p>
+</blockquote>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="err">@</span><span class="n">staticmethod</span>
+
+    <span class="n">def</span> <span class="n">load_paf</span><span class="p">(</span><span class="n">paf_path</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Create a dataframe from a paf file of alignments.</span>
+
+<span class="sd">        **Parameters**</span>
+
+<span class="sd">        **paf_path**</span>
+
+<span class="sd">        &gt; Path (`str`) to PAF file: `paftools.js sam2paf aln.sam &gt; aln.paf`.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">paf</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">paf_path</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">None</span><span class="p">)</span>
+
+        <span class="c1"># First 12 columns are defined by the format:</span>
+
+        <span class="n">columns_12</span> <span class="o">=</span> <span class="p">[</span>
+
+            <span class="s2">&quot;query_name&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;query_length&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;query_start&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;query_end&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;strand&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;target_name&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;target_length&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;target_start&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;target_end&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;mapping_matches&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;mapping_size&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;mapping_quality&quot;</span><span class="p">,</span>
+
+        <span class="p">]</span>
+
+        <span class="c1"># For additional columns optionally created during alignment:</span>
+
+        <span class="n">columns_13plus</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="n">len</span><span class="p">(</span><span class="n">paf</span><span class="o">.</span><span class="n">columns</span><span class="p">))]</span>
+
+        <span class="n">paf</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">columns_12</span> <span class="o">+</span> <span class="n">columns_13plus</span>
+
+        <span class="k">return</span> <span class="n">paf</span>
+</code></pre></div>
+
+
+</details>
+<h5 id="load_tsv">load_tsv</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">load_tsv</span><span class="p">(</span>
+    <span class="n">tsv_path</span>
+<span class="p">)</span>
+</code></pre></div>
+
+
+<p>Create a dataframe from a tsv file of depth counts.</p>
+<p><strong>Parameters</strong></p>
+<p><strong>tsv_path</strong></p>
+<blockquote>
+<p>Path to output of <code>samtools depth -aa</code> (<code>str</code>).</p>
+</blockquote>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="err">@</span><span class="n">staticmethod</span>
+
+    <span class="n">def</span> <span class="n">load_tsv</span><span class="p">(</span><span class="n">tsv_path</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Create a dataframe from a tsv file of depth counts.</span>
+
+<span class="sd">        **Parameters**</span>
+
+<span class="sd">        **tsv_path**</span>
+
+<span class="sd">        &gt; Path to output of `samtools depth -aa` (`str`).</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">tsv</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">tsv_path</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">None</span><span class="p">)</span>
+
+        <span class="n">tsv</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;position&quot;</span><span class="p">,</span> <span class="s2">&quot;depth&quot;</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">tsv</span>
+</code></pre></div>
+
+
+</details>
+<h4 id="methods_1">Methods</h4>
+<h5 id="create_comparator">create_comparator</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">create_comparator</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">reference_name</span>
+<span class="p">)</span>
+</code></pre></div>
+
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">create_comparator</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">reference_name</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">subset_paf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">paf</span><span class="o">[</span><span class="n">self.paf[&quot;target_name&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">reference_name</span><span class="err">]</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">subset_tsv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">tsv</span><span class="o">[</span><span class="n">self.tsv[&quot;name&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">reference_name</span><span class="err">]</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">alignment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;paf&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">subset_paf</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;tsv&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">subset_tsv</span><span class="err">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">comparator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Comparator</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">            </span><span class="err">{</span><span class="nl">reference_name</span><span class="p">:</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="k">references</span><span class="o">[</span><span class="n">reference_name</span><span class="o">]</span><span class="err">}</span><span class="p">,</span><span class="w"> </span><span class="n">alignment</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">comparator</span><span class="w"></span>
+</code></pre></div>
+
+
+</details>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../.." title="Home" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Home
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../" title="Index" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Index
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Powered by
+        <a href="http://timothycrosley.github.io/portray">portray.</a>
+        You too can
+        <a href="http://timothycrosley.github.io/portray">
+          portray</a>
+        your Python project well using automatic documentation.
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/vendor.92ffa368.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.5123e3d4.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../../assets/javascripts/worker/search.a68abb33.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
