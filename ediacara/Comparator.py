@@ -173,11 +173,16 @@ class Comparator:
     def get_weak_read_histogram_data(self, cutoff):
         """Create data for the plotting function.
 
+
         **Parameters**
 
         **cutoff**
         > (`float`). Recommended: 0.8.
         """
+        # For each read, calculate the proportion of bases that map, then create an array
+        # for each read that is below the cutoff. The sum of these arrays will give the
+        # depth of aligning bad reads for each base of the reference.
+
         self.proportion_maps = (
             self.paf["mapping_matches"] / self.paf["query_length"].to_list()
         )

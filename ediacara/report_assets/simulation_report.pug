@@ -1,0 +1,34 @@
+#sidebar: p {{sidebar_text}}
+
+.logos
+  img(src="file:///{{ egf_logo_url }}" style="height:40px; width: auto")
+
+hr
+h1 Alignment analysis report
+hr
+
+div(style="margin-top:1cm; margin-bottom:1cm;")
+
+p(style="text-align:left;")
+  b(style='font-size: 60px;') #[span.green ☑]
+  //- b(style='font-size: 20px;') &emsp;&emsp; Success!
+
+p Name and length of reference: #[span.red {{ id }}] (#[span.red {{ reference_length }}] bp).
+
+h3 Coverage plot
+
+//- each reference in references
+//-   .ui.segment.raised
+//-     .ui.title.ribbon.label.teal {{ reference.id }}
+//-     .description <b>Description</b>: {{ reference.description }}
+
+style.
+  .green {
+    color: #86bf86
+  }
+  .grey {
+    color: #b6b6b6
+  }
+  .red {
+    color: #fd5a31
+  }
