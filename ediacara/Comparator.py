@@ -31,7 +31,7 @@ class ComparatorGroup:
         self.comparators = []
 
     def create_comparator(self, reference_name):
-        subset_paf = self.paf[self.paf["target_name"] == reference_name]
+        subset_paf = self.subset_paf(reference_name)
         subset_tsv = self.tsv[self.tsv["name"] == reference_name]
         alignment = {"paf": subset_paf, "tsv": subset_tsv}
 
@@ -40,6 +40,43 @@ class ComparatorGroup:
         )
 
         return comparator
+
+    def subset_paf(self, reference_name):
+        """Subset PAF dataframe for the reference.
+
+        Select reads that align to the reference and also align *best* to the reference.
+
+
+        **Parameters**
+
+        **reference_name**
+        > Name of the reference sequence to filter for (`str`).
+        """
+        # Work only with the values used for filtering:
+        paf3 = self.paf[["query_name", "target_name", "mapping_matches"]]
+        grouped = paf3.groupby("query_name")
+
+        selected_reads = []
+        for name, group in grouped:
+            # not all reads align to the reference:
+            if reference_name in group["target_name"].values:
+                max_matches = group["mapping_matches"].max()
+                # filter that the read aligns best to this reference:
+                if (
+                    max(
+                        group[group["target_name"] == reference_name][
+                            "mapping_matches"
+                        ].values
+                    )
+                    == max_matches
+                ):
+                    selected_reads += [name]
+
+        # Get only the reads aligning to reference, then filter for selected reads:
+        subset_paf = self.paf[self.paf["target_name"] == reference_name]
+        subset_paf_filtered = subset_paf[subset_paf["query_name"].isin(selected_reads)]
+
+        return subset_paf_filtered
 
     @staticmethod
     def load_paf(paf_path):
