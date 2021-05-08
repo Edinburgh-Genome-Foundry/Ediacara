@@ -72,11 +72,22 @@ class ComparatorGroup:
                 ):
                     selected_reads += [name]
 
-        # Get only the reads aligning to reference, then filter for selected reads:
-        subset_paf = self.paf[self.paf["target_name"] == reference_name]
-        subset_paf_filtered = subset_paf[subset_paf["query_name"].isin(selected_reads)]
+        # Filter for selected reads ..
+        subset_paf_filtered = self.paf[self.paf["query_name"].isin(selected_reads)]
+        # .. add column for counts of multialigning reads,
+        # this is for the compensation in get_weak_read_histogram_data():
+        groups = (
+            subset_paf_filtered.groupby("query_name")["query_name"]
+            .size()
+            .reset_index(name="multialign")
+        )
+        subset_paf_filtered_merged = subset_paf_filtered.merge(groups, how="left")
+        # ..then get only the reads aligning to reference:
+        subset_paf_final = subset_paf_filtered_merged[
+            subset_paf_filtered_merged["target_name"] == reference_name
+        ]
 
-        return subset_paf_filtered
+        return subset_paf_final
 
     @staticmethod
     def load_paf(paf_path):
@@ -233,7 +244,8 @@ class Comparator:
             read_array = [0] * array_length
             start = row["target_start"]
             end = row["target_end"]
-            values = [1] * (end - start)
+            value = 1 / row["multialign"]
+            values = [value] * (end - start)
             read_array[start:end] = values
             histogram_array.append(read_array)
 
