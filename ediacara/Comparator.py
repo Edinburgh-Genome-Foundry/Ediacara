@@ -206,7 +206,13 @@ class Comparator:
 
         # Plot low-quality reads:
         ax3.fill_between(xx, self.zz, alpha=0.8, color="red")
-        ax3.set_ylim(bottom=0)
+        # ensure plot stays small if there are no problems:
+        if max(self.zz) < 0.15 * max(yy):
+            ylim_top = 0.15 * max(yy)
+        else:
+            ylim_top = max(self.zz)
+
+        ax3.set_ylim(bottom=0, top=ylim_top)
         ax3.set_ylabel("Weak reads")
         ax3.set_xlabel("Base [bp]")
         ax3.axhline(
