@@ -56,6 +56,8 @@ def write_pdf_report(target, comparator, csv_path=None):
         id=comparator.record.id,
         reference_length=len(comparator.record),
         figure_data=figure_data,
+        low_positions=comparator.low_coverage_positions_string,
+        bad_positions=comparator.high_error_positions_string,
     )
 
     # if csv_path is not None:

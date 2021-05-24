@@ -180,6 +180,8 @@ class Comparator:
         self.low_coverage_positions_string = ", ".join(
             "-".join(map(str, (g[0], g[-1])[: len(g)])) for g in G
         )
+        if self.low_coverage_positions_string == "":
+            self.low_coverage_positions_string = "-"  # looks better in the pdf report
 
         # This section creates a list of bad position to be reported
         if not hasattr(self, "zz"):
@@ -200,12 +202,14 @@ class Comparator:
         self.high_error_positions_string = ", ".join(
             "-".join(map(str, (g[0], g[-1])[: len(g)])) for g in H
         )
+        if self.high_error_positions_string == "":
+            self.high_error_positions_string = "-"
 
     def plot_coverage(self):
         """Plot the reference with the coverage and weak reads."""
 
         if not hasattr(self, "xx"):
-            self.calculate_stats()
+            self.calculate_stats()  # also calculates yy and zz
 
         # Plot
         ######
