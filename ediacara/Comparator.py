@@ -158,14 +158,18 @@ class Comparator:
         self.record = next(iter(reference.values()))
         self.paf = alignment["paf"]
         self.tsv = alignment["tsv"]
+        self.coverage_cutoff = 0.15  # 15% of median coverage
 
     def calculate_stats(self):
         self.xx = numpy.arange(len(self.record.seq))  # for the plot x axis
         self.yy = self.tsv["depth"].to_list()  # for plotting coverage
         self.median_yy = statistics.median(self.yy)
 
+        # This section creates a list of low coverage position to be reported
         indices = [
-            i for i, value in enumerate(self.yy) if value < self.median_yy * 0.15
+            i
+            for i, value in enumerate(self.yy)
+            if value < self.median_yy * self.coverage_cutoff
         ]
         G = (
             list(x)
@@ -177,15 +181,31 @@ class Comparator:
             "-".join(map(str, (g[0], g[-1])[: len(g)])) for g in G
         )
 
+        # This section creates a list of bad position to be reported
+        if not hasattr(self, "zz"):
+            self.get_weak_read_histogram_data(cutoff=0.8)
+            # for plotting weak reads (less than 80% of the read maps)
+        indices_errors = [
+            i
+            for i, value in enumerate(self.zz)
+            if value > self.median_yy * self.coverage_cutoff
+        ]
+        H = (
+            list(x)
+            for _, x in itertools.groupby(
+                indices_errors, lambda x, c=itertools.count(): next(c) - x
+            )
+        )
+
+        self.high_error_positions_string = ", ".join(
+            "-".join(map(str, (g[0], g[-1])[: len(g)])) for g in H
+        )
+
     def plot_coverage(self):
         """Plot the reference with the coverage and weak reads."""
 
         if not hasattr(self, "xx"):
             self.calculate_stats()
-
-        if not hasattr(self, "zz"):
-            self.get_weak_read_histogram_data(cutoff=0.8)
-            # for plotting weak reads (less than 80% of the read maps)
 
         # Plot
         ######
@@ -223,12 +243,11 @@ class Comparator:
             linewidth=0.8,
         )
 
-        coverage_cutoff = 0.15  # 15% of median coverage
         # Plot low-quality reads:
         ax3.fill_between(self.xx, self.zz, alpha=0.8, color="red")
         # ensure plot stays small if there are no problems:
-        if max(self.zz) < coverage_cutoff * max(self.yy):
-            ylim_top = coverage_cutoff * max(self.yy)
+        if max(self.zz) < self.coverage_cutoff * max(self.yy):
+            ylim_top = self.coverage_cutoff * max(self.yy)
         else:
             ylim_top = max(self.zz)
 
@@ -236,7 +255,7 @@ class Comparator:
         ax3.set_ylabel("Weak reads")
         ax3.set_xlabel("Base [bp]")
         ax3.axhline(
-            y=self.median_yy * coverage_cutoff,
+            y=self.median_yy * self.coverage_cutoff,
             xmin=0,
             xmax=1,
             color="grey",
