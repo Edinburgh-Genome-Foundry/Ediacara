@@ -1,3 +1,4 @@
+import itertools
 import statistics
 
 import matplotlib.pyplot as plt
@@ -162,6 +163,19 @@ class Comparator:
         self.xx = numpy.arange(len(self.record.seq))  # for the plot x axis
         self.yy = self.tsv["depth"].to_list()  # for plotting coverage
         self.median_yy = statistics.median(self.yy)
+
+        indices = [
+            i for i, value in enumerate(self.yy) if value < self.median_yy * 0.15
+        ]
+        G = (
+            list(x)
+            for _, x in itertools.groupby(
+                indices, lambda x, c=itertools.count(): next(c) - x
+            )
+        )
+        self.low_coverage_positions_string = ", ".join(
+            "-".join(map(str, (g[0], g[-1])[: len(g)])) for g in G
+        )
 
     def plot_coverage(self):
         """Plot the reference with the coverage and weak reads."""
