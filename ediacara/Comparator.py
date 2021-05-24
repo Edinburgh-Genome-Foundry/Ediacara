@@ -158,11 +158,17 @@ class Comparator:
         self.paf = alignment["paf"]
         self.tsv = alignment["tsv"]
 
+    def calculate_stats(self):
+        self.xx = numpy.arange(len(self.record.seq))  # for the plot x axis
+        self.yy = self.tsv["depth"].to_list()  # for plotting coverage
+        self.median_yy = statistics.median(self.yy)
+
     def plot_coverage(self):
         """Plot the reference with the coverage and weak reads."""
 
-        xx = numpy.arange(len(self.record.seq))  # for the plot x axis
-        self.yy = self.tsv["depth"].to_list()  # for plotting coverage
+        if not hasattr(self, "xx"):
+            self.calculate_stats()
+
         if not hasattr(self, "zz"):
             self.get_weak_read_histogram_data(cutoff=0.8)
             # for plotting weak reads (less than 80% of the read maps)
@@ -178,8 +184,7 @@ class Comparator:
         graphic_record.plot(ax=ax1, with_ruler=False, strand_in_label_threshold=4)
 
         # Plot coverage
-        ax2.fill_between(xx, self.yy, alpha=0.8)
-        self.median_yy = statistics.median(self.yy)
+        ax2.fill_between(self.xx, self.yy, alpha=0.8)
         stdev_yy = statistics.stdev(self.yy)
         ax2.set_ylim(bottom=0)
         ax2.set_ylabel("Coverage [x]")
@@ -205,7 +210,7 @@ class Comparator:
         )
 
         # Plot low-quality reads:
-        ax3.fill_between(xx, self.zz, alpha=0.8, color="red")
+        ax3.fill_between(self.xx, self.zz, alpha=0.8, color="red")
         # ensure plot stays small if there are no problems:
         if max(self.zz) < 0.15 * max(self.yy):
             ylim_top = 0.15 * max(self.yy)
