@@ -209,11 +209,12 @@ class Comparator:
             linewidth=0.8,
         )
 
+        coverage_cutoff = 0.15  # 15% of median coverage
         # Plot low-quality reads:
         ax3.fill_between(self.xx, self.zz, alpha=0.8, color="red")
         # ensure plot stays small if there are no problems:
-        if max(self.zz) < 0.15 * max(self.yy):
-            ylim_top = 0.15 * max(self.yy)
+        if max(self.zz) < coverage_cutoff * max(self.yy):
+            ylim_top = coverage_cutoff * max(self.yy)
         else:
             ylim_top = max(self.zz)
 
@@ -221,7 +222,7 @@ class Comparator:
         ax3.set_ylabel("Weak reads")
         ax3.set_xlabel("Base [bp]")
         ax3.axhline(
-            y=self.median_yy * 0.15,  # 15% of max coverage as guide
+            y=self.median_yy * coverage_cutoff,
             xmin=0,
             xmax=1,
             color="grey",
