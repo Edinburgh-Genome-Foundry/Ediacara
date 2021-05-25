@@ -368,3 +368,13 @@ class Comparator:
                 geneblocks_failed = False
                 ax1, ax2 = diff_blocks.plot(figure_width=7)
                 is_diffblocks_reverse = True
+
+    def filter_fastq(self, fastq_path, target=None):
+        if target is None:
+            target = fastq_path + "_filtered.fastq"
+        read_names = self.paf["query_name"].to_list()
+        input_seq_iterator = SeqIO.parse(fastq_path, "fastq")
+        seq_iterator = (
+            record for record in input_seq_iterator if record.name in read_names
+        )
+        SeqIO.write(seq_iterator, target, "fastq")
