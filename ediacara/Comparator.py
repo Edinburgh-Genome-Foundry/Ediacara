@@ -5,9 +5,11 @@ import matplotlib.pyplot as plt
 import numpy
 import pandas
 
-import Bio
+from weighted_levenshtein import lev
+from Bio import SeqIO
 
 import dna_features_viewer
+import geneblocks
 
 
 class ComparatorGroup:
@@ -301,3 +303,68 @@ class Comparator:
         histogram_numpy_array = numpy.array(histogram_array)
 
         self.zz = numpy.sum(histogram_numpy_array, axis=0)
+
+    def compare_with_assembly(self, assembly_path):
+        """Compare the reference with a Canu assembly file.
+
+
+        **Parameters**
+
+        **assembly**
+        > Path to Canu assembly file (`str`).
+        """
+        # Note that in this context `assembly` means a genome assembly created from
+        # sequencing reads.
+        self.assembly = SeqIO.read(handle=assembly_path, format="fasta")
+        length_ratio = len(self.assembly) / len(self.record)
+        if 0.95 < length_ratio < 1.1:
+            self.is_length_ok = True
+        else:
+            self.is_length_ok = False
+            difference_bases = len(self.assembly) - len(self.record)
+            difference_percent = (length_ratio - 1) * 100  # get as percent
+            if difference_percent > 0:
+                difference_text = "longer"
+            else:
+                difference_text = "shorter"
+            print(
+                "Incorrect length! The assembly is %d%% (%d bp) %s than the reference."
+                % (int(abs(difference_percent)), difference_bases, difference_text)
+            )
+            return
+
+        # To find out the orientation of the assembly, we compare using Levenshtein
+        lev_distance = lev(str(self.assembly.seq), str(self.record.seq))
+        lev_rc_distance = lev(
+            str(self.assembly.seq.reverse_complement()), str(self.record.seq)
+        )
+        if lev_distance < lev_rc_distance:
+            self.is_assembly_reverse_complement = False
+            assembly_for_diffblocks = self.assembly
+        else:
+            self.is_assembly_reverse_complement = True  # for geneblocks
+            assembly_for_diffblocks = self.assembly.reverse_complement()
+
+        try:
+            diff_blocks = geneblocks.DiffBlocks.from_sequences(
+                assembly_for_diffblocks, self.record
+            )
+        except KeyError:
+            geneblocks_failed = True
+        else:
+            geneblocks_failed = False
+            ax1, ax2 = diff_blocks.plot(figure_width=7)
+            is_diffblocks_reverse = False
+
+        if geneblocks_failed:
+            # due to a bug in geneblocks, the reverse order may work:
+            try:
+                diff_blocks = geneblocks.DiffBlocks.from_sequences(
+                    self.record, assembly_for_diffblocks
+                )
+            except KeyError:
+                pass
+            else:
+                geneblocks_failed = False
+                ax1, ax2 = diff_blocks.plot(figure_width=7)
+                is_diffblocks_reverse = True

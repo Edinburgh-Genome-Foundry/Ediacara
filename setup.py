@@ -17,7 +17,9 @@ setup(
         "matplotlib",
         "numpy",
         "pandas",
+        "weighted_levenshtein",
         "biopython",
         "dna_features_viewer",
+        "geneblocks",
     ],
 )
