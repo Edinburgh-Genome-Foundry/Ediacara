@@ -278,7 +278,8 @@ class Comparator:
         **Parameters**
 
         **cutoff**
-        > (`float`). Recommended: 0.8.
+        > Cutoff for proportion of bases that map (`float`). Reads below the cutoff are
+        viewed as weak reads. Recommended value: 0.8 (80%).
         """
         # For each read, calculate the proportion of bases that map, then create an array
         # for each read that is below the cutoff. The sum of these arrays will give the
@@ -307,11 +308,14 @@ class Comparator:
     def compare_with_assembly(self, assembly_path):
         """Compare the reference with a Canu assembly file.
 
+        Check length, orientation (sense or reverse complement), then use GeneBlocks to
+        highlight differences between reference and the plasmid assembly.
+
 
         **Parameters**
 
-        **assembly**
-        > Path to Canu assembly file (`str`).
+        **assembly_path**
+        > Path to Canu assembly FASTA file (`str`).
         """
         # Note that in this context `assembly` means a genome assembly created from
         # sequencing reads.
@@ -370,6 +374,19 @@ class Comparator:
                 is_diffblocks_reverse = True
 
     def filter_fastq(self, fastq_path, target=None):
+        """Filter original FASTQ file for reads that best map to the reference.
+
+        This function is used to obtain a FASTQ file that can be used for Canu assembly.
+
+
+        **Parameters**
+
+        **fastq_path**
+        > Path to FASTQ file (`str`).
+
+        **target**
+        > Path to save the filtered FASTQ file (`str`).
+        """
         if target is None:
             target = fastq_path + "_filtered.fastq"
         read_names = self.paf["query_name"].to_list()
