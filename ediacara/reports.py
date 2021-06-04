@@ -64,17 +64,9 @@ def write_pdf_report(
 
     html = end_pug_to_html(
         REPORT_TEMPLATE,
-        id=comparator.record.id,
-        is_good=comparator.is_good,
-        reference_length=len(comparator.record),
+        comparator=comparator,
         figure_data=figure_data,
-        low_positions=comparator.low_coverage_positions_string,
-        bad_positions=comparator.high_error_positions_string,
-        is_comparison_successful=comparator.is_comparison_successful,
-        incorrect_length_msg=comparator.incorrect_length_msg,
         comparison_figure_data=comparison_figure_data,
-        geneblocks_done=comparator.geneblocks_done,
-        is_diffblocks_reverse=comparator.is_diffblocks_reverse,
     )
 
     # if csv_path is not None:

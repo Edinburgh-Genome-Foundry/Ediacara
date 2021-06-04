@@ -161,6 +161,7 @@ class Comparator:
         self.paf = alignment["paf"]
         self.tsv = alignment["tsv"]
         self.coverage_cutoff = 0.15  # 15% of median coverage
+        self.reference_length = len(self.record)
 
     def calculate_stats(self):
         self.xx = numpy.arange(len(self.record.seq))  # for the plot x axis

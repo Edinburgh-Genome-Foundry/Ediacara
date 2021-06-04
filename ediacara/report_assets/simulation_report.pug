@@ -9,19 +9,19 @@ hr
 
 div(style="margin-top:1cm; margin-bottom:1cm;")
 
-if is_good
+if comparator.is_good
   p(style="text-align:left;")
-    b(style='font-size: 50px;') #[span.green ☑] &ensp; #[span.grey {{ id }}]
+    b(style='font-size: 50px;') #[span.green ☑] &ensp; #[span.grey {{ comparator.record.id }}]
     //- b(style='font-size: 20px;') &emsp;&emsp; Success!
 else
   p(style="text-align:left;")
-    b(style='font-size: 50px;') #[span.red ☒] &ensp; #[span.grey {{ id }}]
+    b(style='font-size: 50px;') #[span.red ☒] &ensp; #[span.grey {{ comparator.record.id }}]
 
   //- p(style="text-align:left;")
   //-   b(style='font-size: 50px;') #[span.yellow ⚠] &ensp; #[span.grey {{ id }}]
 
 p Length of reference: 
-  strong #[span.green {{ reference_length }}]
+  strong #[span.green {{ comparator.reference_length }}]
   | bp.
 
 h3 Coverage plot
@@ -33,28 +33,28 @@ img#diff-figure(src="{{ figure_data }}")
 //-     .ui.title.ribbon.label.teal {{ reference.id }}
 //-     .description <b>Description</b>: {{ reference.description }}
 
-p Positions with low coverage: #[span.red {{ low_positions }} ]
+p Positions with low coverage: #[span.red {{ comparator.low_coverage_positions_string }} ]
 
-p Positions with bad coverage: #[span.red {{ bad_positions }} ]
+p Positions with bad coverage: #[span.red {{ comparator.high_error_positions_string }} ]
 
 
-if geneblocks_done
+if comparator.geneblocks_done
     <div style = "display:block; clear:both; page-break-after:always;"></div>
 
 h3 <i>De novo</i> assembly
 
-if is_comparison_successful
+if comparator.is_comparison_successful
   if geneblocks_done
     p(style='font-size: 8px').
       #[span.red Note]: GeneBlocks comparison of de novo assembly and reference failed.
   else
-    if is_diffblocks_reverse
+    if comparator.is_diffblocks_reverse
       p
         #[span.red Note]: the plot compares the de novo assembly to the reference,
         | therefore there are no annotations.
     img#diff-figure(src="{{ comparison_figure_data }}")
 else
-  p #[span.red Incorrect length!] {{ incorrect_length_msg }}
+  p #[span.red Incorrect length!] {{ comparator.incorrect_length_msg }}
 
 
 <div style = "display:block; clear:both; page-break-after:always;"></div>
@@ -74,7 +74,7 @@ p.
   Each construct is analysed separately. The result is summarised with a symbol:
 
 p #[span.green ☑] : the construct is estimated to be correct
-p #[span.yellow ⚠] : no errors were detected, but the construct cannot be proved to be correct
+p #[span.yellow ⚠] : no errors were detected, but there are warning signs
 p #[span.red ☒] : errors were detected in the construct
 
 p
