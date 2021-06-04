@@ -41,20 +41,23 @@ p Positions with bad coverage: #[span.red {{ comparator.high_error_positions_str
 if comparator.geneblocks_done
     <div style = "display:block; clear:both; page-break-after:always;"></div>
 
-h3 <i>De novo</i> assembly
 
-if comparator.is_comparison_successful
-  if geneblocks_done
-    p(style='font-size: 8px').
-      #[span.red Note]: GeneBlocks comparison of de novo assembly and reference failed.
+if comparator.has_comparison
+
+  h3 <i>De novo</i> assembly
+
+  if comparator.is_comparison_successful
+    if geneblocks_done
+      p(style='font-size: 8px').
+        #[span.red Note]: GeneBlocks comparison of de novo assembly and reference failed.
+    else
+      if comparator.is_diffblocks_reverse
+        p
+          #[span.red Note]: the plot compares the de novo assembly to the reference,
+          | therefore there are no annotations.
+      img#diff-figure(src="{{ comparator.comparison_figure_data }}")
   else
-    if comparator.is_diffblocks_reverse
-      p
-        #[span.red Note]: the plot compares the de novo assembly to the reference,
-        | therefore there are no annotations.
-    img#diff-figure(src="{{ comparator.comparison_figure_data }}")
-else
-  p #[span.red Incorrect length!] {{ comparator.incorrect_length_msg }}
+    p #[span.red Incorrect length!] {{ comparator.incorrect_length_msg }}
 
 
 <div style = "display:block; clear:both; page-break-after:always;"></div>

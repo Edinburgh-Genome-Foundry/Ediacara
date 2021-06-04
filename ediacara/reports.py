@@ -55,12 +55,14 @@ def write_pdf_report(
     comparator.perform_comparison(assembly_path)
     comparator.figure_data = pdf_tools.figure_data(comparator.fig, fmt="svg")
 
-    if comparator.is_comparison_successful:
-        comparator.comparison_figure_data = pdf_tools.figure_data(
-            comparator.comparison_figure, fmt="svg"
-        )
-    else:
-        comparator.comparison_figure_data = None
+    if hasattr(comparator, "is_comparison_successful"):
+        if comparator.is_comparison_successful:
+            comparator.has_comparison = True
+            comparator.comparison_figure_data = pdf_tools.figure_data(
+                comparator.comparison_figure, fmt="svg"
+            )
+        else:
+            comparator.comparison_figure_data = None
 
     html = end_pug_to_html(REPORT_TEMPLATE, comparator=comparator,)
 
