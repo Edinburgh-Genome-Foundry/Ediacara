@@ -44,6 +44,10 @@ class ComparatorGroup:
 
         return comparator
 
+    def add_comparator(self, reference_name):
+        """Create comparator and add to the group."""
+        self.comparators += [self.create_comparator(reference_name)]
+
     def subset_paf(self, reference_name):
         """Subset PAF dataframe for the reference.
 
