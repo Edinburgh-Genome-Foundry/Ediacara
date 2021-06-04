@@ -163,6 +163,11 @@ class Comparator:
         self.coverage_cutoff = 0.15  # 15% of median coverage
         self.reference_length = len(self.record)
 
+    def perform_comparison(self, assembly_path):
+        self.fig = self.plot_coverage()
+        plt.close(self.fig)
+        self.comparison_figure = self.compare_with_assembly(assembly_path=assembly_path)
+
     def calculate_stats(self):
         self.xx = numpy.arange(len(self.record.seq))  # for the plot x axis
         self.yy = self.tsv["depth"].to_list()  # for plotting coverage
@@ -384,7 +389,7 @@ class Comparator:
                 return
             else:
                 self.geneblocks_done = False  # overwrite
-                ax1 = diff_blocks.plot(figure_width=7, separate_axes=False)
+                ax1, ax2 = diff_blocks.plot(figure_width=7)
                 self.is_diffblocks_reverse = True
 
         self.is_comparison_successful = True
