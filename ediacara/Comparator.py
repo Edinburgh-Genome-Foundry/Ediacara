@@ -96,6 +96,25 @@ class ComparatorGroup:
 
         return subset_paf_final
 
+    def perform_all_comparisons(self, assembly_paths=None):
+        """Call perform_comparison() on each Comparator.
+
+
+        **Parameters**
+
+        **assembly_paths**
+        > Dictionary of construct name: de novo assembly file.
+        For example: `{"Construct_1": "/path/to/assembly.fa"}`.
+        """
+        if assembly_paths is None:
+            assembly_paths = {}
+        for comparator in self.comparators:
+            try:
+                assembly_path = assembly_paths[comparator.name]
+            except Exception:
+                assembly_path = None
+            comparator.perform_comparison(assembly_path=assembly_path)
+
     @staticmethod
     def load_paf(paf_path):
         """Create a dataframe from a paf file of alignments.
