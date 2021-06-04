@@ -184,6 +184,8 @@ class Comparator:
         )
         if self.low_coverage_positions_string == "":
             self.low_coverage_positions_string = "-"  # looks better in the pdf report
+        else:
+            self.is_good = False
 
         # This section creates a list of bad position to be reported
         if not hasattr(self, "zz"):
@@ -206,6 +208,8 @@ class Comparator:
         )
         if self.high_error_positions_string == "":
             self.high_error_positions_string = "-"
+        else:
+            self.is_good = False
 
     def plot_coverage(self):
         """Plot the reference with the coverage and weak reads."""
@@ -324,8 +328,11 @@ class Comparator:
         if 0.95 < length_ratio < 1.05:  # length within reason
             self.is_length_ok = True  # can compare with expected sequence
             self.incorrect_length_msg = None
+            self.is_good = True
         else:
             self.is_length_ok = False  # do not compare sequences
+            self.is_good = False
+
             difference_bases = len(self.assembly) - len(self.record)
             difference_percent = (length_ratio - 1) * 100  # get as percent
             if difference_percent > 0:

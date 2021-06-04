@@ -9,9 +9,16 @@ hr
 
 div(style="margin-top:1cm; margin-bottom:1cm;")
 
-p(style="text-align:left;")
-  b(style='font-size: 50px;') #[span.yellow ⚠] &ensp; #[span.grey {{ id }}]
-  //- b(style='font-size: 20px;') &emsp;&emsp; Success!
+if is_good
+  p(style="text-align:left;")
+    b(style='font-size: 50px;') #[span.green ☑] &ensp; #[span.grey {{ id }}]
+    //- b(style='font-size: 20px;') &emsp;&emsp; Success!
+else
+  p(style="text-align:left;")
+    b(style='font-size: 50px;') #[span.red ☒] &ensp; #[span.grey {{ id }}]
+
+  //- p(style="text-align:left;")
+  //-   b(style='font-size: 50px;') #[span.yellow ⚠] &ensp; #[span.grey {{ id }}]
 
 p Length of reference: 
   strong #[span.green {{ reference_length }}]

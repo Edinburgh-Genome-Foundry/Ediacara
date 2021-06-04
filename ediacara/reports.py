@@ -65,6 +65,7 @@ def write_pdf_report(
     html = end_pug_to_html(
         REPORT_TEMPLATE,
         id=comparator.record.id,
+        is_good=comparator.is_good,
         reference_length=len(comparator.record),
         figure_data=figure_data,
         low_positions=comparator.low_coverage_positions_string,
