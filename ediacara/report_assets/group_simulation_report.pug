@@ -1,0 +1,133 @@
+#sidebar: p {{sidebar_text}}
+
+.logos
+  img(src="file:///{{ egf_logo_url }}" style="height:40px; width: auto")
+
+hr
+h1 Alignment analysis report
+hr
+
+div(style="margin-top:1cm; margin-bottom:1cm;")
+
+
+
+<div style = "display:block; clear:both; page-break-after:always;"></div>
+
+each comparator in comparatorgroup.comparators
+
+  div(style="margin-top:1cm; margin-bottom:1cm;")
+
+  if comparator.is_good
+    p(style="text-align:left;")
+      b(style='font-size: 50px;') #[span.green ☑] &ensp; #[span.grey {{ comparator.record.id }}]
+      //- b(style='font-size: 20px;') &emsp;&emsp; Success!
+  else
+    p(style="text-align:left;")
+      b(style='font-size: 50px;') #[span.red ☒] &ensp; #[span.grey {{ comparator.record.id }}]
+
+    //- p(style="text-align:left;")
+    //-   b(style='font-size: 50px;') #[span.yellow ⚠] &ensp; #[span.grey {{ id }}]
+
+  p Length of reference: 
+    strong #[span.green {{ comparator.reference_length }}]
+    | bp.
+
+  h3 Coverage plot
+
+  img#diff-figure(src="{{ comparator.figure_data }}")
+
+  //- each reference in references
+  //-   .ui.segment.raised
+  //-     .ui.title.ribbon.label.teal {{ reference.id }}
+  //-     .description <b>Description</b>: {{ reference.description }}
+
+  p Positions with low coverage: #[span.red {{ comparator.low_coverage_positions_string }} ]
+
+  p Positions with bad coverage: #[span.red {{ comparator.high_error_positions_string }} ]
+
+
+  if comparator.geneblocks_done
+      div(style="display:block; clear:both; page-break-after:always")
+
+  if comparator.has_comparison
+    h3 <i>De novo</i> assembly
+
+    if comparator.is_comparison_successful
+      if comparator.geneblocks_done
+        if comparator.is_diffblocks_reverse
+          p
+            #[span.red Note]: the plot compares the <i>de novo</i> assembly to the
+            |  reference (#[span.grey {{ comparator.record.id }}]),
+            |  therefore there are no annotations.
+        else
+          p 
+            strong #[span.grey {{ comparator.record.id }}]
+            | reference vs <i>de novo</i> assembly of reads:
+
+        img#diff-figure(src="{{ comparator.comparison_figure_data }}")
+
+      else
+        p
+          #[span.red Note]: GeneBlocks comparison of de novo assembly and reference failed.
+    else
+      p #[span.red Incorrect length!] {{ comparator.incorrect_length_msg }}
+
+
+  <div style = "display:block; clear:both; page-break-after:always;"></div>
+
+
+h2 Appendix
+
+p The report consists of 3 sections: summary, analysis, appendix.
+
+p
+  h5 Summary page
+p The first page summarises the results and other details for each construct.
+
+p
+  h5 Analysis pages
+p.
+  Each construct is analysed separately. The result is summarised with a symbol:
+
+p #[span.green ☑] : correct construct, based on no detection of errors
+p #[span.yellow ⚠] : warning signs are present, but below the error thresholds
+p #[span.red ☒] : errors were detected in the construct
+
+p
+  strong Coverage
+p.
+  The coverage plot displays the number of reads
+  aligning to each base of the reference, in blue. This is useful for detecting deletions.
+  The quality of each read is the proportion of the read aligning to the reference.
+  The number of bad (low quality) reads aligning to each base is displayed in red.
+  This is useful for detecting insertions. The dashed line shows the set threshold.
+p.
+  Positions with low coverage and bad read coverage are also listed.
+  Low coverage = below the coverage threshold.
+  Bad read coverage = above the bad read threshold.
+
+p
+  strong Assembly
+p.
+  The reads are assembled into a <i>de novo</i> plasmid sequence that is compared with
+  the reference. If the lengths differ more than 5%, then an error is displayed here,
+  otherwise a
+  <a href="https://edinburgh-genome-foundry.github.io/Geneblocks/">GeneBlocks</a>
+  plot is made.
+
+
+
+
+style.
+  .green {
+    color: #86bf86
+  }
+  .grey {
+    color: #a9a9a9
+  }
+  .red {
+    color: #fd5a31
+  }
+  .yellow {
+    color: #f7b500
+  }

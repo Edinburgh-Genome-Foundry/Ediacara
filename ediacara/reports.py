@@ -16,6 +16,7 @@ from .version import __version__
 THIS_PATH = os.path.dirname(os.path.realpath(__file__))
 ASSETS_PATH = os.path.join(THIS_PATH, "report_assets")
 REPORT_TEMPLATE = os.path.join(ASSETS_PATH, "simulation_report.pug")
+GROUP_REPORT_TEMPLATE = os.path.join(ASSETS_PATH, "group_simulation_report.pug")
 STYLESHEET = os.path.join(ASSETS_PATH, "report_style.css")
 
 
@@ -30,6 +31,40 @@ def end_pug_to_html(template, **context):
         if k not in context:
             context[k] = defaults[k]
     return pug_to_html(template, **context)
+
+
+def write_comparatorgroup_report(target, comparatorgroup):
+    """Write an alignment report with a PDF summary.
+
+
+    **Parameters**
+
+    **target**
+    > Path for PDF file.
+
+    **comparatorgroup**
+    > ComparatorGroup instance.
+    """
+    if not comparatorgroup.comparisons_performed:
+        return "Run perform_all_comparisons()!"
+
+    for comparator in comparatorgroup.comparators:
+        comparator.figure_data = pdf_tools.figure_data(comparator.fig, fmt="svg")
+
+        if hasattr(comparator, "is_comparison_successful"):
+            if comparator.is_comparison_successful:
+                comparator.has_comparison = True
+                height = comparator.comparison_figure.figure.get_size_inches()[1]
+                if height > 10:
+                    height = 10  # to fit on one page
+                comparator.comparison_figure_data = pdf_tools.figure_data(
+                    comparator.comparison_figure, fmt="svg", size=[7, height]
+                )
+            else:
+                comparator.comparison_figure_data = None
+
+    html = end_pug_to_html(GROUP_REPORT_TEMPLATE, comparatorgroup=comparatorgroup)
+    write_report(html, target, extra_stylesheets=(STYLESHEET,))
 
 
 def write_pdf_report(

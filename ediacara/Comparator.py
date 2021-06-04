@@ -114,6 +114,7 @@ class ComparatorGroup:
             except Exception:
                 assembly_path = None
             comparator.perform_comparison(assembly_path=assembly_path)
+        self.comparisons_performed = True
 
     @staticmethod
     def load_paf(paf_path):
@@ -399,14 +400,14 @@ class Comparator:
                 assembly_for_diffblocks, self.record
             )
         except KeyError:
-            self.geneblocks_done = True
-        else:
             self.geneblocks_done = False
-            ax1, ax2 = diff_blocks.plot(figure_width=7)
+        else:
+            self.geneblocks_done = True
+            ax1, ax2 = diff_blocks.plot(figure_width=5)
             self.is_diffblocks_reverse = False
 
         # We try again as due to a bug in geneblocks, the reverse order may work:
-        if self.geneblocks_done:
+        if not self.geneblocks_done:
             try:
                 diff_blocks = geneblocks.DiffBlocks.from_sequences(
                     self.record, assembly_for_diffblocks
@@ -414,7 +415,7 @@ class Comparator:
             except KeyError:
                 return
             else:
-                self.geneblocks_done = False  # overwrite
+                self.geneblocks_done = True  # overwrite
                 ax1, ax2 = diff_blocks.plot(figure_width=7)
                 self.is_diffblocks_reverse = True
 
