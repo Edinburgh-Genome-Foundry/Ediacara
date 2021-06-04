@@ -258,7 +258,7 @@ class Comparator:
             ylim_top = max(self.zz)
 
         ax3.set_ylim(bottom=0, top=ylim_top)
-        ax3.set_ylabel("Weak reads")
+        ax3.set_ylabel("Bad reads")
         ax3.set_xlabel("Base [bp]")
         ax3.axhline(
             y=self.median_yy * self.coverage_cutoff,
@@ -317,24 +317,30 @@ class Comparator:
         **assembly_path**
         > Path to Canu assembly FASTA file (`str`).
         """
-        # Note that in this context `assembly` means a genome assembly created from
-        # sequencing reads.
+        # Note that in this context 'assembly' means a de novo genome assembly created
+        # from sequencing reads.
         self.assembly = SeqIO.read(handle=assembly_path, format="fasta")
         length_ratio = len(self.assembly) / len(self.record)
-        if 0.95 < length_ratio < 1.1:
-            self.is_length_ok = True
+        if 0.95 < length_ratio < 1.05:  # length within reason
+            self.is_length_ok = True  # can compare with expected sequence
+            self.incorrect_length_msg = None
         else:
-            self.is_length_ok = False
+            self.is_length_ok = False  # do not compare sequences
             difference_bases = len(self.assembly) - len(self.record)
             difference_percent = (length_ratio - 1) * 100  # get as percent
             if difference_percent > 0:
                 difference_text = "longer"
             else:
                 difference_text = "shorter"
-            print(
-                "Incorrect length! The assembly is %d%% (%d bp) %s than the reference."
+            self.incorrect_length_msg = (
+                "The <i>de novo</i> assembly is %d%% (%d bp) %s than the reference."
                 % (int(abs(difference_percent)), difference_bases, difference_text)
             )
+            # print(self.incorrect_length_msg)
+
+            self.geneblocks_done = False
+            self.is_diffblocks_reverse = None
+            self.is_comparison_successful = False  # for PDF reporting
             return
 
         # To find out the orientation of the assembly, we compare using Levenshtein
@@ -354,24 +360,28 @@ class Comparator:
                 assembly_for_diffblocks, self.record
             )
         except KeyError:
-            geneblocks_failed = True
+            self.geneblocks_done = True
         else:
-            geneblocks_failed = False
+            self.geneblocks_done = False
             ax1, ax2 = diff_blocks.plot(figure_width=7)
-            is_diffblocks_reverse = False
+            self.is_diffblocks_reverse = False
 
-        if geneblocks_failed:
-            # due to a bug in geneblocks, the reverse order may work:
+        # We try again as due to a bug in geneblocks, the reverse order may work:
+        if self.geneblocks_done:
             try:
                 diff_blocks = geneblocks.DiffBlocks.from_sequences(
                     self.record, assembly_for_diffblocks
                 )
             except KeyError:
-                pass
+                return
             else:
-                geneblocks_failed = False
+                self.geneblocks_done = False  # overwrite
                 ax1, ax2 = diff_blocks.plot(figure_width=7)
-                is_diffblocks_reverse = True
+                self.is_diffblocks_reverse = True
+
+        self.is_comparison_successful = True
+
+        return ax1
 
     def filter_fastq(self, fastq_path, target=None):
         """Filter original FASTQ file for reads that best map to the reference.
