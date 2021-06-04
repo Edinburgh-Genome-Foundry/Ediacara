@@ -32,7 +32,9 @@ def end_pug_to_html(template, **context):
     return pug_to_html(template, **context)
 
 
-def write_pdf_report(target, comparator, csv_path=None):
+def write_pdf_report(
+    target, comparator, assembly_path, csv_path=None,
+):
     """Write an alignment report with a PDF summary.
 
 
@@ -44,12 +46,21 @@ def write_pdf_report(target, comparator, csv_path=None):
     **comparator**
     > Comparator instance.
 
+    **assembly_path**
+    > Assembly to compare with. See `Comparator.compare_with_assembly()`.
+
     **csv_path**
     > Path to CSV output of results (`str`). Default no CSV.
     """
     fig = comparator.plot_coverage()
     figure_data = pdf_tools.figure_data(fig, fmt="svg")
     plt.close(fig)
+
+    comparison_figure = comparator.compare_with_assembly(assembly_path=assembly_path)
+    if comparator.is_comparison_successful:
+        comparison_figure_data = pdf_tools.figure_data(comparison_figure, fmt="svg")
+    else:
+        comparison_figure_data = None
 
     html = end_pug_to_html(
         REPORT_TEMPLATE,
@@ -58,6 +69,11 @@ def write_pdf_report(target, comparator, csv_path=None):
         figure_data=figure_data,
         low_positions=comparator.low_coverage_positions_string,
         bad_positions=comparator.high_error_positions_string,
+        is_comparison_successful=comparator.is_comparison_successful,
+        incorrect_length_msg=comparator.incorrect_length_msg,
+        comparison_figure_data=comparison_figure_data,
+        geneblocks_done=comparator.geneblocks_done,
+        is_diffblocks_reverse=comparator.is_diffblocks_reverse,
     )
 
     # if csv_path is not None:
