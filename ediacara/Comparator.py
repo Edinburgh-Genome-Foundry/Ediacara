@@ -384,7 +384,7 @@ class Comparator:
                 return
             else:
                 self.geneblocks_done = False  # overwrite
-                ax1, ax2 = diff_blocks.plot(figure_width=7)
+                ax1 = diff_blocks.plot(figure_width=7, separate_axes=False)
                 self.is_diffblocks_reverse = True
 
         self.is_comparison_successful = True

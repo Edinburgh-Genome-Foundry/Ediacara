@@ -53,21 +53,18 @@ def write_pdf_report(
     > Path to CSV output of results (`str`). Default no CSV.
     """
     fig = comparator.plot_coverage()
-    figure_data = pdf_tools.figure_data(fig, fmt="svg")
+    comparator.figure_data = pdf_tools.figure_data(fig, fmt="svg")
     plt.close(fig)
 
     comparison_figure = comparator.compare_with_assembly(assembly_path=assembly_path)
     if comparator.is_comparison_successful:
-        comparison_figure_data = pdf_tools.figure_data(comparison_figure, fmt="svg")
+        comparator.comparison_figure_data = pdf_tools.figure_data(
+            comparison_figure, fmt="svg"
+        )
     else:
-        comparison_figure_data = None
+        comparator.comparison_figure_data = None
 
-    html = end_pug_to_html(
-        REPORT_TEMPLATE,
-        comparator=comparator,
-        figure_data=figure_data,
-        comparison_figure_data=comparison_figure_data,
-    )
+    html = end_pug_to_html(REPORT_TEMPLATE, comparator=comparator,)
 
     # if csv_path is not None:
     #     analysis_summary.to_csv(csv_path, index=False)

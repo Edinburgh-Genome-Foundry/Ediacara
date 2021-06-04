@@ -26,7 +26,7 @@ p Length of reference:
 
 h3 Coverage plot
 
-img#diff-figure(src="{{ figure_data }}")
+img#diff-figure(src="{{ comparator.figure_data }}")
 
 //- each reference in references
 //-   .ui.segment.raised
@@ -52,7 +52,7 @@ if comparator.is_comparison_successful
       p
         #[span.red Note]: the plot compares the de novo assembly to the reference,
         | therefore there are no annotations.
-    img#diff-figure(src="{{ comparison_figure_data }}")
+    img#diff-figure(src="{{ comparator.comparison_figure_data }}")
 else
   p #[span.red Incorrect length!] {{ comparator.incorrect_length_msg }}
 
@@ -73,8 +73,8 @@ p
 p.
   Each construct is analysed separately. The result is summarised with a symbol:
 
-p #[span.green ☑] : the construct is estimated to be correct
-p #[span.yellow ⚠] : no errors were detected, but there are warning signs
+p #[span.green ☑] : correct construct, based on no detection of errors
+p #[span.yellow ⚠] : warning signs are present, but below the error thresholds
 p #[span.red ☒] : errors were detected in the construct
 
 p
