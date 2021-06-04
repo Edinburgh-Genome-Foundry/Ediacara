@@ -264,7 +264,7 @@ class Comparator:
         ax2.fill_between(self.xx, self.yy, alpha=0.8)
         stdev_yy = statistics.stdev(self.yy)
         ax2.set_ylim(bottom=0)
-        ax2.set_ylabel("Coverage [x]")
+        ax2.set_ylabel("Depth")
         ax2.set_xlabel("Base [bp]")
         ax2.axhline(
             y=self.median_yy, xmin=0, xmax=1, color="grey", linestyle="-", linewidth=0.8
