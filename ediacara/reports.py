@@ -61,7 +61,7 @@ def write_comparatorgroup_report(target, comparatorgroup):
         result = tds[1]  # second element of list is the result symbol
         if result.text == "☑":
             add_css_class(tr, "positive")
-        else:
+        elif result.text == "☒":
             add_css_class(tr, "negative")
 
     # This colours the summary table:

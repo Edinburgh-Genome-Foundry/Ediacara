@@ -252,7 +252,7 @@ class Comparator:
                 assembly_path=assembly_path
             )
         else:
-            self.is_good = None
+            self.has_warnings = True
 
     def calculate_stats(self):
         self.xx = numpy.arange(len(self.record.seq))  # for the plot x axis
