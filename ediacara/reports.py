@@ -79,7 +79,6 @@ def write_comparatorgroup_report(target, comparatorgroup):
 
         if hasattr(comparator, "is_comparison_successful"):
             if comparator.is_comparison_successful:
-                comparator.has_comparison = True
                 height = comparator.comparison_figure.figure.get_size_inches()[1]
                 if height > 10:
                     height = 10  # to fit on one page
@@ -88,6 +87,32 @@ def write_comparatorgroup_report(target, comparatorgroup):
                 )
             else:
                 comparator.comparison_figure_data = None
+
+        comparator.has_comparison_error = True
+        if comparator.geneblocks_outcome == "none":
+            comparator.geneblocks_text = (
+                "Missing <i>de novo</i> assembly file for comparison!"
+            )
+        elif comparator.geneblocks_outcome == "incorrect_length":
+            comparator.geneblocks_text = (
+                "Incorrect length! " + comparator.incorrect_length_msg
+            )
+        elif comparator.geneblocks_outcome == "swapped_diffblocks":
+            comparator.geneblocks_text = (
+                "Note: the plot compares the <i>de novo</i> assembly to the "
+                "reference " + comparator.name + " therefore there are no annotations."
+            )
+        elif comparator.geneblocks_outcome == "geneblocks_error":
+            comparator.geneblocks_text = (
+                "GeneBlocks comparison of <i>de novo<i/> assembly and reference failed."
+            )
+        elif comparator.geneblocks_outcome == "all_good":
+            comparator.geneblocks_text = (
+                "<b>"
+                + comparator.name
+                + "</b> reference vs <i>de novo</i> assembly of reads:"
+            )
+            comparator.has_comparison_error = False
 
     html = end_pug_to_html(GROUP_REPORT_TEMPLATE, comparatorgroup=comparatorgroup)
     write_report(html, target, extra_stylesheets=(STYLESHEET,))

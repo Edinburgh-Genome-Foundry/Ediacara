@@ -136,16 +136,16 @@ class ComparatorGroup:
             number_of_reads_aligning += [str(len(comparator.paf))]
             median_coverages += [str(int(comparator.median_yy))]
 
-            if comparator.has_warnings:
-                self.result_good += 1
-                results += ["⚠"]
+            if comparator.has_errors:
+                self.result_error += 1
+                results += ["☒"]
             else:
-                if comparator.is_good:
+                if comparator.has_warnings:
+                    self.result_warning += 1
+                    results += ["⚠"]
+                else:
                     self.result_good += 1
                     results += ["☑"]
-                else:
-                    self.result_error += 1
-                    results += ["☒"]
 
         self.n_fastq_reads = len(set(self.paf.query_name))
         self.fastq_plot = self.plot_fastq_histogram()
@@ -243,6 +243,8 @@ class Comparator:
         self.coverage_cutoff = 0.15  # 15% of median coverage
         self.reference_length = len(self.record)
         self.has_warnings = False
+        self.has_errors = False
+        self.geneblocks_outcome = "none"  # stores outcome, used in PDF report making
 
     def perform_comparison(self, assembly_path=None):
         self.fig = self.plot_coverage()
@@ -277,7 +279,7 @@ class Comparator:
         if self.low_coverage_positions_string == "":
             self.low_coverage_positions_string = "-"  # looks better in the pdf report
         else:
-            self.is_good = False
+            self.has_errors = True
 
         # This section creates a list of bad position to be reported
         if not hasattr(self, "zz"):
@@ -301,7 +303,7 @@ class Comparator:
         if self.high_error_positions_string == "":
             self.high_error_positions_string = "-"
         else:
-            self.is_good = False
+            self.has_errors = True
 
     def plot_coverage(self):
         """Plot the reference with the coverage and weak reads."""
@@ -420,10 +422,10 @@ class Comparator:
         if 0.95 < length_ratio < 1.05:  # length within reason
             self.is_length_ok = True  # can compare with expected sequence
             self.incorrect_length_msg = None
-            self.is_good = True
         else:
+            self.geneblocks_outcome = "incorrect_length"
             self.is_length_ok = False  # do not compare sequences
-            self.is_good = False
+            self.has_errors = True
 
             difference_bases = len(self.assembly) - len(self.record)
             difference_percent = (length_ratio - 1) * 100  # get as percent
@@ -435,7 +437,6 @@ class Comparator:
                 "The <i>de novo</i> assembly is %d%% (%d bp) %s than the reference."
                 % (int(abs(difference_percent)), difference_bases, difference_text)
             )
-            # print(self.incorrect_length_msg)
 
             self.geneblocks_done = False
             self.is_diffblocks_reverse = None
@@ -460,13 +461,14 @@ class Comparator:
             )
         except KeyError:
             self.geneblocks_done = False
-        else:
+            self.geneblocks_outcome = "geneblocks_error"
+        else:  # diffblocks had no error
             self.geneblocks_done = True
             ax1, ax2 = diff_blocks.plot(figure_width=5)
             self.is_diffblocks_reverse = False
 
         # We try again as due to a bug in geneblocks, the reverse order may work:
-        if not self.geneblocks_done:
+        if self.geneblocks_outcome == "geneblocks_error":
             try:
                 diff_blocks = geneblocks.DiffBlocks.from_sequences(
                     self.record, assembly_for_diffblocks
@@ -477,8 +479,9 @@ class Comparator:
                 self.geneblocks_done = True  # overwrite
                 ax1, ax2 = diff_blocks.plot(figure_width=7)
                 self.is_diffblocks_reverse = True
-
+                self.geneblocks_outcome = "swapped_diffblocks"
         self.is_comparison_successful = True
+        self.geneblocks_outcome = "all_good"
 
         return ax1
 

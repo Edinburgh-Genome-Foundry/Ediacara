@@ -31,8 +31,7 @@ each comparator in comparatorgroup.comparators
   div(style="margin-top:1cm; margin-bottom:1cm;")
 
 
-  unless comparator.is_good
-    //- error
+  if comparator.has_errors
     p(style="text-align:left;")
       b(style='font-size: 50px;') #[span.red ☒] &ensp; #[span.grey {{ comparator.record.id }}]
   else
@@ -55,44 +54,29 @@ each comparator in comparatorgroup.comparators
 
   img#diff-figure(src="{{ comparator.figure_data }}")
 
-  //- each reference in references
-  //-   .ui.segment.raised
-  //-     .ui.title.ribbon.label.teal {{ reference.id }}
-  //-     .description <b>Description</b>: {{ reference.description }}
-
   p Positions with low coverage: #[span.red {{ comparator.low_coverage_positions_string }} ]
 
   p Positions with bad coverage: #[span.red {{ comparator.high_error_positions_string }} ]
 
 
-  if comparator.geneblocks_done
-      div(style="display:block; clear:both; page-break-after:always")
+  unless comparator.has_comparison_error
+    div(style="display:block; clear:both; page-break-after:always")
 
-  if comparator.has_comparison
-    h3 <i>De novo</i> assembly
+  h3 <i>De novo</i> assembly
 
-    if comparator.is_comparison_successful
-      if comparator.geneblocks_done
-        if comparator.is_diffblocks_reverse
-          p
-            #[span.red Note]: the plot compares the <i>de novo</i> assembly to the
-            |  reference (#[span.grey {{ comparator.record.id }}]),
-            |  therefore there are no annotations.
-        else
-          p 
-            strong #[span.grey {{ comparator.record.id }}]
-            | reference vs <i>de novo</i> assembly of reads:
+  if comparator.has_comparison_error
+    p
+      strong #[span.red Error!]
+      | {{ comparator.geneblocks_text }}
 
-        img#diff-figure(src="{{ comparator.comparison_figure_data }}")
+  else
+    p {{ comparator.geneblocks_text }}
 
-      else
-        p
-          #[span.red Note]: GeneBlocks comparison of de novo assembly and reference failed.
-    else
-      p #[span.red Incorrect length!] {{ comparator.incorrect_length_msg }}
+    img#diff-figure(src="{{ comparator.comparison_figure_data }}")
 
 
   <div style = "display:block; clear:both; page-break-after:always;"></div>
+
 
 
 h2 Appendix
