@@ -5,8 +5,10 @@ import matplotlib.pyplot as plt
 import pandas
 
 from pdf_reports import (
+    add_css_class,
     dataframe_to_html,
     pug_to_html,
+    style_table_rows,
     write_report,
 )
 import pdf_reports.tools as pdf_tools
@@ -52,6 +54,22 @@ def write_comparatorgroup_report(target, comparatorgroup):
         comparatorgroup.summary_table, extra_classes=("definition",)
     )
 
+    def tr_modifier(tr):
+        tds = list(tr.find_all("td"))
+        if len(tds) == 0:
+            return
+        result = tds[1]  # second element of list is the result symbol
+        if result.text == "☑":
+            add_css_class(tr, "positive")
+        else:
+            add_css_class(tr, "negative")
+
+    # This colours the summary table:
+    comparatorgroup.report_table = style_table_rows(
+        comparatorgroup.report_table, tr_modifier
+    )
+
+    # Histogram of reads in the report summary
     comparatorgroup.fastq_figure_data = pdf_tools.figure_data(
         comparatorgroup.fastq_plot, fmt="svg"
     )
