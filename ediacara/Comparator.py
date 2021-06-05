@@ -134,6 +134,18 @@ class ComparatorGroup:
                     self.result_error += 1
         self.n_fastq_reads = len(set(self.paf.query_name))
 
+    def plot_fastq_histogram(self, n_bins=50):
+        fig, ax = plt.subplots()
+        plt.hist(
+            self.paf["query_length"],
+            bins=int(self.paf.iloc[0]["target_length"] / n_bins),
+            alpha=0.8,
+        )
+        ax.set_ylabel("Number of reads")
+        ax.set_xlabel("Read length [bp]")
+
+        return fig
+
     @staticmethod
     def load_paf(paf_path):
         """Create a dataframe from a paf file of alignments.
