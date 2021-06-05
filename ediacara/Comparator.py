@@ -115,6 +115,24 @@ class ComparatorGroup:
                 assembly_path = None
             comparator.perform_comparison(assembly_path=assembly_path)
         self.comparisons_performed = True
+        self.summarise_analysis()
+
+    def summarise_analysis(self):
+        """Create variables for the PDF report summary."""
+        self.number_of_constructs = len(self.comparators)
+        self.result_good = 0
+        self.result_warning = 0
+        self.result_error = 0
+
+        for comparator in self.comparators:
+            if comparator.has_warnings:
+                self.result_good += 1
+            else:
+                if comparator.is_good:
+                    self.result_good += 1
+                else:
+                    self.result_error += 1
+        self.n_fastq_reads = len(set(self.paf.query_name))
 
     @staticmethod
     def load_paf(paf_path):
@@ -195,6 +213,8 @@ class Comparator:
             self.comparison_figure = self.compare_with_assembly(
                 assembly_path=assembly_path
             )
+        else:
+            self.is_good = None
 
     def calculate_stats(self):
         self.xx = numpy.arange(len(self.record.seq))  # for the plot x axis
