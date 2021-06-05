@@ -133,6 +133,7 @@ class ComparatorGroup:
                 else:
                     self.result_error += 1
         self.n_fastq_reads = len(set(self.paf.query_name))
+        self.fastq_plot = self.plot_fastq_histogram()
 
     def plot_fastq_histogram(self, n_bins=50):
         fig, ax = plt.subplots()
