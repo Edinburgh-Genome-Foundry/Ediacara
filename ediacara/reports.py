@@ -97,15 +97,16 @@ def write_comparatorgroup_report(target, comparatorgroup):
             comparator.geneblocks_text = (
                 "Incorrect length! " + comparator.incorrect_length_msg
             )
+        elif comparator.geneblocks_outcome == "geneblocks_error":
+            comparator.geneblocks_text = (
+                "GeneBlocks comparison of <i>de novo<i/> assembly and reference failed."
+            )
         elif comparator.geneblocks_outcome == "swapped_diffblocks":
             comparator.geneblocks_text = (
                 "Note: the plot compares the <i>de novo</i> assembly to the "
                 "reference " + comparator.name + " therefore there are no annotations."
             )
-        elif comparator.geneblocks_outcome == "geneblocks_error":
-            comparator.geneblocks_text = (
-                "GeneBlocks comparison of <i>de novo<i/> assembly and reference failed."
-            )
+            comparator.has_comparison_error = False
         elif comparator.geneblocks_outcome == "all_good":
             comparator.geneblocks_text = (
                 "<b>"
@@ -113,6 +114,15 @@ def write_comparatorgroup_report(target, comparatorgroup):
                 + "</b> reference vs <i>de novo</i> assembly of reads:"
             )
             comparator.has_comparison_error = False
+
+        if (
+            hasattr(comparator, "is_assembly_reverse_complement")
+            and comparator.is_assembly_reverse_complement
+        ):
+            comparator.geneblocks_text += (
+                "Note: the <i>de novo<i/> assembly is the "
+                "reverse complement of the reference."
+            )
 
     html = end_pug_to_html(GROUP_REPORT_TEMPLATE, comparatorgroup=comparatorgroup)
     write_report(html, target, extra_stylesheets=(STYLESHEET,))

@@ -466,6 +466,10 @@ class Comparator:
             self.geneblocks_done = True
             ax1, ax2 = diff_blocks.plot(figure_width=5)
             self.is_diffblocks_reverse = False
+            self.is_comparison_successful = True
+            self.geneblocks_outcome = "all_good"
+
+            return ax1
 
         # We try again as due to a bug in geneblocks, the reverse order may work:
         if self.geneblocks_outcome == "geneblocks_error":
@@ -475,15 +479,15 @@ class Comparator:
                 )
             except KeyError:
                 return
+
             else:
                 self.geneblocks_done = True  # overwrite
                 ax1, ax2 = diff_blocks.plot(figure_width=7)
                 self.is_diffblocks_reverse = True
+                self.is_comparison_successful = True
                 self.geneblocks_outcome = "swapped_diffblocks"
-        self.is_comparison_successful = True
-        self.geneblocks_outcome = "all_good"
 
-        return ax1
+                return ax1
 
     def filter_fastq(self, fastq_path, target=None):
         """Filter original FASTQ file for reads that best map to the reference.
