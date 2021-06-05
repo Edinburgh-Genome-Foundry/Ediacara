@@ -47,6 +47,11 @@ def write_comparatorgroup_report(target, comparatorgroup):
     """
     if not comparatorgroup.comparisons_performed:
         return "Run perform_all_comparisons()!"
+
+    comparatorgroup.report_table = dataframe_to_html(
+        comparatorgroup.summary_table, extra_classes=("definition",)
+    )
+
     comparatorgroup.fastq_figure_data = pdf_tools.figure_data(
         comparatorgroup.fastq_plot, fmt="svg"
     )

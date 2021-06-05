@@ -124,16 +124,41 @@ class ComparatorGroup:
         self.result_warning = 0
         self.result_error = 0
 
+        names = []
+        reference_lengths = []
+        results = []
+        number_of_reads_aligning = []
+        median_coverages = []
+
         for comparator in self.comparators:
+            names += [comparator.name]
+            reference_lengths += [str(comparator.reference_length)]
+            number_of_reads_aligning += [str(len(comparator.paf))]
+            median_coverages += [str(int(comparator.median_yy))]
+
             if comparator.has_warnings:
                 self.result_good += 1
+                results += ["⚠"]
             else:
                 if comparator.is_good:
                     self.result_good += 1
+                    results += ["☑"]
                 else:
                     self.result_error += 1
+                    results += ["☒"]
+
         self.n_fastq_reads = len(set(self.paf.query_name))
         self.fastq_plot = self.plot_fastq_histogram()
+
+        # Summary table
+        d = {
+            "Name": pandas.Series(names),
+            "Result": pandas.Series(results),
+            "Length [bp]": pandas.Series(reference_lengths),
+            "FASTQ reads": pandas.Series(number_of_reads_aligning),
+            "Coverage [x]": pandas.Series(median_coverages),
+        }
+        self.summary_table = pandas.DataFrame(d)
 
     def plot_fastq_histogram(self, n_bins=50):
         fig, ax = plt.subplots()

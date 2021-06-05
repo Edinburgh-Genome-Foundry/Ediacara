@@ -12,6 +12,7 @@ div(style="margin-top:1cm; margin-bottom:1cm;")
 
 p Out of <b>{{ comparatorgroup.number_of_constructs }}</b> constructs, there were <b>#[span.green {{ comparatorgroup.result_good }}]/#[span.yellow {{ comparatorgroup.result_warning}}]/#[span.red {{ comparatorgroup.result_error}} ]</b> (☑/⚠/☒) good/uncertain/errored constructs. The analysis yielded the following results:
 
+{{ comparatorgroup.report_table }}
 
 p Histogram of the <b>{{ comparatorgroup.n_fastq_reads }}</b> FASTQ reads:
 
