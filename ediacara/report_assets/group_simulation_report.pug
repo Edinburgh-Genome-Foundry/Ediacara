@@ -9,24 +9,28 @@ hr
 
 div(style="margin-top:1cm; margin-bottom:1cm;")
 
-
-
 <div style = "display:block; clear:both; page-break-after:always;"></div>
 
 each comparator in comparatorgroup.comparators
 
   div(style="margin-top:1cm; margin-bottom:1cm;")
 
-  if comparator.is_good
-    p(style="text-align:left;")
-      b(style='font-size: 50px;') #[span.green ☑] &ensp; #[span.grey {{ comparator.record.id }}]
-      //- b(style='font-size: 20px;') &emsp;&emsp; Success!
-  else
+
+  unless comparator.is_good
+    //- error
     p(style="text-align:left;")
       b(style='font-size: 50px;') #[span.red ☒] &ensp; #[span.grey {{ comparator.record.id }}]
+  else
+    if comparator.has_warnings
+      p(style="text-align:left;")
+        b(style='font-size: 50px;') #[span.yellow ⚠] &ensp; #[span.grey {{ comparator.record.id }}]
 
-    //- p(style="text-align:left;")
-    //-   b(style='font-size: 50px;') #[span.yellow ⚠] &ensp; #[span.grey {{ id }}]
+    else
+      //- all good
+      p(style="text-align:left;")
+        b(style='font-size: 50px;') #[span.green ☑] &ensp; #[span.grey {{ comparator.record.id }}]
+      //- b(style='font-size: 20px;') &emsp;&emsp; Success!
+
 
   p Length of reference: 
     strong #[span.green {{ comparator.reference_length }}]

@@ -186,6 +186,7 @@ class Comparator:
         self.tsv = alignment["tsv"]
         self.coverage_cutoff = 0.15  # 15% of median coverage
         self.reference_length = len(self.record)
+        self.has_warnings = False
 
     def perform_comparison(self, assembly_path=None):
         self.fig = self.plot_coverage()
