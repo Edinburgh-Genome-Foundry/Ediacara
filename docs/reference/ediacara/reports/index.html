@@ -333,6 +333,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#write_comparatorgroup_report" class="md-nav__link">
+    write_comparatorgroup_report
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#write_pdf_report" class="md-nav__link">
     write_pdf_report
   </a>
@@ -421,6 +428,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#write_comparatorgroup_report" class="md-nav__link">
+    write_comparatorgroup_report
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#write_pdf_report" class="md-nav__link">
     write_pdf_report
   </a>
@@ -463,9 +477,13 @@
 
 <span class="kn">from</span> <span class="nn">pdf_reports</span> <span class="kn">import</span> <span class="p">(</span>
 
+    <span class="n">add_css_class</span><span class="p">,</span>
+
     <span class="n">dataframe_to_html</span><span class="p">,</span>
 
     <span class="n">pug_to_html</span><span class="p">,</span>
+
+    <span class="n">style_table_rows</span><span class="p">,</span>
 
     <span class="n">write_report</span><span class="p">,</span>
 
@@ -480,6 +498,8 @@
 <span class="n">ASSETS_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">THIS_PATH</span><span class="p">,</span> <span class="s2">&quot;report_assets&quot;</span><span class="p">)</span>
 
 <span class="n">REPORT_TEMPLATE</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ASSETS_PATH</span><span class="p">,</span> <span class="s2">&quot;simulation_report.pug&quot;</span><span class="p">)</span>
+
+<span class="n">GROUP_REPORT_TEMPLATE</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ASSETS_PATH</span><span class="p">,</span> <span class="s2">&quot;group_simulation_report.pug&quot;</span><span class="p">)</span>
 
 <span class="n">STYLESHEET</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ASSETS_PATH</span><span class="p">,</span> <span class="s2">&quot;report_style.css&quot;</span><span class="p">)</span>
 
@@ -505,7 +525,167 @@
 
     <span class="k">return</span> <span class="n">pug_to_html</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="o">**</span><span class="n">context</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">write_pdf_report</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">comparator</span><span class="p">,</span> <span class="n">csv_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">write_comparatorgroup_report</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">comparatorgroup</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Write an alignment report with a PDF summary.</span>
+
+<span class="sd">    **Parameters**</span>
+
+<span class="sd">    **target**</span>
+
+<span class="sd">    &gt; Path for PDF file.</span>
+
+<span class="sd">    **comparatorgroup**</span>
+
+<span class="sd">    &gt; ComparatorGroup instance.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">comparatorgroup</span><span class="o">.</span><span class="n">comparisons_performed</span><span class="p">:</span>
+
+        <span class="k">return</span> <span class="s2">&quot;Run perform_all_comparisons()!&quot;</span>
+
+    <span class="n">comparatorgroup</span><span class="o">.</span><span class="n">report_table</span> <span class="o">=</span> <span class="n">dataframe_to_html</span><span class="p">(</span>
+
+        <span class="n">comparatorgroup</span><span class="o">.</span><span class="n">summary_table</span><span class="p">,</span> <span class="n">extra_classes</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;definition&quot;</span><span class="p">,)</span>
+
+    <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">tr_modifier</span><span class="p">(</span><span class="n">tr</span><span class="p">):</span>
+
+        <span class="n">tds</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;td&quot;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tds</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+
+            <span class="k">return</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">tds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># second element of list is the result symbol</span>
+
+        <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="s2">&quot;☑&quot;</span><span class="p">:</span>
+
+            <span class="n">add_css_class</span><span class="p">(</span><span class="n">tr</span><span class="p">,</span> <span class="s2">&quot;positive&quot;</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">result</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="s2">&quot;☒&quot;</span><span class="p">:</span>
+
+            <span class="n">add_css_class</span><span class="p">(</span><span class="n">tr</span><span class="p">,</span> <span class="s2">&quot;negative&quot;</span><span class="p">)</span>
+
+    <span class="c1"># This colours the summary table:</span>
+
+    <span class="n">comparatorgroup</span><span class="o">.</span><span class="n">report_table</span> <span class="o">=</span> <span class="n">style_table_rows</span><span class="p">(</span>
+
+        <span class="n">comparatorgroup</span><span class="o">.</span><span class="n">report_table</span><span class="p">,</span> <span class="n">tr_modifier</span>
+
+    <span class="p">)</span>
+
+    <span class="c1"># Histogram of reads in the report summary</span>
+
+    <span class="n">comparatorgroup</span><span class="o">.</span><span class="n">fastq_figure_data</span> <span class="o">=</span> <span class="n">pdf_tools</span><span class="o">.</span><span class="n">figure_data</span><span class="p">(</span>
+
+        <span class="n">comparatorgroup</span><span class="o">.</span><span class="n">fastq_plot</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;svg&quot;</span>
+
+    <span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">comparator</span> <span class="ow">in</span> <span class="n">comparatorgroup</span><span class="o">.</span><span class="n">comparators</span><span class="p">:</span>
+
+        <span class="n">comparator</span><span class="o">.</span><span class="n">figure_data</span> <span class="o">=</span> <span class="n">pdf_tools</span><span class="o">.</span><span class="n">figure_data</span><span class="p">(</span><span class="n">comparator</span><span class="o">.</span><span class="n">fig</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;svg&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">comparator</span><span class="p">,</span> <span class="s2">&quot;is_comparison_successful&quot;</span><span class="p">):</span>
+
+            <span class="k">if</span> <span class="n">comparator</span><span class="o">.</span><span class="n">is_comparison_successful</span><span class="p">:</span>
+
+                <span class="n">height</span> <span class="o">=</span> <span class="n">comparator</span><span class="o">.</span><span class="n">comparison_figure</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">get_size_inches</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+
+                <span class="k">if</span> <span class="n">height</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+
+                    <span class="n">height</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># to fit on one page</span>
+
+                <span class="n">comparator</span><span class="o">.</span><span class="n">comparison_figure_data</span> <span class="o">=</span> <span class="n">pdf_tools</span><span class="o">.</span><span class="n">figure_data</span><span class="p">(</span>
+
+                    <span class="n">comparator</span><span class="o">.</span><span class="n">comparison_figure</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;svg&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="n">height</span><span class="p">]</span>
+
+                <span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+
+                <span class="n">comparator</span><span class="o">.</span><span class="n">comparison_figure_data</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">comparator</span><span class="o">.</span><span class="n">has_comparison_error</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">if</span> <span class="n">comparator</span><span class="o">.</span><span class="n">geneblocks_outcome</span> <span class="o">==</span> <span class="s2">&quot;none&quot;</span><span class="p">:</span>
+
+            <span class="n">comparator</span><span class="o">.</span><span class="n">geneblocks_text</span> <span class="o">=</span> <span class="p">(</span>
+
+                <span class="s2">&quot;Missing &lt;i&gt;de novo&lt;/i&gt; assembly file for comparison!&quot;</span>
+
+            <span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">comparator</span><span class="o">.</span><span class="n">geneblocks_outcome</span> <span class="o">==</span> <span class="s2">&quot;incorrect_length&quot;</span><span class="p">:</span>
+
+            <span class="n">comparator</span><span class="o">.</span><span class="n">geneblocks_text</span> <span class="o">=</span> <span class="p">(</span>
+
+                <span class="s2">&quot;Incorrect length! &quot;</span> <span class="o">+</span> <span class="n">comparator</span><span class="o">.</span><span class="n">incorrect_length_msg</span>
+
+            <span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">comparator</span><span class="o">.</span><span class="n">geneblocks_outcome</span> <span class="o">==</span> <span class="s2">&quot;geneblocks_error&quot;</span><span class="p">:</span>
+
+            <span class="n">comparator</span><span class="o">.</span><span class="n">geneblocks_text</span> <span class="o">=</span> <span class="p">(</span>
+
+                <span class="s2">&quot;GeneBlocks comparison of &lt;i&gt;de novo&lt;i/&gt; assembly and reference failed.&quot;</span>
+
+            <span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">comparator</span><span class="o">.</span><span class="n">geneblocks_outcome</span> <span class="o">==</span> <span class="s2">&quot;swapped_diffblocks&quot;</span><span class="p">:</span>
+
+            <span class="n">comparator</span><span class="o">.</span><span class="n">geneblocks_text</span> <span class="o">=</span> <span class="p">(</span>
+
+                <span class="s2">&quot;Note: the plot compares the &lt;i&gt;de novo&lt;/i&gt; assembly to the &quot;</span>
+
+                <span class="s2">&quot;reference &quot;</span> <span class="o">+</span> <span class="n">comparator</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; therefore there are no annotations.&quot;</span>
+
+            <span class="p">)</span>
+
+            <span class="n">comparator</span><span class="o">.</span><span class="n">has_comparison_error</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">elif</span> <span class="n">comparator</span><span class="o">.</span><span class="n">geneblocks_outcome</span> <span class="o">==</span> <span class="s2">&quot;all_good&quot;</span><span class="p">:</span>
+
+            <span class="n">comparator</span><span class="o">.</span><span class="n">geneblocks_text</span> <span class="o">=</span> <span class="p">(</span>
+
+                <span class="s2">&quot;&lt;b&gt;&quot;</span>
+
+                <span class="o">+</span> <span class="n">comparator</span><span class="o">.</span><span class="n">name</span>
+
+                <span class="o">+</span> <span class="s2">&quot;&lt;/b&gt; reference vs &lt;i&gt;de novo&lt;/i&gt; assembly of reads:&quot;</span>
+
+            <span class="p">)</span>
+
+            <span class="n">comparator</span><span class="o">.</span><span class="n">has_comparison_error</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">if</span> <span class="p">(</span>
+
+            <span class="nb">hasattr</span><span class="p">(</span><span class="n">comparator</span><span class="p">,</span> <span class="s2">&quot;is_assembly_reverse_complement&quot;</span><span class="p">)</span>
+
+            <span class="ow">and</span> <span class="n">comparator</span><span class="o">.</span><span class="n">is_assembly_reverse_complement</span>
+
+        <span class="p">):</span>
+
+            <span class="n">comparator</span><span class="o">.</span><span class="n">geneblocks_text</span> <span class="o">+=</span> <span class="p">(</span>
+
+                <span class="s2">&quot;Note: the &lt;i&gt;de novo&lt;i/&gt; assembly is the &quot;</span>
+
+                <span class="s2">&quot;reverse complement of the reference.&quot;</span>
+
+            <span class="p">)</span>
+
+    <span class="n">html</span> <span class="o">=</span> <span class="n">end_pug_to_html</span><span class="p">(</span><span class="n">GROUP_REPORT_TEMPLATE</span><span class="p">,</span> <span class="n">comparatorgroup</span><span class="o">=</span><span class="n">comparatorgroup</span><span class="p">)</span>
+
+    <span class="n">write_report</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">extra_stylesheets</span><span class="o">=</span><span class="p">(</span><span class="n">STYLESHEET</span><span class="p">,))</span>
+
+<span class="k">def</span> <span class="nf">write_pdf_report</span><span class="p">(</span>
+
+    <span class="n">target</span><span class="p">,</span> <span class="n">comparator</span><span class="p">,</span> <span class="n">assembly_path</span><span class="p">,</span> <span class="n">csv_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+<span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;Write an alignment report with a PDF summary.</span>
 
@@ -519,33 +699,37 @@
 
 <span class="sd">    &gt; Comparator instance.</span>
 
+<span class="sd">    **assembly_path**</span>
+
+<span class="sd">    &gt; Assembly to compare with. See `Comparator.compare_with_assembly()`.</span>
+
 <span class="sd">    **csv_path**</span>
 
 <span class="sd">    &gt; Path to CSV output of results (`str`). Default no CSV.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">fig</span> <span class="o">=</span> <span class="n">comparator</span><span class="o">.</span><span class="n">plot_coverage</span><span class="p">()</span>
+    <span class="n">comparator</span><span class="o">.</span><span class="n">perform_comparison</span><span class="p">(</span><span class="n">assembly_path</span><span class="p">)</span>
 
-    <span class="n">figure_data</span> <span class="o">=</span> <span class="n">pdf_tools</span><span class="o">.</span><span class="n">figure_data</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;svg&quot;</span><span class="p">)</span>
+    <span class="n">comparator</span><span class="o">.</span><span class="n">figure_data</span> <span class="o">=</span> <span class="n">pdf_tools</span><span class="o">.</span><span class="n">figure_data</span><span class="p">(</span><span class="n">comparator</span><span class="o">.</span><span class="n">fig</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;svg&quot;</span><span class="p">)</span>
 
-    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">comparator</span><span class="p">,</span> <span class="s2">&quot;is_comparison_successful&quot;</span><span class="p">):</span>
 
-    <span class="n">html</span> <span class="o">=</span> <span class="n">end_pug_to_html</span><span class="p">(</span>
+        <span class="k">if</span> <span class="n">comparator</span><span class="o">.</span><span class="n">is_comparison_successful</span><span class="p">:</span>
 
-        <span class="n">REPORT_TEMPLATE</span><span class="p">,</span>
+            <span class="n">comparator</span><span class="o">.</span><span class="n">has_comparison</span> <span class="o">=</span> <span class="kc">True</span>
 
-        <span class="nb">id</span><span class="o">=</span><span class="n">comparator</span><span class="o">.</span><span class="n">record</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="n">comparator</span><span class="o">.</span><span class="n">comparison_figure_data</span> <span class="o">=</span> <span class="n">pdf_tools</span><span class="o">.</span><span class="n">figure_data</span><span class="p">(</span>
 
-        <span class="n">reference_length</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">comparator</span><span class="o">.</span><span class="n">record</span><span class="p">),</span>
+                <span class="n">comparator</span><span class="o">.</span><span class="n">comparison_figure</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;svg&quot;</span>
 
-        <span class="n">figure_data</span><span class="o">=</span><span class="n">figure_data</span><span class="p">,</span>
+            <span class="p">)</span>
 
-        <span class="n">low_positions</span><span class="o">=</span><span class="n">comparator</span><span class="o">.</span><span class="n">low_coverage_positions_string</span><span class="p">,</span>
+        <span class="k">else</span><span class="p">:</span>
 
-        <span class="n">bad_positions</span><span class="o">=</span><span class="n">comparator</span><span class="o">.</span><span class="n">high_error_positions_string</span><span class="p">,</span>
+            <span class="n">comparator</span><span class="o">.</span><span class="n">comparison_figure_data</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="p">)</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="n">end_pug_to_html</span><span class="p">(</span><span class="n">REPORT_TEMPLATE</span><span class="p">,</span> <span class="n">comparator</span><span class="o">=</span><span class="n">comparator</span><span class="p">,)</span>
 
     <span class="c1"># if csv_path is not None:</span>
 
@@ -558,6 +742,10 @@
 </details>
 <h2 id="variables">Variables</h2>
 <div class="codehilite"><pre><span></span><code><span class="n">ASSETS_PATH</span>
+</code></pre></div>
+
+
+<div class="codehilite"><pre><span></span><code><span class="n">GROUP_REPORT_TEMPLATE</span>
 </code></pre></div>
 
 
@@ -607,10 +795,188 @@
 
 
 </details>
+<h3 id="write_comparatorgroup_report">write_comparatorgroup_report</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">write_comparatorgroup_report</span><span class="p">(</span>
+    <span class="n">target</span><span class="p">,</span>
+    <span class="n">comparatorgroup</span>
+<span class="p">)</span>
+</code></pre></div>
+
+
+<p>Write an alignment report with a PDF summary.</p>
+<p><strong>Parameters</strong></p>
+<p><strong>target</strong></p>
+<blockquote>
+<p>Path for PDF file.</p>
+</blockquote>
+<p><strong>comparatorgroup</strong></p>
+<blockquote>
+<p>ComparatorGroup instance.</p>
+</blockquote>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">write_comparatorgroup_report</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">comparatorgroup</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Write an alignment report with a PDF summary.</span>
+
+<span class="sd">    **Parameters**</span>
+
+<span class="sd">    **target**</span>
+
+<span class="sd">    &gt; Path for PDF file.</span>
+
+<span class="sd">    **comparatorgroup**</span>
+
+<span class="sd">    &gt; ComparatorGroup instance.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">comparatorgroup</span><span class="o">.</span><span class="n">comparisons_performed</span><span class="p">:</span>
+
+        <span class="k">return</span> <span class="s2">&quot;Run perform_all_comparisons()!&quot;</span>
+
+    <span class="n">comparatorgroup</span><span class="o">.</span><span class="n">report_table</span> <span class="o">=</span> <span class="n">dataframe_to_html</span><span class="p">(</span>
+
+        <span class="n">comparatorgroup</span><span class="o">.</span><span class="n">summary_table</span><span class="p">,</span> <span class="n">extra_classes</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;definition&quot;</span><span class="p">,)</span>
+
+    <span class="p">)</span>
+
+    <span class="n">def</span> <span class="n">tr_modifier</span><span class="p">(</span><span class="n">tr</span><span class="p">):</span>
+
+        <span class="n">tds</span> <span class="o">=</span> <span class="n">list</span><span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;td&quot;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">len</span><span class="p">(</span><span class="n">tds</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+
+            <span class="k">return</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">tds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># second element of list is the result symbol</span>
+
+        <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="s2">&quot;☑&quot;</span><span class="p">:</span>
+
+            <span class="n">add_css_class</span><span class="p">(</span><span class="n">tr</span><span class="p">,</span> <span class="s2">&quot;positive&quot;</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">result</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="s2">&quot;☒&quot;</span><span class="p">:</span>
+
+            <span class="n">add_css_class</span><span class="p">(</span><span class="n">tr</span><span class="p">,</span> <span class="s2">&quot;negative&quot;</span><span class="p">)</span>
+
+    <span class="c1"># This colours the summary table:</span>
+
+    <span class="n">comparatorgroup</span><span class="o">.</span><span class="n">report_table</span> <span class="o">=</span> <span class="n">style_table_rows</span><span class="p">(</span>
+
+        <span class="n">comparatorgroup</span><span class="o">.</span><span class="n">report_table</span><span class="p">,</span> <span class="n">tr_modifier</span>
+
+    <span class="p">)</span>
+
+    <span class="c1"># Histogram of reads in the report summary</span>
+
+    <span class="n">comparatorgroup</span><span class="o">.</span><span class="n">fastq_figure_data</span> <span class="o">=</span> <span class="n">pdf_tools</span><span class="o">.</span><span class="n">figure_data</span><span class="p">(</span>
+
+        <span class="n">comparatorgroup</span><span class="o">.</span><span class="n">fastq_plot</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;svg&quot;</span>
+
+    <span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">comparator</span> <span class="ow">in</span> <span class="n">comparatorgroup</span><span class="o">.</span><span class="n">comparators</span><span class="p">:</span>
+
+        <span class="n">comparator</span><span class="o">.</span><span class="n">figure_data</span> <span class="o">=</span> <span class="n">pdf_tools</span><span class="o">.</span><span class="n">figure_data</span><span class="p">(</span><span class="n">comparator</span><span class="o">.</span><span class="n">fig</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;svg&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">hasattr</span><span class="p">(</span><span class="n">comparator</span><span class="p">,</span> <span class="s2">&quot;is_comparison_successful&quot;</span><span class="p">):</span>
+
+            <span class="k">if</span> <span class="n">comparator</span><span class="o">.</span><span class="n">is_comparison_successful</span><span class="p">:</span>
+
+                <span class="n">height</span> <span class="o">=</span> <span class="n">comparator</span><span class="o">.</span><span class="n">comparison_figure</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">get_size_inches</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+
+                <span class="k">if</span> <span class="n">height</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+
+                    <span class="n">height</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># to fit on one page</span>
+
+                <span class="n">comparator</span><span class="o">.</span><span class="n">comparison_figure_data</span> <span class="o">=</span> <span class="n">pdf_tools</span><span class="o">.</span><span class="n">figure_data</span><span class="p">(</span>
+
+                    <span class="n">comparator</span><span class="o">.</span><span class="n">comparison_figure</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;svg&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="n">height</span><span class="p">]</span>
+
+                <span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+
+                <span class="n">comparator</span><span class="o">.</span><span class="n">comparison_figure_data</span> <span class="o">=</span> <span class="n">None</span>
+
+        <span class="n">comparator</span><span class="o">.</span><span class="n">has_comparison_error</span> <span class="o">=</span> <span class="n">True</span>
+
+        <span class="k">if</span> <span class="n">comparator</span><span class="o">.</span><span class="n">geneblocks_outcome</span> <span class="o">==</span> <span class="s2">&quot;none&quot;</span><span class="p">:</span>
+
+            <span class="n">comparator</span><span class="o">.</span><span class="n">geneblocks_text</span> <span class="o">=</span> <span class="p">(</span>
+
+                <span class="s2">&quot;Missing &lt;i&gt;de novo&lt;/i&gt; assembly file for comparison!&quot;</span>
+
+            <span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">comparator</span><span class="o">.</span><span class="n">geneblocks_outcome</span> <span class="o">==</span> <span class="s2">&quot;incorrect_length&quot;</span><span class="p">:</span>
+
+            <span class="n">comparator</span><span class="o">.</span><span class="n">geneblocks_text</span> <span class="o">=</span> <span class="p">(</span>
+
+                <span class="s2">&quot;Incorrect length! &quot;</span> <span class="o">+</span> <span class="n">comparator</span><span class="o">.</span><span class="n">incorrect_length_msg</span>
+
+            <span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">comparator</span><span class="o">.</span><span class="n">geneblocks_outcome</span> <span class="o">==</span> <span class="s2">&quot;geneblocks_error&quot;</span><span class="p">:</span>
+
+            <span class="n">comparator</span><span class="o">.</span><span class="n">geneblocks_text</span> <span class="o">=</span> <span class="p">(</span>
+
+                <span class="s2">&quot;GeneBlocks comparison of &lt;i&gt;de novo&lt;i/&gt; assembly and reference failed.&quot;</span>
+
+            <span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">comparator</span><span class="o">.</span><span class="n">geneblocks_outcome</span> <span class="o">==</span> <span class="s2">&quot;swapped_diffblocks&quot;</span><span class="p">:</span>
+
+            <span class="n">comparator</span><span class="o">.</span><span class="n">geneblocks_text</span> <span class="o">=</span> <span class="p">(</span>
+
+                <span class="s2">&quot;Note: the plot compares the &lt;i&gt;de novo&lt;/i&gt; assembly to the &quot;</span>
+
+                <span class="s2">&quot;reference &quot;</span> <span class="o">+</span> <span class="n">comparator</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; therefore there are no annotations.&quot;</span>
+
+            <span class="p">)</span>
+
+            <span class="n">comparator</span><span class="o">.</span><span class="n">has_comparison_error</span> <span class="o">=</span> <span class="n">False</span>
+
+        <span class="k">elif</span> <span class="n">comparator</span><span class="o">.</span><span class="n">geneblocks_outcome</span> <span class="o">==</span> <span class="s2">&quot;all_good&quot;</span><span class="p">:</span>
+
+            <span class="n">comparator</span><span class="o">.</span><span class="n">geneblocks_text</span> <span class="o">=</span> <span class="p">(</span>
+
+                <span class="s2">&quot;&lt;b&gt;&quot;</span>
+
+                <span class="o">+</span> <span class="n">comparator</span><span class="o">.</span><span class="n">name</span>
+
+                <span class="o">+</span> <span class="s2">&quot;&lt;/b&gt; reference vs &lt;i&gt;de novo&lt;/i&gt; assembly of reads:&quot;</span>
+
+            <span class="p">)</span>
+
+            <span class="n">comparator</span><span class="o">.</span><span class="n">has_comparison_error</span> <span class="o">=</span> <span class="n">False</span>
+
+        <span class="k">if</span> <span class="p">(</span>
+
+            <span class="n">hasattr</span><span class="p">(</span><span class="n">comparator</span><span class="p">,</span> <span class="s2">&quot;is_assembly_reverse_complement&quot;</span><span class="p">)</span>
+
+            <span class="ow">and</span> <span class="n">comparator</span><span class="o">.</span><span class="n">is_assembly_reverse_complement</span>
+
+        <span class="p">):</span>
+
+            <span class="n">comparator</span><span class="o">.</span><span class="n">geneblocks_text</span> <span class="o">+=</span> <span class="p">(</span>
+
+                <span class="s2">&quot;Note: the &lt;i&gt;de novo&lt;i/&gt; assembly is the &quot;</span>
+
+                <span class="s2">&quot;reverse complement of the reference.&quot;</span>
+
+            <span class="p">)</span>
+
+    <span class="n">html</span> <span class="o">=</span> <span class="n">end_pug_to_html</span><span class="p">(</span><span class="n">GROUP_REPORT_TEMPLATE</span><span class="p">,</span> <span class="n">comparatorgroup</span><span class="o">=</span><span class="n">comparatorgroup</span><span class="p">)</span>
+
+    <span class="n">write_report</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">extra_stylesheets</span><span class="o">=</span><span class="p">(</span><span class="n">STYLESHEET</span><span class="p">,))</span>
+</code></pre></div>
+
+
+</details>
 <h3 id="write_pdf_report">write_pdf_report</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">write_pdf_report</span><span class="p">(</span>
     <span class="n">target</span><span class="p">,</span>
     <span class="n">comparator</span><span class="p">,</span>
+    <span class="n">assembly_path</span><span class="p">,</span>
     <span class="n">csv_path</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
 </code></pre></div>
@@ -626,11 +992,19 @@
 <blockquote>
 <p>Comparator instance.</p>
 </blockquote>
+<p><strong>assembly_path</strong></p>
+<blockquote>
+<p>Assembly to compare with. See <code>Comparator.compare_with_assembly()</code>.</p>
+</blockquote>
 <p><strong>csv_path</strong></p>
 <blockquote>
 <p>Path to CSV output of results (<code>str</code>). Default no CSV.</p>
 </blockquote>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">write_pdf_report</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">comparator</span><span class="p">,</span> <span class="n">csv_path</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="o">:</span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">write_pdf_report</span><span class="p">(</span>
+
+    <span class="n">target</span><span class="p">,</span> <span class="n">comparator</span><span class="p">,</span> <span class="n">assembly_path</span><span class="p">,</span> <span class="n">csv_path</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+
+<span class="p">)</span><span class="o">:</span>
 
     <span class="s2">&quot;</span><span class="se">&quot;&quot;</span><span class="s2">Write an alignment report with a PDF summary.</span>
 
@@ -644,33 +1018,37 @@
 
 <span class="s2">    &gt; Comparator instance.</span>
 
+<span class="s2">    **assembly_path**</span>
+
+<span class="s2">    &gt; Assembly to compare with. See `Comparator.compare_with_assembly()`.</span>
+
 <span class="s2">    **csv_path**</span>
 
 <span class="s2">    &gt; Path to CSV output of results (`str`). Default no CSV.</span>
 
 <span class="s2">    </span><span class="se">&quot;&quot;</span><span class="s2">&quot;</span>
 
-    <span class="n">fig</span> <span class="o">=</span> <span class="n">comparator</span><span class="p">.</span><span class="n">plot_coverage</span><span class="p">()</span>
+    <span class="n">comparator</span><span class="p">.</span><span class="n">perform_comparison</span><span class="p">(</span><span class="n">assembly_path</span><span class="p">)</span>
 
-    <span class="n">figure_data</span> <span class="o">=</span> <span class="n">pdf_tools</span><span class="p">.</span><span class="n">figure_data</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;svg&quot;</span><span class="p">)</span>
+    <span class="n">comparator</span><span class="p">.</span><span class="n">figure_data</span> <span class="o">=</span> <span class="n">pdf_tools</span><span class="p">.</span><span class="n">figure_data</span><span class="p">(</span><span class="n">comparator</span><span class="p">.</span><span class="n">fig</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;svg&quot;</span><span class="p">)</span>
 
-    <span class="n">plt</span><span class="p">.</span><span class="k">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">hasattr</span><span class="p">(</span><span class="n">comparator</span><span class="p">,</span> <span class="s2">&quot;is_comparison_successful&quot;</span><span class="p">)</span><span class="o">:</span>
 
-    <span class="n">html</span> <span class="o">=</span> <span class="n">end_pug_to_html</span><span class="p">(</span>
+        <span class="k">if</span> <span class="n">comparator</span><span class="p">.</span><span class="n">is_comparison_successful</span><span class="o">:</span>
 
-        <span class="n">REPORT_TEMPLATE</span><span class="p">,</span>
+            <span class="n">comparator</span><span class="p">.</span><span class="n">has_comparison</span> <span class="o">=</span> <span class="no">True</span>
 
-        <span class="n">id</span><span class="o">=</span><span class="n">comparator</span><span class="p">.</span><span class="n">record</span><span class="p">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="n">comparator</span><span class="p">.</span><span class="n">comparison_figure_data</span> <span class="o">=</span> <span class="n">pdf_tools</span><span class="p">.</span><span class="n">figure_data</span><span class="p">(</span>
 
-        <span class="n">reference_length</span><span class="o">=</span><span class="n">len</span><span class="p">(</span><span class="n">comparator</span><span class="p">.</span><span class="n">record</span><span class="p">),</span>
+                <span class="n">comparator</span><span class="p">.</span><span class="n">comparison_figure</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;svg&quot;</span>
 
-        <span class="n">figure_data</span><span class="o">=</span><span class="n">figure_data</span><span class="p">,</span>
+            <span class="p">)</span>
 
-        <span class="n">low_positions</span><span class="o">=</span><span class="n">comparator</span><span class="p">.</span><span class="n">low_coverage_positions_string</span><span class="p">,</span>
+        <span class="k">else</span><span class="o">:</span>
 
-        <span class="n">bad_positions</span><span class="o">=</span><span class="n">comparator</span><span class="p">.</span><span class="n">high_error_positions_string</span><span class="p">,</span>
+            <span class="n">comparator</span><span class="p">.</span><span class="n">comparison_figure_data</span> <span class="o">=</span> <span class="k">None</span>
 
-    <span class="p">)</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="n">end_pug_to_html</span><span class="p">(</span><span class="n">REPORT_TEMPLATE</span><span class="p">,</span> <span class="n">comparator</span><span class="o">=</span><span class="n">comparator</span><span class="p">,)</span>
 
     <span class="c1"># if csv_path is not None:</span>
 

@@ -339,6 +339,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#perform_comparison" class="md-nav__link">
+    perform_comparison
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#plot_coverage" class="md-nav__link">
     plot_coverage
   </a>
@@ -399,6 +406,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#add_comparator" class="md-nav__link">
+    add_comparator
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#create_comparator" class="md-nav__link">
     create_comparator
   </a>
@@ -406,8 +420,29 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#perform_all_comparisons" class="md-nav__link">
+    perform_all_comparisons
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plot_fastq_histogram" class="md-nav__link">
+    plot_fastq_histogram
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#subset_paf" class="md-nav__link">
     subset_paf
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summarise_analysis" class="md-nav__link">
+    summarise_analysis
   </a>
   
 </li>
@@ -558,6 +593,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#perform_comparison" class="md-nav__link">
+    perform_comparison
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#plot_coverage" class="md-nav__link">
     plot_coverage
   </a>
@@ -618,6 +660,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#add_comparator" class="md-nav__link">
+    add_comparator
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#create_comparator" class="md-nav__link">
     create_comparator
   </a>
@@ -625,8 +674,29 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#perform_all_comparisons" class="md-nav__link">
+    perform_all_comparisons
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plot_fastq_histogram" class="md-nav__link">
+    plot_fastq_histogram
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#subset_paf" class="md-nav__link">
     subset_paf
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summarise_analysis" class="md-nav__link">
+    summarise_analysis
   </a>
   
 </li>
@@ -717,6 +787,16 @@
 
     <span class="k">def</span> <span class="nf">create_comparator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reference_name</span><span class="p">):</span>
 
+        <span class="sd">&quot;&quot;&quot;Create a Comparator instance from one of the loaded references.</span>
+
+<span class="sd">        **Parameters**</span>
+
+<span class="sd">        **reference_name**</span>
+
+<span class="sd">        &gt; The name of the reference (`str`).</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="n">subset_paf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subset_paf</span><span class="p">(</span><span class="n">reference_name</span><span class="p">)</span>
 
         <span class="n">subset_tsv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tsv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">tsv</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">reference_name</span><span class="p">]</span>
@@ -730,6 +810,12 @@
         <span class="p">)</span>
 
         <span class="k">return</span> <span class="n">comparator</span>
+
+    <span class="k">def</span> <span class="nf">add_comparator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reference_name</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Create comparator and add to the group. See create_comparator().&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">comparators</span> <span class="o">+=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">create_comparator</span><span class="p">(</span><span class="n">reference_name</span><span class="p">)]</span>
 
     <span class="k">def</span> <span class="nf">subset_paf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reference_name</span><span class="p">):</span>
 
@@ -811,11 +897,149 @@
 
         <span class="k">return</span> <span class="n">subset_paf_final</span>
 
+    <span class="k">def</span> <span class="nf">perform_all_comparisons</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">assembly_paths</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Call perform_comparison() on each Comparator.</span>
+
+<span class="sd">        **Parameters**</span>
+
+<span class="sd">        **assembly_paths**</span>
+
+<span class="sd">        &gt; Dictionary of construct name: *de novo* assembly file.</span>
+
+<span class="sd">        For example: `{&quot;Construct_1&quot;: &quot;/path/to/assembly.fa&quot;}`.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">assembly_paths</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="n">assembly_paths</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">comparator</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">comparators</span><span class="p">:</span>
+
+            <span class="k">try</span><span class="p">:</span>
+
+                <span class="n">assembly_path</span> <span class="o">=</span> <span class="n">assembly_paths</span><span class="p">[</span><span class="n">comparator</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+
+                <span class="n">assembly_path</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="n">comparator</span><span class="o">.</span><span class="n">perform_comparison</span><span class="p">(</span><span class="n">assembly_path</span><span class="o">=</span><span class="n">assembly_path</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">comparisons_performed</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">summarise_analysis</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">summarise_analysis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Create variables for the PDF report summary.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">number_of_constructs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">comparators</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">result_good</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">result_warning</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">result_error</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="n">names</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">reference_lengths</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">number_of_reads_aligning</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">median_coverages</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">comparator</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">comparators</span><span class="p">:</span>
+
+            <span class="n">names</span> <span class="o">+=</span> <span class="p">[</span><span class="n">comparator</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+
+            <span class="n">reference_lengths</span> <span class="o">+=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">comparator</span><span class="o">.</span><span class="n">reference_length</span><span class="p">)]</span>
+
+            <span class="n">number_of_reads_aligning</span> <span class="o">+=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">comparator</span><span class="o">.</span><span class="n">paf</span><span class="p">))]</span>
+
+            <span class="n">median_coverages</span> <span class="o">+=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">comparator</span><span class="o">.</span><span class="n">median_yy</span><span class="p">))]</span>
+
+            <span class="k">if</span> <span class="n">comparator</span><span class="o">.</span><span class="n">has_errors</span><span class="p">:</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">result_error</span> <span class="o">+=</span> <span class="mi">1</span>
+
+                <span class="n">results</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&quot;☒&quot;</span><span class="p">]</span>
+
+            <span class="k">else</span><span class="p">:</span>
+
+                <span class="k">if</span> <span class="n">comparator</span><span class="o">.</span><span class="n">has_warnings</span><span class="p">:</span>
+
+                    <span class="bp">self</span><span class="o">.</span><span class="n">result_warning</span> <span class="o">+=</span> <span class="mi">1</span>
+
+                    <span class="n">results</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&quot;⚠&quot;</span><span class="p">]</span>
+
+                <span class="k">else</span><span class="p">:</span>
+
+                    <span class="bp">self</span><span class="o">.</span><span class="n">result_good</span> <span class="o">+=</span> <span class="mi">1</span>
+
+                    <span class="n">results</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&quot;☑&quot;</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_fastq_reads</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">paf</span><span class="o">.</span><span class="n">query_name</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fastq_plot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot_fastq_histogram</span><span class="p">()</span>
+
+        <span class="c1"># Summary table</span>
+
+        <span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
+
+            <span class="s2">&quot;Name&quot;</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">names</span><span class="p">),</span>
+
+            <span class="s2">&quot;Result&quot;</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">results</span><span class="p">),</span>
+
+            <span class="s2">&quot;Length [bp]&quot;</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">reference_lengths</span><span class="p">),</span>
+
+            <span class="s2">&quot;FASTQ reads&quot;</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">number_of_reads_aligning</span><span class="p">),</span>
+
+            <span class="s2">&quot;Coverage [x]&quot;</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">median_coverages</span><span class="p">),</span>
+
+        <span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">summary_table</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">plot_fastq_histogram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Plot a histogram of the FASTQ reads.</span>
+
+<span class="sd">        **Parameters**</span>
+
+<span class="sd">        **n_bins**</span>
+
+<span class="sd">        &gt; Number of bins in the histogram (`int`).</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">paf</span><span class="p">[</span><span class="s2">&quot;query_length&quot;</span><span class="p">],</span>
+
+            <span class="n">bins</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">paf</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;target_length&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">n_bins</span><span class="p">),</span>
+
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+
+        <span class="p">)</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Number of reads&quot;</span><span class="p">)</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Read length [bp]&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">fig</span>
+
     <span class="nd">@staticmethod</span>
 
     <span class="k">def</span> <span class="nf">load_paf</span><span class="p">(</span><span class="n">paf_path</span><span class="p">):</span>
 
-        <span class="sd">&quot;&quot;&quot;Create a dataframe from a paf file of alignments.</span>
+        <span class="sd">&quot;&quot;&quot;Create a dataframe from a PAF file of alignments.</span>
 
 <span class="sd">        **Parameters**</span>
 
@@ -869,7 +1093,7 @@
 
     <span class="k">def</span> <span class="nf">load_tsv</span><span class="p">(</span><span class="n">tsv_path</span><span class="p">):</span>
 
-        <span class="sd">&quot;&quot;&quot;Create a dataframe from a tsv file of depth counts.</span>
+        <span class="sd">&quot;&quot;&quot;Create a dataframe from a TSV file of depth counts.</span>
 
 <span class="sd">        **Parameters**</span>
 
@@ -915,7 +1139,45 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">coverage_cutoff</span> <span class="o">=</span> <span class="mf">0.15</span>  <span class="c1"># 15% of median coverage</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">reference_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">record</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">has_warnings</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">has_errors</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">geneblocks_outcome</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>  <span class="c1"># stores outcome, used in PDF report making</span>
+
+    <span class="k">def</span> <span class="nf">perform_comparison</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">assembly_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Plot coverage and compare reference with *de novo* assembly.</span>
+
+<span class="sd">        **Parameters**</span>
+
+<span class="sd">        **assembly_path**</span>
+
+<span class="sd">        &gt; Optional. Path to a *de novo* assembly FASTA file (`str`).</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fig</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot_coverage</span><span class="p">()</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">assembly_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">comparison_figure</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compare_with_assembly</span><span class="p">(</span>
+
+                <span class="n">assembly_path</span><span class="o">=</span><span class="n">assembly_path</span>
+
+            <span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">has_warnings</span> <span class="o">=</span> <span class="kc">True</span>
+
     <span class="k">def</span> <span class="nf">calculate_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Calculate statistics for the coverage plot, used in plot_coverage().&quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">xx</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="kp">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">record</span><span class="o">.</span><span class="n">seq</span><span class="p">))</span>  <span class="c1"># for the plot x axis</span>
 
@@ -957,6 +1219,10 @@
 
             <span class="bp">self</span><span class="o">.</span><span class="n">low_coverage_positions_string</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span>  <span class="c1"># looks better in the pdf report</span>
 
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">has_errors</span> <span class="o">=</span> <span class="kc">True</span>
+
         <span class="c1"># This section creates a list of bad position to be reported</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;zz&quot;</span><span class="p">):</span>
@@ -997,6 +1263,10 @@
 
             <span class="bp">self</span><span class="o">.</span><span class="n">high_error_positions_string</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span>
 
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">has_errors</span> <span class="o">=</span> <span class="kc">True</span>
+
     <span class="k">def</span> <span class="nf">plot_coverage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
         <span class="sd">&quot;&quot;&quot;Plot the reference with the coverage and weak reads.&quot;&quot;&quot;</span>
@@ -1031,7 +1301,7 @@
 
         <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-        <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Coverage [x]&quot;</span><span class="p">)</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Depth&quot;</span><span class="p">)</span>
 
         <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Base [bp]&quot;</span><span class="p">)</span>
 
@@ -1089,7 +1359,7 @@
 
         <span class="n">ax3</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="n">ylim_top</span><span class="p">)</span>
 
-        <span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Weak reads&quot;</span><span class="p">)</span>
+        <span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Bad reads&quot;</span><span class="p">)</span>
 
         <span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Base [bp]&quot;</span><span class="p">)</span>
 
@@ -1179,21 +1449,27 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="c1"># Note that in this context `assembly` means a genome assembly created from</span>
+        <span class="c1"># Note that in this context &#39;assembly&#39; means a de novo genome assembly created</span>
 
-        <span class="c1"># sequencing reads.</span>
+        <span class="c1"># from sequencing reads.</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">assembly</span> <span class="o">=</span> <span class="n">SeqIO</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">handle</span><span class="o">=</span><span class="n">assembly_path</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;fasta&quot;</span><span class="p">)</span>
 
         <span class="n">length_ratio</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">assembly</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">record</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="mf">0.95</span> <span class="o">&lt;</span> <span class="n">length_ratio</span> <span class="o">&lt;</span> <span class="mf">1.1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="mf">0.95</span> <span class="o">&lt;</span> <span class="n">length_ratio</span> <span class="o">&lt;</span> <span class="mf">1.05</span><span class="p">:</span>  <span class="c1"># length within reason</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">is_length_ok</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_length_ok</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># can compare with expected sequence</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">incorrect_length_msg</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="k">else</span><span class="p">:</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">is_length_ok</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">geneblocks_outcome</span> <span class="o">=</span> <span class="s2">&quot;incorrect_length&quot;</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_length_ok</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># do not compare sequences</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">has_errors</span> <span class="o">=</span> <span class="kc">True</span>
 
             <span class="n">difference_bases</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">assembly</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">record</span><span class="p">)</span>
 
@@ -1207,13 +1483,19 @@
 
                 <span class="n">difference_text</span> <span class="o">=</span> <span class="s2">&quot;shorter&quot;</span>
 
-            <span class="nb">print</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">incorrect_length_msg</span> <span class="o">=</span> <span class="p">(</span>
 
-                <span class="s2">&quot;Incorrect length! The assembly is </span><span class="si">%d%%</span><span class="s2"> (</span><span class="si">%d</span><span class="s2"> bp) </span><span class="si">%s</span><span class="s2"> than the reference.&quot;</span>
+                <span class="s2">&quot;The &lt;i&gt;de novo&lt;/i&gt; assembly is </span><span class="si">%d%%</span><span class="s2"> (</span><span class="si">%d</span><span class="s2"> bp) </span><span class="si">%s</span><span class="s2"> than the reference.&quot;</span>
 
                 <span class="o">%</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">difference_percent</span><span class="p">)),</span> <span class="n">difference_bases</span><span class="p">,</span> <span class="n">difference_text</span><span class="p">)</span>
 
             <span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">geneblocks_done</span> <span class="o">=</span> <span class="kc">False</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_diffblocks_reverse</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_comparison_successful</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># for PDF reporting</span>
 
             <span class="k">return</span>
 
@@ -1249,19 +1531,27 @@
 
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
 
-            <span class="n">geneblocks_failed</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">geneblocks_done</span> <span class="o">=</span> <span class="kc">False</span>
 
-        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">geneblocks_outcome</span> <span class="o">=</span> <span class="s2">&quot;geneblocks_error&quot;</span>
 
-            <span class="n">geneblocks_failed</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># diffblocks had no error</span>
 
-            <span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">diff_blocks</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figure_width</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">geneblocks_done</span> <span class="o">=</span> <span class="kc">True</span>
 
-            <span class="n">is_diffblocks_reverse</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">diff_blocks</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figure_width</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">geneblocks_failed</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_diffblocks_reverse</span> <span class="o">=</span> <span class="kc">False</span>
 
-            <span class="c1"># due to a bug in geneblocks, the reverse order may work:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_comparison_successful</span> <span class="o">=</span> <span class="kc">True</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">geneblocks_outcome</span> <span class="o">=</span> <span class="s2">&quot;all_good&quot;</span>
+
+            <span class="k">return</span> <span class="n">ax1</span>
+
+        <span class="c1"># We try again as due to a bug in geneblocks, the reverse order may work:</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">geneblocks_outcome</span> <span class="o">==</span> <span class="s2">&quot;geneblocks_error&quot;</span><span class="p">:</span>
 
             <span class="k">try</span><span class="p">:</span>
 
@@ -1273,15 +1563,21 @@
 
             <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
 
-                <span class="k">pass</span>
+                <span class="k">return</span>
 
             <span class="k">else</span><span class="p">:</span>
 
-                <span class="n">geneblocks_failed</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">geneblocks_done</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># overwrite</span>
 
                 <span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">diff_blocks</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figure_width</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
 
-                <span class="n">is_diffblocks_reverse</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">is_diffblocks_reverse</span> <span class="o">=</span> <span class="kc">True</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">is_comparison_successful</span> <span class="o">=</span> <span class="kc">True</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">geneblocks_outcome</span> <span class="o">=</span> <span class="s2">&quot;swapped_diffblocks&quot;</span>
+
+                <span class="k">return</span> <span class="n">ax1</span>
 
     <span class="k">def</span> <span class="nf">filter_fastq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fastq_path</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
@@ -1370,7 +1666,45 @@ contain entries only for the reference.</p>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">coverage_cutoff</span> <span class="o">=</span> <span class="mf">0.15</span>  <span class="c1"># 15% of median coverage</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">reference_length</span> <span class="o">=</span> <span class="n">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">record</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">has_warnings</span> <span class="o">=</span> <span class="n">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">has_errors</span> <span class="o">=</span> <span class="n">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">geneblocks_outcome</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>  <span class="c1"># stores outcome, used in PDF report making</span>
+
+    <span class="n">def</span> <span class="n">perform_comparison</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">assembly_path</span><span class="o">=</span><span class="n">None</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Plot coverage and compare reference with *de novo* assembly.</span>
+
+<span class="sd">        **Parameters**</span>
+
+<span class="sd">        **assembly_path**</span>
+
+<span class="sd">        &gt; Optional. Path to a *de novo* assembly FASTA file (`str`).</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fig</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot_coverage</span><span class="p">()</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">assembly_path</span> <span class="k">is</span> <span class="ow">not</span> <span class="n">None</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">comparison_figure</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compare_with_assembly</span><span class="p">(</span>
+
+                <span class="n">assembly_path</span><span class="o">=</span><span class="n">assembly_path</span>
+
+            <span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">has_warnings</span> <span class="o">=</span> <span class="n">True</span>
+
     <span class="n">def</span> <span class="n">calculate_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Calculate statistics for the coverage plot, used in plot_coverage().&quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">xx</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">record</span><span class="o">.</span><span class="n">seq</span><span class="p">))</span>  <span class="c1"># for the plot x axis</span>
 
@@ -1412,6 +1746,10 @@ contain entries only for the reference.</p>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">low_coverage_positions_string</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span>  <span class="c1"># looks better in the pdf report</span>
 
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">has_errors</span> <span class="o">=</span> <span class="n">True</span>
+
         <span class="c1"># This section creates a list of bad position to be reported</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;zz&quot;</span><span class="p">):</span>
@@ -1452,6 +1790,10 @@ contain entries only for the reference.</p>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">high_error_positions_string</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span>
 
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">has_errors</span> <span class="o">=</span> <span class="n">True</span>
+
     <span class="n">def</span> <span class="n">plot_coverage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
         <span class="sd">&quot;&quot;&quot;Plot the reference with the coverage and weak reads.&quot;&quot;&quot;</span>
@@ -1486,7 +1828,7 @@ contain entries only for the reference.</p>
 
         <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-        <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Coverage [x]&quot;</span><span class="p">)</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Depth&quot;</span><span class="p">)</span>
 
         <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Base [bp]&quot;</span><span class="p">)</span>
 
@@ -1544,7 +1886,7 @@ contain entries only for the reference.</p>
 
         <span class="n">ax3</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="n">ylim_top</span><span class="p">)</span>
 
-        <span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Weak reads&quot;</span><span class="p">)</span>
+        <span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Bad reads&quot;</span><span class="p">)</span>
 
         <span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Base [bp]&quot;</span><span class="p">)</span>
 
@@ -1634,21 +1976,27 @@ contain entries only for the reference.</p>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="c1"># Note that in this context `assembly` means a genome assembly created from</span>
+        <span class="c1"># Note that in this context &#39;assembly&#39; means a de novo genome assembly created</span>
 
-        <span class="c1"># sequencing reads.</span>
+        <span class="c1"># from sequencing reads.</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">assembly</span> <span class="o">=</span> <span class="n">SeqIO</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">handle</span><span class="o">=</span><span class="n">assembly_path</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s2">&quot;fasta&quot;</span><span class="p">)</span>
 
         <span class="n">length_ratio</span> <span class="o">=</span> <span class="n">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">assembly</span><span class="p">)</span> <span class="o">/</span> <span class="n">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">record</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="mf">0.95</span> <span class="o">&lt;</span> <span class="n">length_ratio</span> <span class="o">&lt;</span> <span class="mf">1.1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="mf">0.95</span> <span class="o">&lt;</span> <span class="n">length_ratio</span> <span class="o">&lt;</span> <span class="mf">1.05</span><span class="p">:</span>  <span class="c1"># length within reason</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">is_length_ok</span> <span class="o">=</span> <span class="n">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_length_ok</span> <span class="o">=</span> <span class="n">True</span>  <span class="c1"># can compare with expected sequence</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">incorrect_length_msg</span> <span class="o">=</span> <span class="n">None</span>
 
         <span class="k">else</span><span class="p">:</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">is_length_ok</span> <span class="o">=</span> <span class="n">False</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">geneblocks_outcome</span> <span class="o">=</span> <span class="s2">&quot;incorrect_length&quot;</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_length_ok</span> <span class="o">=</span> <span class="n">False</span>  <span class="c1"># do not compare sequences</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">has_errors</span> <span class="o">=</span> <span class="n">True</span>
 
             <span class="n">difference_bases</span> <span class="o">=</span> <span class="n">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">assembly</span><span class="p">)</span> <span class="o">-</span> <span class="n">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">record</span><span class="p">)</span>
 
@@ -1662,13 +2010,19 @@ contain entries only for the reference.</p>
 
                 <span class="n">difference_text</span> <span class="o">=</span> <span class="s2">&quot;shorter&quot;</span>
 
-            <span class="nb">print</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">incorrect_length_msg</span> <span class="o">=</span> <span class="p">(</span>
 
-                <span class="s2">&quot;Incorrect length! The assembly is </span><span class="si">%d%%</span><span class="s2"> (</span><span class="si">%d</span><span class="s2"> bp) </span><span class="si">%s</span><span class="s2"> than the reference.&quot;</span>
+                <span class="s2">&quot;The &lt;i&gt;de novo&lt;/i&gt; assembly is </span><span class="si">%d%%</span><span class="s2"> (</span><span class="si">%d</span><span class="s2"> bp) </span><span class="si">%s</span><span class="s2"> than the reference.&quot;</span>
 
                 <span class="o">%</span> <span class="p">(</span><span class="nb nb-Type">int</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">difference_percent</span><span class="p">)),</span> <span class="n">difference_bases</span><span class="p">,</span> <span class="n">difference_text</span><span class="p">)</span>
 
             <span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">geneblocks_done</span> <span class="o">=</span> <span class="n">False</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_diffblocks_reverse</span> <span class="o">=</span> <span class="n">None</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_comparison_successful</span> <span class="o">=</span> <span class="n">False</span>  <span class="c1"># for PDF reporting</span>
 
             <span class="k">return</span>
 
@@ -1704,19 +2058,27 @@ contain entries only for the reference.</p>
 
         <span class="n">except</span> <span class="n">KeyError</span><span class="p">:</span>
 
-            <span class="n">geneblocks_failed</span> <span class="o">=</span> <span class="n">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">geneblocks_done</span> <span class="o">=</span> <span class="n">False</span>
 
-        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">geneblocks_outcome</span> <span class="o">=</span> <span class="s2">&quot;geneblocks_error&quot;</span>
 
-            <span class="n">geneblocks_failed</span> <span class="o">=</span> <span class="n">False</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># diffblocks had no error</span>
 
-            <span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">diff_blocks</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figure_width</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">geneblocks_done</span> <span class="o">=</span> <span class="n">True</span>
 
-            <span class="n">is_diffblocks_reverse</span> <span class="o">=</span> <span class="n">False</span>
+            <span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">diff_blocks</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figure_width</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">geneblocks_failed</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_diffblocks_reverse</span> <span class="o">=</span> <span class="n">False</span>
 
-            <span class="c1"># due to a bug in geneblocks, the reverse order may work:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_comparison_successful</span> <span class="o">=</span> <span class="n">True</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">geneblocks_outcome</span> <span class="o">=</span> <span class="s2">&quot;all_good&quot;</span>
+
+            <span class="k">return</span> <span class="n">ax1</span>
+
+        <span class="c1"># We try again as due to a bug in geneblocks, the reverse order may work:</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">geneblocks_outcome</span> <span class="o">==</span> <span class="s2">&quot;geneblocks_error&quot;</span><span class="p">:</span>
 
             <span class="n">try</span><span class="p">:</span>
 
@@ -1728,15 +2090,21 @@ contain entries only for the reference.</p>
 
             <span class="n">except</span> <span class="n">KeyError</span><span class="p">:</span>
 
-                <span class="k">pass</span>
+                <span class="k">return</span>
 
             <span class="k">else</span><span class="p">:</span>
 
-                <span class="n">geneblocks_failed</span> <span class="o">=</span> <span class="n">False</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">geneblocks_done</span> <span class="o">=</span> <span class="n">True</span>  <span class="c1"># overwrite</span>
 
                 <span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">diff_blocks</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figure_width</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
 
-                <span class="n">is_diffblocks_reverse</span> <span class="o">=</span> <span class="n">True</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">is_diffblocks_reverse</span> <span class="o">=</span> <span class="n">True</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">is_comparison_successful</span> <span class="o">=</span> <span class="n">True</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">geneblocks_outcome</span> <span class="o">=</span> <span class="s2">&quot;swapped_diffblocks&quot;</span>
+
+                <span class="k">return</span> <span class="n">ax1</span>
 
     <span class="n">def</span> <span class="n">filter_fastq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fastq_path</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">None</span><span class="p">):</span>
 
@@ -1784,7 +2152,10 @@ contain entries only for the reference.</p>
 </code></pre></div>
 
 
+<p>Calculate statistics for the coverage plot, used in plot_coverage().</p>
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">calculate_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Calculate statistics for the coverage plot, used in plot_coverage().&quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">xx</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">record</span><span class="o">.</span><span class="n">seq</span><span class="p">))</span>  <span class="c1"># for the plot x axis</span>
 
@@ -1826,6 +2197,10 @@ contain entries only for the reference.</p>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">low_coverage_positions_string</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span>  <span class="c1"># looks better in the pdf report</span>
 
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">has_errors</span> <span class="o">=</span> <span class="n">True</span>
+
         <span class="c1"># This section creates a list of bad position to be reported</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;zz&quot;</span><span class="p">):</span>
@@ -1865,6 +2240,10 @@ contain entries only for the reference.</p>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">high_error_positions_string</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">high_error_positions_string</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">has_errors</span> <span class="o">=</span> <span class="n">True</span>
 </code></pre></div>
 
 
@@ -1901,21 +2280,27 @@ highlight differences between reference and the plasmid assembly.</p>
 
 <span class="s2">        </span><span class="se">&quot;&quot;</span><span class="s2">&quot;</span>
 
-        <span class="c1"># Note that in this context `assembly` means a genome assembly created from</span>
+        <span class="c1"># Note that in this context &#39;assembly&#39; means a de novo genome assembly created</span>
 
-        <span class="c1"># sequencing reads.</span>
+        <span class="c1"># from sequencing reads.</span>
 
         <span class="n">self</span><span class="p">.</span><span class="n">assembly</span> <span class="o">=</span> <span class="n">SeqIO</span><span class="p">.</span><span class="k">read</span><span class="p">(</span><span class="n">handle</span><span class="o">=</span><span class="n">assembly_path</span><span class="p">,</span> <span class="k">format</span><span class="o">=</span><span class="s2">&quot;fasta&quot;</span><span class="p">)</span>
 
         <span class="n">length_ratio</span> <span class="o">=</span> <span class="n">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">assembly</span><span class="p">)</span> <span class="o">/</span> <span class="n">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">record</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="mf">0.95</span> <span class="o">&lt;</span> <span class="n">length_ratio</span> <span class="o">&lt;</span> <span class="mf">1.1</span><span class="o">:</span>
+        <span class="k">if</span> <span class="mf">0.95</span> <span class="o">&lt;</span> <span class="n">length_ratio</span> <span class="o">&lt;</span> <span class="mf">1.05</span><span class="o">:</span>  <span class="c1"># length within reason</span>
 
-            <span class="n">self</span><span class="p">.</span><span class="n">is_length_ok</span> <span class="o">=</span> <span class="no">True</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">is_length_ok</span> <span class="o">=</span> <span class="no">True</span>  <span class="c1"># can compare with expected sequence</span>
+
+            <span class="n">self</span><span class="p">.</span><span class="n">incorrect_length_msg</span> <span class="o">=</span> <span class="k">None</span>
 
         <span class="k">else</span><span class="o">:</span>
 
-            <span class="n">self</span><span class="p">.</span><span class="n">is_length_ok</span> <span class="o">=</span> <span class="no">False</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">geneblocks_outcome</span> <span class="o">=</span> <span class="s2">&quot;incorrect_length&quot;</span>
+
+            <span class="n">self</span><span class="p">.</span><span class="n">is_length_ok</span> <span class="o">=</span> <span class="no">False</span>  <span class="c1"># do not compare sequences</span>
+
+            <span class="n">self</span><span class="p">.</span><span class="n">has_errors</span> <span class="o">=</span> <span class="no">True</span>
 
             <span class="n">difference_bases</span> <span class="o">=</span> <span class="n">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">assembly</span><span class="p">)</span> <span class="o">-</span> <span class="n">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">record</span><span class="p">)</span>
 
@@ -1929,13 +2314,19 @@ highlight differences between reference and the plasmid assembly.</p>
 
                 <span class="n">difference_text</span> <span class="o">=</span> <span class="s2">&quot;shorter&quot;</span>
 
-            <span class="n">print</span><span class="p">(</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">incorrect_length_msg</span> <span class="o">=</span> <span class="p">(</span>
 
-                <span class="s2">&quot;Incorrect length! The assembly is %d%% (%d bp) %s than the reference.&quot;</span>
+                <span class="s2">&quot;The &lt;i&gt;de novo&lt;/i&gt; assembly is %d%% (%d bp) %s than the reference.&quot;</span>
 
                 <span class="o">%</span> <span class="p">(</span><span class="kt">int</span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="n">difference_percent</span><span class="p">)),</span> <span class="n">difference_bases</span><span class="p">,</span> <span class="n">difference_text</span><span class="p">)</span>
 
             <span class="p">)</span>
+
+            <span class="n">self</span><span class="p">.</span><span class="n">geneblocks_done</span> <span class="o">=</span> <span class="no">False</span>
+
+            <span class="n">self</span><span class="p">.</span><span class="n">is_diffblocks_reverse</span> <span class="o">=</span> <span class="k">None</span>
+
+            <span class="n">self</span><span class="p">.</span><span class="n">is_comparison_successful</span> <span class="o">=</span> <span class="no">False</span>  <span class="c1"># for PDF reporting</span>
 
             <span class="k">return</span>
 
@@ -1971,19 +2362,27 @@ highlight differences between reference and the plasmid assembly.</p>
 
         <span class="k">except</span> <span class="n">KeyError</span><span class="o">:</span>
 
-            <span class="n">geneblocks_failed</span> <span class="o">=</span> <span class="no">True</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">geneblocks_done</span> <span class="o">=</span> <span class="no">False</span>
 
-        <span class="k">else</span><span class="o">:</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">geneblocks_outcome</span> <span class="o">=</span> <span class="s2">&quot;geneblocks_error&quot;</span>
 
-            <span class="n">geneblocks_failed</span> <span class="o">=</span> <span class="no">False</span>
+        <span class="k">else</span><span class="o">:</span>  <span class="c1"># diffblocks had no error</span>
 
-            <span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">diff_blocks</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figure_width</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">geneblocks_done</span> <span class="o">=</span> <span class="no">True</span>
 
-            <span class="n">is_diffblocks_reverse</span> <span class="o">=</span> <span class="no">False</span>
+            <span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">diff_blocks</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figure_width</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">geneblocks_failed</span><span class="o">:</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">is_diffblocks_reverse</span> <span class="o">=</span> <span class="no">False</span>
 
-            <span class="c1"># due to a bug in geneblocks, the reverse order may work:</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">is_comparison_successful</span> <span class="o">=</span> <span class="no">True</span>
+
+            <span class="n">self</span><span class="p">.</span><span class="n">geneblocks_outcome</span> <span class="o">=</span> <span class="s2">&quot;all_good&quot;</span>
+
+            <span class="k">return</span> <span class="n">ax1</span>
+
+        <span class="c1"># We try again as due to a bug in geneblocks, the reverse order may work:</span>
+
+        <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="n">geneblocks_outcome</span> <span class="o">==</span> <span class="s2">&quot;geneblocks_error&quot;</span><span class="o">:</span>
 
             <span class="n">try</span><span class="o">:</span>
 
@@ -1995,15 +2394,21 @@ highlight differences between reference and the plasmid assembly.</p>
 
             <span class="k">except</span> <span class="n">KeyError</span><span class="o">:</span>
 
-                <span class="n">pass</span>
+                <span class="k">return</span>
 
             <span class="k">else</span><span class="o">:</span>
 
-                <span class="n">geneblocks_failed</span> <span class="o">=</span> <span class="no">False</span>
+                <span class="n">self</span><span class="p">.</span><span class="n">geneblocks_done</span> <span class="o">=</span> <span class="no">True</span>  <span class="c1"># overwrite</span>
 
                 <span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">diff_blocks</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figure_width</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
 
-                <span class="n">is_diffblocks_reverse</span> <span class="o">=</span> <span class="no">True</span>
+                <span class="n">self</span><span class="p">.</span><span class="n">is_diffblocks_reverse</span> <span class="o">=</span> <span class="no">True</span>
+
+                <span class="n">self</span><span class="p">.</span><span class="n">is_comparison_successful</span> <span class="o">=</span> <span class="no">True</span>
+
+                <span class="n">self</span><span class="p">.</span><span class="n">geneblocks_outcome</span> <span class="o">=</span> <span class="s2">&quot;swapped_diffblocks&quot;</span>
+
+                <span class="k">return</span> <span class="n">ax1</span>
 </code></pre></div>
 
 
@@ -2135,6 +2540,51 @@ viewed as weak reads. Recommended value: 0.8 (80%).</p>
 
 
 </details>
+<h5 id="perform_comparison">perform_comparison</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">perform_comparison</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">assembly_path</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+
+
+<p>Plot coverage and compare reference with <em>de novo</em> assembly.</p>
+<p><strong>Parameters</strong></p>
+<p><strong>assembly_path</strong></p>
+<blockquote>
+<p>Optional. Path to a <em>de novo</em> assembly FASTA file (<code>str</code>).</p>
+</blockquote>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">perform_comparison</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">assembly_path</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="o">:</span>
+
+        <span class="s2">&quot;</span><span class="se">&quot;&quot;</span><span class="s2">Plot coverage and compare reference with *de novo* assembly.</span>
+
+<span class="s2">        **Parameters**</span>
+
+<span class="s2">        **assembly_path**</span>
+
+<span class="s2">        &gt; Optional. Path to a *de novo* assembly FASTA file (`str`).</span>
+
+<span class="s2">        </span><span class="se">&quot;&quot;</span><span class="s2">&quot;</span>
+
+        <span class="n">self</span><span class="p">.</span><span class="n">fig</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">plot_coverage</span><span class="p">()</span>
+
+        <span class="n">plt</span><span class="p">.</span><span class="k">close</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">fig</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">assembly_path</span> <span class="k">is</span> <span class="k">not</span> <span class="k">None</span><span class="o">:</span>
+
+            <span class="n">self</span><span class="p">.</span><span class="n">comparison_figure</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">compare_with_assembly</span><span class="p">(</span>
+
+                <span class="n">assembly_path</span><span class="o">=</span><span class="n">assembly_path</span>
+
+            <span class="p">)</span>
+
+        <span class="k">else</span><span class="o">:</span>
+
+            <span class="n">self</span><span class="p">.</span><span class="n">has_warnings</span> <span class="o">=</span> <span class="no">True</span>
+</code></pre></div>
+
+
+</details>
 <h5 id="plot_coverage">plot_coverage</h5>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">plot_coverage</span><span class="p">(</span>
     <span class="bp">self</span>
@@ -2177,7 +2627,7 @@ viewed as weak reads. Recommended value: 0.8 (80%).</p>
 
 <span class="w">        </span><span class="n">ax2</span><span class="p">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">ax2</span><span class="p">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="ss">&quot;Coverage [x]&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">ax2</span><span class="p">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="ss">&quot;Depth&quot;</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">ax2</span><span class="p">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="ss">&quot;Base [bp]&quot;</span><span class="p">)</span><span class="w"></span>
 
@@ -2235,7 +2685,7 @@ viewed as weak reads. Recommended value: 0.8 (80%).</p>
 
 <span class="w">        </span><span class="n">ax3</span><span class="p">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">top</span><span class="o">=</span><span class="n">ylim_top</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">ax3</span><span class="p">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="ss">&quot;Weak reads&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">ax3</span><span class="p">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="ss">&quot;Bad reads&quot;</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">ax3</span><span class="p">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="ss">&quot;Base [bp]&quot;</span><span class="p">)</span><span class="w"></span>
 
@@ -2312,6 +2762,16 @@ created from the output of <code>samtools depth -aa</code>.</p>
 
     <span class="n">def</span> <span class="n">create_comparator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reference_name</span><span class="p">):</span>
 
+        <span class="sd">&quot;&quot;&quot;Create a Comparator instance from one of the loaded references.</span>
+
+<span class="sd">        **Parameters**</span>
+
+<span class="sd">        **reference_name**</span>
+
+<span class="sd">        &gt; The name of the reference (`str`).</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="n">subset_paf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subset_paf</span><span class="p">(</span><span class="n">reference_name</span><span class="p">)</span>
 
         <span class="n">subset_tsv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tsv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">tsv</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">reference_name</span><span class="p">]</span>
@@ -2325,6 +2785,12 @@ created from the output of <code>samtools depth -aa</code>.</p>
         <span class="p">)</span>
 
         <span class="k">return</span> <span class="n">comparator</span>
+
+    <span class="n">def</span> <span class="n">add_comparator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reference_name</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Create comparator and add to the group. See create_comparator().&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">comparators</span> <span class="o">+=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">create_comparator</span><span class="p">(</span><span class="n">reference_name</span><span class="p">)]</span>
 
     <span class="n">def</span> <span class="n">subset_paf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reference_name</span><span class="p">):</span>
 
@@ -2406,11 +2872,149 @@ created from the output of <code>samtools depth -aa</code>.</p>
 
         <span class="k">return</span> <span class="n">subset_paf_final</span>
 
+    <span class="n">def</span> <span class="n">perform_all_comparisons</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">assembly_paths</span><span class="o">=</span><span class="n">None</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Call perform_comparison() on each Comparator.</span>
+
+<span class="sd">        **Parameters**</span>
+
+<span class="sd">        **assembly_paths**</span>
+
+<span class="sd">        &gt; Dictionary of construct name: *de novo* assembly file.</span>
+
+<span class="sd">        For example: `{&quot;Construct_1&quot;: &quot;/path/to/assembly.fa&quot;}`.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">assembly_paths</span> <span class="k">is</span> <span class="n">None</span><span class="p">:</span>
+
+            <span class="n">assembly_paths</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">comparator</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">comparators</span><span class="p">:</span>
+
+            <span class="n">try</span><span class="p">:</span>
+
+                <span class="n">assembly_path</span> <span class="o">=</span> <span class="n">assembly_paths</span><span class="p">[</span><span class="n">comparator</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+
+            <span class="n">except</span> <span class="n">Exception</span><span class="p">:</span>
+
+                <span class="n">assembly_path</span> <span class="o">=</span> <span class="n">None</span>
+
+            <span class="n">comparator</span><span class="o">.</span><span class="n">perform_comparison</span><span class="p">(</span><span class="n">assembly_path</span><span class="o">=</span><span class="n">assembly_path</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">comparisons_performed</span> <span class="o">=</span> <span class="n">True</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">summarise_analysis</span><span class="p">()</span>
+
+    <span class="n">def</span> <span class="n">summarise_analysis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Create variables for the PDF report summary.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">number_of_constructs</span> <span class="o">=</span> <span class="n">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">comparators</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">result_good</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">result_warning</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">result_error</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="n">names</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">reference_lengths</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">number_of_reads_aligning</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">median_coverages</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">comparator</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">comparators</span><span class="p">:</span>
+
+            <span class="n">names</span> <span class="o">+=</span> <span class="p">[</span><span class="n">comparator</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+
+            <span class="n">reference_lengths</span> <span class="o">+=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">comparator</span><span class="o">.</span><span class="n">reference_length</span><span class="p">)]</span>
+
+            <span class="n">number_of_reads_aligning</span> <span class="o">+=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">len</span><span class="p">(</span><span class="n">comparator</span><span class="o">.</span><span class="n">paf</span><span class="p">))]</span>
+
+            <span class="n">median_coverages</span> <span class="o">+=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="nb nb-Type">int</span><span class="p">(</span><span class="n">comparator</span><span class="o">.</span><span class="n">median_yy</span><span class="p">))]</span>
+
+            <span class="k">if</span> <span class="n">comparator</span><span class="o">.</span><span class="n">has_errors</span><span class="p">:</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">result_error</span> <span class="o">+=</span> <span class="mi">1</span>
+
+                <span class="n">results</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&quot;☒&quot;</span><span class="p">]</span>
+
+            <span class="k">else</span><span class="p">:</span>
+
+                <span class="k">if</span> <span class="n">comparator</span><span class="o">.</span><span class="n">has_warnings</span><span class="p">:</span>
+
+                    <span class="bp">self</span><span class="o">.</span><span class="n">result_warning</span> <span class="o">+=</span> <span class="mi">1</span>
+
+                    <span class="n">results</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&quot;⚠&quot;</span><span class="p">]</span>
+
+                <span class="k">else</span><span class="p">:</span>
+
+                    <span class="bp">self</span><span class="o">.</span><span class="n">result_good</span> <span class="o">+=</span> <span class="mi">1</span>
+
+                    <span class="n">results</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&quot;☑&quot;</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_fastq_reads</span> <span class="o">=</span> <span class="n">len</span><span class="p">(</span><span class="n">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">paf</span><span class="o">.</span><span class="n">query_name</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fastq_plot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot_fastq_histogram</span><span class="p">()</span>
+
+        <span class="c1"># Summary table</span>
+
+        <span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
+
+            <span class="s2">&quot;Name&quot;</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">names</span><span class="p">),</span>
+
+            <span class="s2">&quot;Result&quot;</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">results</span><span class="p">),</span>
+
+            <span class="s2">&quot;Length [bp]&quot;</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">reference_lengths</span><span class="p">),</span>
+
+            <span class="s2">&quot;FASTQ reads&quot;</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">number_of_reads_aligning</span><span class="p">),</span>
+
+            <span class="s2">&quot;Coverage [x]&quot;</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">median_coverages</span><span class="p">),</span>
+
+        <span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">summary_table</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+    <span class="n">def</span> <span class="n">plot_fastq_histogram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Plot a histogram of the FASTQ reads.</span>
+
+<span class="sd">        **Parameters**</span>
+
+<span class="sd">        **n_bins**</span>
+
+<span class="sd">        &gt; Number of bins in the histogram (`int`).</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">paf</span><span class="p">[</span><span class="s2">&quot;query_length&quot;</span><span class="p">],</span>
+
+            <span class="n">bins</span><span class="o">=</span><span class="nb nb-Type">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">paf</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;target_length&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">n_bins</span><span class="p">),</span>
+
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+
+        <span class="p">)</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Number of reads&quot;</span><span class="p">)</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Read length [bp]&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">fig</span>
+
     <span class="err">@</span><span class="n">staticmethod</span>
 
     <span class="n">def</span> <span class="n">load_paf</span><span class="p">(</span><span class="n">paf_path</span><span class="p">):</span>
 
-        <span class="sd">&quot;&quot;&quot;Create a dataframe from a paf file of alignments.</span>
+        <span class="sd">&quot;&quot;&quot;Create a dataframe from a PAF file of alignments.</span>
 
 <span class="sd">        **Parameters**</span>
 
@@ -2464,7 +3068,7 @@ created from the output of <code>samtools depth -aa</code>.</p>
 
     <span class="n">def</span> <span class="n">load_tsv</span><span class="p">(</span><span class="n">tsv_path</span><span class="p">):</span>
 
-        <span class="sd">&quot;&quot;&quot;Create a dataframe from a tsv file of depth counts.</span>
+        <span class="sd">&quot;&quot;&quot;Create a dataframe from a TSV file of depth counts.</span>
 
 <span class="sd">        **Parameters**</span>
 
@@ -2492,7 +3096,7 @@ created from the output of <code>samtools depth -aa</code>.</p>
 </code></pre></div>
 
 
-<p>Create a dataframe from a paf file of alignments.</p>
+<p>Create a dataframe from a PAF file of alignments.</p>
 <p><strong>Parameters</strong></p>
 <p><strong>paf_path</strong></p>
 <blockquote>
@@ -2502,7 +3106,7 @@ created from the output of <code>samtools depth -aa</code>.</p>
 
     <span class="n">def</span> <span class="n">load_paf</span><span class="p">(</span><span class="n">paf_path</span><span class="p">):</span>
 
-        <span class="sd">&quot;&quot;&quot;Create a dataframe from a paf file of alignments.</span>
+        <span class="sd">&quot;&quot;&quot;Create a dataframe from a PAF file of alignments.</span>
 
 <span class="sd">        **Parameters**</span>
 
@@ -2562,7 +3166,7 @@ created from the output of <code>samtools depth -aa</code>.</p>
 </code></pre></div>
 
 
-<p>Create a dataframe from a tsv file of depth counts.</p>
+<p>Create a dataframe from a TSV file of depth counts.</p>
 <p><strong>Parameters</strong></p>
 <p><strong>tsv_path</strong></p>
 <blockquote>
@@ -2572,7 +3176,7 @@ created from the output of <code>samtools depth -aa</code>.</p>
 
     <span class="n">def</span> <span class="n">load_tsv</span><span class="p">(</span><span class="n">tsv_path</span><span class="p">):</span>
 
-        <span class="sd">&quot;&quot;&quot;Create a dataframe from a tsv file of depth counts.</span>
+        <span class="sd">&quot;&quot;&quot;Create a dataframe from a TSV file of depth counts.</span>
 
 <span class="sd">        **Parameters**</span>
 
@@ -2592,6 +3196,24 @@ created from the output of <code>samtools depth -aa</code>.</p>
 
 </details>
 <h4 id="methods_1">Methods</h4>
+<h5 id="add_comparator">add_comparator</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">add_comparator</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">reference_name</span>
+<span class="p">)</span>
+</code></pre></div>
+
+
+<p>Create comparator and add to the group. See create_comparator().</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    def add_comparator(self, reference_name):
+
+        &quot;&quot;&quot;Create comparator and add to the group. See create_comparator().&quot;&quot;&quot;
+
+        self.comparators += [self.create_comparator(reference_name)]
+</code></pre></div>
+
+
+</details>
 <h5 id="create_comparator">create_comparator</h5>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">create_comparator</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
@@ -2600,21 +3222,136 @@ created from the output of <code>samtools depth -aa</code>.</p>
 </code></pre></div>
 
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">create_comparator</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">reference_name</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<p>Create a Comparator instance from one of the loaded references.</p>
+<p><strong>Parameters</strong></p>
+<p><strong>reference_name</strong></p>
+<blockquote>
+<p>The name of the reference (<code>str</code>).</p>
+</blockquote>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">create_comparator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reference_name</span><span class="p">):</span>
 
-<span class="w">        </span><span class="n">subset_paf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">subset_paf</span><span class="p">(</span><span class="n">reference_name</span><span class="p">)</span><span class="w"></span>
+        <span class="sd">&quot;&quot;&quot;Create a Comparator instance from one of the loaded references.</span>
 
-<span class="w">        </span><span class="n">subset_tsv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">tsv</span><span class="o">[</span><span class="n">self.tsv[&quot;name&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">reference_name</span><span class="err">]</span><span class="w"></span>
+<span class="sd">        **Parameters**</span>
 
-<span class="w">        </span><span class="n">alignment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;paf&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">subset_paf</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;tsv&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">subset_tsv</span><span class="err">}</span><span class="w"></span>
+<span class="sd">        **reference_name**</span>
 
-<span class="w">        </span><span class="n">comparator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Comparator</span><span class="p">(</span><span class="w"></span>
+<span class="sd">        &gt; The name of the reference (`str`).</span>
 
-<span class="w">            </span><span class="err">{</span><span class="nl">reference_name</span><span class="p">:</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="k">references</span><span class="o">[</span><span class="n">reference_name</span><span class="o">]</span><span class="err">}</span><span class="p">,</span><span class="w"> </span><span class="n">alignment</span><span class="w"></span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
-<span class="w">        </span><span class="p">)</span><span class="w"></span>
+        <span class="n">subset_paf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subset_paf</span><span class="p">(</span><span class="n">reference_name</span><span class="p">)</span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">comparator</span><span class="w"></span>
+        <span class="n">subset_tsv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tsv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">tsv</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">reference_name</span><span class="p">]</span>
+
+        <span class="n">alignment</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;paf&quot;</span><span class="p">:</span> <span class="n">subset_paf</span><span class="p">,</span> <span class="s2">&quot;tsv&quot;</span><span class="p">:</span> <span class="n">subset_tsv</span><span class="p">}</span>
+
+        <span class="n">comparator</span> <span class="o">=</span> <span class="n">Comparator</span><span class="p">(</span>
+
+            <span class="p">{</span><span class="n">reference_name</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">references</span><span class="p">[</span><span class="n">reference_name</span><span class="p">]},</span> <span class="n">alignment</span>
+
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">comparator</span>
+</code></pre></div>
+
+
+</details>
+<h5 id="perform_all_comparisons">perform_all_comparisons</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">perform_all_comparisons</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">assembly_paths</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+
+
+<p>Call perform_comparison() on each Comparator.</p>
+<p><strong>Parameters</strong></p>
+<p><strong>assembly_paths</strong></p>
+<blockquote>
+<p>Dictionary of construct name: <em>de novo</em> assembly file.
+For example: <code>{"Construct_1": "/path/to/assembly.fa"}</code>.</p>
+</blockquote>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">perform_all_comparisons</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">assembly_paths</span><span class="o">=</span><span class="n">None</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Call perform_comparison() on each Comparator.</span>
+
+<span class="sd">        **Parameters**</span>
+
+<span class="sd">        **assembly_paths**</span>
+
+<span class="sd">        &gt; Dictionary of construct name: *de novo* assembly file.</span>
+
+<span class="sd">        For example: `{&quot;Construct_1&quot;: &quot;/path/to/assembly.fa&quot;}`.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">assembly_paths</span> <span class="k">is</span> <span class="n">None</span><span class="p">:</span>
+
+            <span class="n">assembly_paths</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">comparator</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">comparators</span><span class="p">:</span>
+
+            <span class="n">try</span><span class="p">:</span>
+
+                <span class="n">assembly_path</span> <span class="o">=</span> <span class="n">assembly_paths</span><span class="p">[</span><span class="n">comparator</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+
+            <span class="n">except</span> <span class="n">Exception</span><span class="p">:</span>
+
+                <span class="n">assembly_path</span> <span class="o">=</span> <span class="n">None</span>
+
+            <span class="n">comparator</span><span class="o">.</span><span class="n">perform_comparison</span><span class="p">(</span><span class="n">assembly_path</span><span class="o">=</span><span class="n">assembly_path</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">comparisons_performed</span> <span class="o">=</span> <span class="n">True</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">summarise_analysis</span><span class="p">()</span>
+</code></pre></div>
+
+
+</details>
+<h5 id="plot_fastq_histogram">plot_fastq_histogram</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">plot_fastq_histogram</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">n_bins</span><span class="o">=</span><span class="mi">50</span>
+<span class="p">)</span>
+</code></pre></div>
+
+
+<p>Plot a histogram of the FASTQ reads.</p>
+<p><strong>Parameters</strong></p>
+<p><strong>n_bins</strong></p>
+<blockquote>
+<p>Number of bins in the histogram (<code>int</code>).</p>
+</blockquote>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">plot_fastq_histogram</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span><span class="o">:</span>
+
+        <span class="s2">&quot;</span><span class="se">&quot;&quot;</span><span class="s2">Plot a histogram of the FASTQ reads.</span>
+
+<span class="s2">        **Parameters**</span>
+
+<span class="s2">        **n_bins**</span>
+
+<span class="s2">        &gt; Number of bins in the histogram (`int`).</span>
+
+<span class="s2">        </span><span class="se">&quot;&quot;</span><span class="s2">&quot;</span>
+
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">subplots</span><span class="p">()</span>
+
+        <span class="n">plt</span><span class="p">.</span><span class="n">hist</span><span class="p">(</span>
+
+            <span class="n">self</span><span class="p">.</span><span class="n">paf</span><span class="err">[</span><span class="s2">&quot;query_length&quot;</span><span class="err">]</span><span class="p">,</span>
+
+            <span class="n">bins</span><span class="o">=</span><span class="kt">int</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">paf</span><span class="p">.</span><span class="n">iloc</span><span class="err">[</span><span class="mi">0</span><span class="err">][</span><span class="s2">&quot;target_length&quot;</span><span class="err">]</span> <span class="o">/</span> <span class="n">n_bins</span><span class="p">),</span>
+
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+
+        <span class="p">)</span>
+
+        <span class="n">ax</span><span class="p">.</span><span class="k">set</span><span class="n">_ylabel</span><span class="p">(</span><span class="s2">&quot;Number of reads&quot;</span><span class="p">)</span>
+
+        <span class="n">ax</span><span class="p">.</span><span class="k">set</span><span class="n">_xlabel</span><span class="p">(</span><span class="s2">&quot;Read length [bp]&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">fig</span>
 </code></pre></div>
 
 
@@ -2713,6 +3450,91 @@ created from the output of <code>samtools depth -aa</code>.</p>
         <span class="err">]</span>
 
         <span class="k">return</span> <span class="n">subset_paf_final</span>
+</code></pre></div>
+
+
+</details>
+<h5 id="summarise_analysis">summarise_analysis</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">summarise_analysis</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span>
+</code></pre></div>
+
+
+<p>Create variables for the PDF report summary.</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">summarise_analysis</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot;Create variables for the PDF report summary.&quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">number_of_constructs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">comparators</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">result_good</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">result_warning</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">result_error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">[]</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">reference_lengths</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">[]</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">[]</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">number_of_reads_aligning</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">[]</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">median_coverages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">[]</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">comparator</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="nl">comparators</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">names</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="o">[</span><span class="n">comparator.name</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">reference_lengths</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="o">[</span><span class="n">str(comparator.reference_length)</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">number_of_reads_aligning</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="o">[</span><span class="n">str(len(comparator.paf))</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">median_coverages</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="o">[</span><span class="n">str(int(comparator.median_yy))</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">comparator</span><span class="p">.</span><span class="nl">has_errors</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="n">result_error</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">results</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="o">[</span><span class="n">&quot;☒&quot;</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">comparator</span><span class="p">.</span><span class="nl">has_warnings</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                    </span><span class="n">self</span><span class="p">.</span><span class="n">result_warning</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
+
+<span class="w">                    </span><span class="n">results</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="o">[</span><span class="n">&quot;⚠&quot;</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">                </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                    </span><span class="n">self</span><span class="p">.</span><span class="n">result_good</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
+
+<span class="w">                    </span><span class="n">results</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="o">[</span><span class="n">&quot;☑&quot;</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">n_fastq_reads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">len</span><span class="p">(</span><span class="k">set</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">paf</span><span class="p">.</span><span class="n">query_name</span><span class="p">))</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">fastq_plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">plot_fastq_histogram</span><span class="p">()</span><span class="w"></span>
+
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="n">Summary</span><span class="w"> </span><span class="nc">table</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+
+<span class="w">            </span><span class="ss">&quot;Name&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">pandas</span><span class="p">.</span><span class="n">Series</span><span class="p">(</span><span class="k">names</span><span class="p">),</span><span class="w"></span>
+
+<span class="w">            </span><span class="ss">&quot;Result&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">pandas</span><span class="p">.</span><span class="n">Series</span><span class="p">(</span><span class="n">results</span><span class="p">),</span><span class="w"></span>
+
+<span class="w">            </span><span class="ss">&quot;Length [bp]&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">pandas</span><span class="p">.</span><span class="n">Series</span><span class="p">(</span><span class="n">reference_lengths</span><span class="p">),</span><span class="w"></span>
+
+<span class="w">            </span><span class="ss">&quot;FASTQ reads&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">pandas</span><span class="p">.</span><span class="n">Series</span><span class="p">(</span><span class="n">number_of_reads_aligning</span><span class="p">),</span><span class="w"></span>
+
+<span class="w">            </span><span class="ss">&quot;Coverage [x]&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">pandas</span><span class="p">.</span><span class="n">Series</span><span class="p">(</span><span class="n">median_coverages</span><span class="p">),</span><span class="w"></span>
+
+<span class="w">        </span><span class="err">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">summary_table</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pandas</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
 
 

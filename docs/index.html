@@ -445,24 +445,30 @@
 </code></pre></div>
 
 
-<p>Using Ediacara requires the plasmid reference sequences (Genbank), the alignments in <a href="https://lh3.github.io/minimap2/minimap2.html#10">PAF format</a>, and a TSV file of coverage (depth) counts.</p>
+<p>Using Ediacara requires the plasmid reference sequences (Genbank), the alignments in <a href="https://lh3.github.io/minimap2/minimap2.html#10">PAF format</a>, and a TSV file of coverage (depth) counts. Optionally, the user can also specify <em>de novo</em> assembly files that will be compared with the references.</p>
+<p><a href="https://github.com/rrwick/Badread">Badread</a> is a long read simulator that generates fastq files from reference sequences.</p>
 <p><a href="https://lh3.github.io/minimap2/">Minimap2</a> can create SAM or PAF alignments from fastq and reference fasta files.
 <a href="https://github.com/lh3/minimap2/blob/master/misc/README.md"><code>paftools.js</code></a> can convert from SAM to PAF.
 The TSV file is the output of <code>samtools depth -aa</code>.</p>
-<p><a href="https://github.com/rrwick/Badread">Badread</a> is a long read simulator that generates fastq files from reference sequences.</p>
+<p><a href="https://canu.readthedocs.io">Canu</a> can create an assembly file from filtered FASTQ reads that align best to the reference.</p>
 <h2 id="usage">Usage</h2>
-<p>An example for creating alignments for a reference named <code>ABC_1</code>:</p>
+<p>An example for creating alignments in the terminal, for a reference named <code>ABC_1</code>:</p>
 <div class="codehilite"><pre><span></span><code><span class="c1"># badread simulate --reference ABC_1.fa --quantity 50x --length 1500,500 &gt; ABC_1.fastq</span>
-<span class="n">minimap2</span> <span class="o">-</span><span class="n">a</span> <span class="n">ABC_1</span><span class="o">.</span><span class="n">fa</span> <span class="n">ABC_1</span><span class="o">.</span><span class="n">fastq</span> <span class="o">&gt;</span> <span class="n">ABC_1</span><span class="o">.</span><span class="n">sam</span>
-<span class="n">samtools</span> <span class="n">sort</span> <span class="o">-</span><span class="n">O</span> <span class="n">sam</span> <span class="o">-</span><span class="n">T</span> <span class="n">sample</span><span class="o">.</span><span class="n">sort</span> <span class="o">-</span><span class="n">o</span> <span class="n">ABC_1_sorted</span><span class="o">.</span><span class="n">sam</span> <span class="n">ABC_1</span><span class="o">.</span><span class="n">sam</span>
-<span class="n">samtools</span> <span class="n">depth</span> <span class="o">-</span><span class="n">aa</span> <span class="n">ABC_1_sorted</span><span class="o">.</span><span class="n">sam</span> <span class="o">&gt;</span> <span class="n">ABC_1</span><span class="o">.</span><span class="n">tsv</span>
-<span class="n">paftools</span><span class="o">.</span><span class="n">js</span> <span class="n">sam2paf</span> <span class="n">ABC_1</span><span class="o">.</span><span class="n">sam</span> <span class="o">&gt;</span> <span class="n">ABC_1</span><span class="o">.</span><span class="n">paf</span>
+minimap2 -a ABC_1.fa ABC_1.fastq &gt; ABC_1.sam
+samtools sort -O sam -T sample.sort -o ABC_1_sorted.sam ABC_1.sam
+samtools depth -aa ABC_1_sorted.sam &gt; ABC_1.tsv
+paftools.js sam2paf ABC_1.sam &gt; ABC_1.paf
 </code></pre></div>
 
 
-<p>Run Ediacara and plot coverage:</p>
+<p>Create a <em>de novo</em> assembly with Canu:</p>
+<div class="codehilite"><pre><span></span><code>./canu-2.1.1/bin/canu -p egf -d ABC_1 <span class="nv">genomeSize</span><span class="o">=</span>8k -nanopore filtered_fastq/ABC_1_filtered.fastq
+</code></pre></div>
+
+
+<p>Create a PDF report in Python with Ediacara:</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">ediacara</span> <span class="k">as</span> <span class="nn">edi</span>
-<span class="kn">import</span> <span class="nn">dnacauldron</span>
+<span class="kn">import</span> <span class="nn">dnacauldron</span>  <span class="c1"># for loading sequence files</span>
 
 <span class="n">tsv_file</span> <span class="o">=</span> <span class="s2">&quot;/path/to/ABC_1.tsv&quot;</span>
 <span class="n">tsv</span> <span class="o">=</span> <span class="n">edi</span><span class="o">.</span><span class="n">ComparatorGroup</span><span class="o">.</span><span class="n">load_tsv</span><span class="p">(</span><span class="n">tsv_file</span><span class="p">)</span>
@@ -474,9 +480,11 @@ The TSV file is the output of <code>samtools depth -aa</code>.</p>
 <span class="n">references</span> <span class="o">=</span> <span class="p">{</span><span class="n">record</span><span class="o">.</span><span class="n">id</span><span class="p">:</span> <span class="n">record</span> <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">records</span><span class="p">}</span>
 <span class="n">alignments</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;paf&quot;</span><span class="p">:</span> <span class="n">paf</span><span class="p">,</span> <span class="s2">&quot;tsv&quot;</span><span class="p">:</span> <span class="n">tsv</span><span class="p">}</span>
 <span class="n">comparator_group</span> <span class="o">=</span> <span class="n">edi</span><span class="o">.</span><span class="n">ComparatorGroup</span><span class="p">(</span><span class="n">references</span><span class="p">,</span> <span class="n">alignments</span><span class="p">)</span>
-<span class="n">comparator</span> <span class="o">=</span> <span class="n">comparator_group</span><span class="o">.</span><span class="n">create_comparator</span><span class="p">(</span><span class="s2">&quot;ABC_1&quot;</span><span class="p">)</span>
 
-<span class="n">edi</span><span class="o">.</span><span class="n">write_pdf_report</span><span class="p">(</span><span class="s2">&quot;report.pdf&quot;</span><span class="p">,</span> <span class="n">comparator</span><span class="p">)</span>
+<span class="n">assembly_paths</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ABC_1&quot;</span><span class="p">:</span> <span class="s2">&quot;/path/to/canu_assembly/ABC_1/egf.contigs.fasta&quot;</span><span class="p">}</span>
+<span class="n">comparator_group</span><span class="o">.</span><span class="n">perform_all_comparisons</span><span class="p">(</span><span class="n">assembly_paths</span><span class="o">=</span><span class="n">assembly_paths</span><span class="p">)</span>
+<span class="c1"># Write a PDF report on all constructs:</span>
+<span class="n">edi</span><span class="o">.</span><span class="n">write_comparatorgroup_report</span><span class="p">(</span><span class="s2">&quot;report_ABC.pdf&quot;</span><span class="p">,</span> <span class="n">comparator_group</span><span class="p">)</span>
 </code></pre></div>
 
 
