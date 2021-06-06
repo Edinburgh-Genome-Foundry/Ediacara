@@ -34,6 +34,14 @@ class ComparatorGroup:
         self.comparators = []
 
     def create_comparator(self, reference_name):
+        """Create a Comparator instance from one of the loaded references.
+
+
+        **Parameters**
+
+        **reference_name**
+        > The name of the reference (`str`).
+        """
         subset_paf = self.subset_paf(reference_name)
         subset_tsv = self.tsv[self.tsv["name"] == reference_name]
         alignment = {"paf": subset_paf, "tsv": subset_tsv}
@@ -45,7 +53,7 @@ class ComparatorGroup:
         return comparator
 
     def add_comparator(self, reference_name):
-        """Create comparator and add to the group."""
+        """Create comparator and add to the group. See create_comparator()."""
         self.comparators += [self.create_comparator(reference_name)]
 
     def subset_paf(self, reference_name):
@@ -103,7 +111,7 @@ class ComparatorGroup:
         **Parameters**
 
         **assembly_paths**
-        > Dictionary of construct name: de novo assembly file.
+        > Dictionary of construct name: *de novo* assembly file.
         For example: `{"Construct_1": "/path/to/assembly.fa"}`.
         """
         if assembly_paths is None:
@@ -161,6 +169,14 @@ class ComparatorGroup:
         self.summary_table = pandas.DataFrame(d)
 
     def plot_fastq_histogram(self, n_bins=50):
+        """Plot a histogram of the FASTQ reads.
+
+
+        **Parameters**
+
+        **n_bins**
+        > Number of bins in the histogram (`int`).
+        """
         fig, ax = plt.subplots()
         plt.hist(
             self.paf["query_length"],
@@ -174,7 +190,7 @@ class ComparatorGroup:
 
     @staticmethod
     def load_paf(paf_path):
-        """Create a dataframe from a paf file of alignments.
+        """Create a dataframe from a PAF file of alignments.
 
 
         **Parameters**
@@ -207,7 +223,7 @@ class ComparatorGroup:
 
     @staticmethod
     def load_tsv(tsv_path):
-        """Create a dataframe from a tsv file of depth counts.
+        """Create a dataframe from a TSV file of depth counts.
 
 
         **Parameters**
@@ -247,6 +263,14 @@ class Comparator:
         self.geneblocks_outcome = "none"  # stores outcome, used in PDF report making
 
     def perform_comparison(self, assembly_path=None):
+        """Plot coverage and compare reference with *de novo* assembly.
+
+
+        **Parameters**
+
+        **assembly_path**
+        > Optional. Path to a *de novo* assembly FASTA file (`str`).
+        """
         self.fig = self.plot_coverage()
         plt.close(self.fig)
         if assembly_path is not None:
@@ -257,6 +281,7 @@ class Comparator:
             self.has_warnings = True
 
     def calculate_stats(self):
+        """Calculate statistics for the coverage plot, used in plot_coverage()."""
         self.xx = numpy.arange(len(self.record.seq))  # for the plot x axis
         self.yy = self.tsv["depth"].to_list()  # for plotting coverage
         self.median_yy = statistics.median(self.yy)
