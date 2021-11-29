@@ -12,6 +12,20 @@ import dna_features_viewer
 import geneblocks
 
 
+class CustomTranslator(dna_features_viewer.BiopythonTranslator):
+    """Custom translator."""
+
+    def compute_filtered_features(self, features):
+        """Display only "From " features and overhangs."""
+        features = [
+            feature
+            for feature in features
+            if (len(feature.qualifiers.get("label", "")[0]) == 4)
+            or ("From " in str(feature.qualifiers.get("label", "")))
+        ]
+        return features
+
+
 class ComparatorGroup:
     """Analyse alignments to a set of references.
 
@@ -261,6 +275,8 @@ class Comparator:
         self.has_warnings = False
         self.has_errors = False
         self.geneblocks_outcome = "none"  # stores outcome, used in PDF report making
+        # Set True if references are DNA Cauldron-simulated files:
+        self.dnacauldron = True  # for plotting
 
     def perform_comparison(self, assembly_path=None):
         """Plot coverage and compare reference with *de novo* assembly.
@@ -341,9 +357,13 @@ class Comparator:
         fig, (ax1, ax2, ax3) = plt.subplots(
             3, 1, figsize=(7, 4), sharex=True, gridspec_kw={"height_ratios": [4, 1, 1]}
         )
-        graphic_record = dna_features_viewer.BiopythonTranslator().translate_record(
-            self.record
-        )
+        if self.dnacauldron:
+            graphic_record = CustomTranslator().translate_record(self.record)
+        else:
+            graphic_record = dna_features_viewer.BiopythonTranslator().translate_record(
+                self.record
+            )
+
         graphic_record.plot(ax=ax1, with_ruler=False, strand_in_label_threshold=4)
 
         # Plot coverage
