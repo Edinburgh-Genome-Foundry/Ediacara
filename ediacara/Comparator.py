@@ -271,6 +271,7 @@ class Comparator:
         self.paf = alignment["paf"]
         self.tsv = alignment["tsv"]
         self.coverage_cutoff = 0.15  # 15% of median coverage
+        self.calculate_bad_reads = False  # for an old approach
         self.reference_length = len(self.record)
         self.has_warnings = False
         self.has_errors = False
@@ -323,28 +324,29 @@ class Comparator:
             self.has_errors = True
 
         # This section creates a list of bad position to be reported
-        if not hasattr(self, "zz"):
-            self.get_weak_read_histogram_data(cutoff=0.8)
-            # for plotting weak reads (less than 80% of the read maps)
-        indices_errors = [
-            i
-            for i, value in enumerate(self.zz)
-            if value > self.median_yy * self.coverage_cutoff
-        ]
-        H = (
-            list(x)
-            for _, x in itertools.groupby(
-                indices_errors, lambda x, c=itertools.count(): next(c) - x
+        if self.calculate_bad_reads:
+            if not hasattr(self, "zz"):
+                self.get_weak_read_histogram_data(cutoff=0.8)
+                # for plotting weak reads (less than 80% of the read maps)
+            indices_errors = [
+                i
+                for i, value in enumerate(self.zz)
+                if value > self.median_yy * self.coverage_cutoff
+            ]
+            H = (
+                list(x)
+                for _, x in itertools.groupby(
+                    indices_errors, lambda x, c=itertools.count(): next(c) - x
+                )
             )
-        )
 
-        self.high_error_positions_string = ", ".join(
-            "-".join(map(str, (g[0], g[-1])[: len(g)])) for g in H
-        )
-        if self.high_error_positions_string == "":
-            self.high_error_positions_string = "-"
-        else:
-            self.has_errors = True
+            self.high_error_positions_string = ", ".join(
+                "-".join(map(str, (g[0], g[-1])[: len(g)])) for g in H
+            )
+            if self.high_error_positions_string == "":
+                self.high_error_positions_string = "-"
+            else:
+                self.has_errors = True
 
     def plot_coverage(self):
         """Plot the reference with the coverage and weak reads."""
@@ -354,9 +356,18 @@ class Comparator:
 
         # Plot
         ######
-        fig, (ax1, ax2, ax3) = plt.subplots(
-            3, 1, figsize=(7, 4), sharex=True, gridspec_kw={"height_ratios": [4, 1, 1]}
-        )
+        if self.calculate_bad_reads:
+            fig, (ax1, ax2, ax3) = plt.subplots(
+                3,
+                1,
+                figsize=(7, 4),
+                sharex=True,
+                gridspec_kw={"height_ratios": [4, 1, 1]},
+            )
+        else:
+            fig, (ax1, ax2) = plt.subplots(
+                2, 1, figsize=(7, 3), sharex=True, gridspec_kw={"height_ratios": [4, 1]}
+            )
         if self.dnacauldron:
             graphic_record = CustomTranslator().translate_record(self.record)
         else:
@@ -393,24 +404,25 @@ class Comparator:
         )
 
         # Plot low-quality reads:
-        ax3.fill_between(self.xx, self.zz, alpha=0.8, color="red")
-        # ensure plot stays small if there are no problems:
-        if max(self.zz) < self.coverage_cutoff * max(self.yy):
-            ylim_top = self.coverage_cutoff * max(self.yy)
-        else:
-            ylim_top = max(self.zz)
+        if self.calculate_bad_reads:
+            ax3.fill_between(self.xx, self.zz, alpha=0.8, color="red")
+            # ensure plot stays small if there are no problems:
+            if max(self.zz) < self.coverage_cutoff * max(self.yy):
+                ylim_top = self.coverage_cutoff * max(self.yy)
+            else:
+                ylim_top = max(self.zz)
 
-        ax3.set_ylim(bottom=0, top=ylim_top)
-        ax3.set_ylabel("Bad reads")
-        ax3.set_xlabel("Base [bp]")
-        ax3.axhline(
-            y=self.median_yy * self.coverage_cutoff,
-            xmin=0,
-            xmax=1,
-            color="grey",
-            linestyle="--",
-            linewidth=0.8,
-        )
+            ax3.set_ylim(bottom=0, top=ylim_top)
+            ax3.set_ylabel("Bad reads")
+            ax3.set_xlabel("Base [bp]")
+            ax3.axhline(
+                y=self.median_yy * self.coverage_cutoff,
+                xmin=0,
+                xmax=1,
+                color="grey",
+                linestyle="--",
+                linewidth=0.8,
+            )
 
         return fig
 
