@@ -56,23 +56,26 @@ each comparator in comparatorgroup.comparators
 
   p Positions with low coverage: #[span.red {{ comparator.low_coverage_positions_string }} ]
 
-  p Positions with bad coverage: #[span.red {{ comparator.high_error_positions_string }} ]
+  if comparator.high_error_positions_string
+    p Positions with bad coverage: #[span.red {{ comparator.high_error_positions_string }} ]
 
 
   unless comparator.has_comparison_error
     div(style="display:block; clear:both; page-break-after:always")
 
-  h3 <i>De novo</i> assembly
 
-  if comparator.has_comparison_error
-    p
-      strong #[span.red Error!]
-      | {{ comparator.geneblocks_text }}
+  if comparator.has_de_novo
+    h3 <i>De novo</i> assembly
 
-  else
-    p {{ comparator.geneblocks_text }}
+    if comparator.has_comparison_error
+      p
+        strong #[span.red Error!]
+        | {{ comparator.geneblocks_text }}
 
-    img#diff-figure(src="{{ comparator.comparison_figure_data }}")
+    else
+      p {{ comparator.geneblocks_text }}
+
+      img#diff-figure(src="{{ comparator.comparison_figure_data }}")
 
 
   <div style = "display:block; clear:both; page-break-after:always;"></div>

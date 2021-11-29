@@ -278,6 +278,7 @@ class Comparator:
         self.geneblocks_outcome = "none"  # stores outcome, used in PDF report making
         # Set True if references are DNA Cauldron-simulated files:
         self.dnacauldron = True  # for plotting
+        self.has_de_novo = False  # for de novo assembly comparison
 
     def perform_comparison(self, assembly_path=None):
         """Plot coverage and compare reference with *de novo* assembly.
@@ -294,8 +295,7 @@ class Comparator:
             self.comparison_figure = self.compare_with_assembly(
                 assembly_path=assembly_path
             )
-        else:
-            self.has_warnings = True
+            self.has_de_novo = True
 
     def calculate_stats(self):
         """Calculate statistics for the coverage plot, used in plot_coverage()."""
