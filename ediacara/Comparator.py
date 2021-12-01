@@ -26,6 +26,25 @@ class CustomTranslator(dna_features_viewer.BiopythonTranslator):
         return features
 
 
+class SequencingGroup:
+    """Analyse alignments of a sequencing run.
+
+
+    **Parameters**
+
+    **comparatorgroups**
+    > List of `ComparatorGroup` instances.
+    """
+
+    def __init__(self, comparatorgroups):
+        self.comparatorgroups = comparatorgroups
+
+    def perform_all_comparisons_in_sequencinggroup(self):
+        for comparatorgroup in self.comparatorgroups:
+            comparatorgroup.perform_all_comparisons()
+        self.comparisons_performed = True
+
+
 class ComparatorGroup:
     """Analyse alignments to a set of references.
 

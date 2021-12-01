@@ -19,6 +19,7 @@ THIS_PATH = os.path.dirname(os.path.realpath(__file__))
 ASSETS_PATH = os.path.join(THIS_PATH, "report_assets")
 REPORT_TEMPLATE = os.path.join(ASSETS_PATH, "simulation_report.pug")
 GROUP_REPORT_TEMPLATE = os.path.join(ASSETS_PATH, "group_simulation_report.pug")
+SEQUENCINGGROUP_REPORT_TEMPLATE = os.path.join(ASSETS_PATH, "run_simulation_report.pug")
 STYLESHEET = os.path.join(ASSETS_PATH, "report_style.css")
 
 
@@ -35,6 +36,104 @@ def end_pug_to_html(template, **context):
     return pug_to_html(template, **context)
 
 
+def write_sequencinggroup_report(target, sequencinggroup):
+    """Write a sequencing run report with a PDF summary.
+
+
+    **Parameters**
+
+    **target**
+    > Path for PDF file.
+
+    **sequencinggroup**
+    > `SequencingGroup` instance.
+    """
+
+    def tr_modifier(tr):
+        tds = list(tr.find_all("td"))
+        if len(tds) == 0:
+            return
+        result = tds[1]  # second element of list is the result symbol
+        if result.text == "☑":
+            add_css_class(tr, "positive")
+        elif result.text == "☒":
+            add_css_class(tr, "negative")
+
+    if not sequencinggroup.comparisons_performed:
+        return "Run perform_all_comparisons_in_sequencinggroup()!"
+
+    for comparatorgroup in sequencinggroup.comparatorgroups:
+        comparatorgroup.report_table = dataframe_to_html(
+            comparatorgroup.summary_table, extra_classes=("definition",)
+        )
+
+        # This colours the summary table:
+        comparatorgroup.report_table = style_table_rows(
+            comparatorgroup.report_table, tr_modifier
+        )
+
+        # Histogram of reads in the report summary
+        comparatorgroup.fastq_figure_data = pdf_tools.figure_data(
+            comparatorgroup.fastq_plot, fmt="svg"
+        )
+
+        for comparator in comparatorgroup.comparators:
+            comparator.figure_data = pdf_tools.figure_data(comparator.fig, fmt="svg")
+
+            if hasattr(comparator, "is_comparison_successful"):
+                if comparator.is_comparison_successful:
+                    height = comparator.comparison_figure.figure.get_size_inches()[1]
+                    if height > 10:
+                        height = 10  # to fit on one page
+                    comparator.comparison_figure_data = pdf_tools.figure_data(
+                        comparator.comparison_figure, fmt="svg", size=[7, height]
+                    )
+                else:
+                    comparator.comparison_figure_data = None
+
+            if comparator.has_de_novo:
+                comparator.has_comparison_error = True
+                if comparator.geneblocks_outcome == "none":
+                    comparator.geneblocks_text = (
+                        "Missing <i>de novo</i> assembly file for comparison!"
+                    )
+                elif comparator.geneblocks_outcome == "incorrect_length":
+                    comparator.geneblocks_text = (
+                        "Incorrect length! " + comparator.incorrect_length_msg
+                    )
+                elif comparator.geneblocks_outcome == "geneblocks_error":
+                    comparator.geneblocks_text = "GeneBlocks comparison of <i>de novo<i/> assembly and reference failed."
+                elif comparator.geneblocks_outcome == "swapped_diffblocks":
+                    comparator.geneblocks_text = (
+                        "Note: the plot compares the <i>de novo</i> assembly to the "
+                        "reference "
+                        + comparator.name
+                        + " therefore there are no annotations."
+                    )
+                    comparator.has_comparison_error = False
+                elif comparator.geneblocks_outcome == "all_good":
+                    comparator.geneblocks_text = (
+                        "<b>"
+                        + comparator.name
+                        + "</b> reference vs <i>de novo</i> assembly of reads:"
+                    )
+                    comparator.has_comparison_error = False
+
+                if (
+                    hasattr(comparator, "is_assembly_reverse_complement")
+                    and comparator.is_assembly_reverse_complement
+                ):
+                    comparator.geneblocks_text += (
+                        "Note: the <i>de novo<i/> assembly is the "
+                        "reverse complement of the reference."
+                    )
+
+    html = end_pug_to_html(
+        SEQUENCINGGROUP_REPORT_TEMPLATE, sequencinggroup=sequencinggroup
+    )
+    write_report(html, target, extra_stylesheets=(STYLESHEET,))
+
+
 def write_comparatorgroup_report(target, comparatorgroup):
     """Write an alignment report with a PDF summary.
 
@@ -45,7 +144,7 @@ def write_comparatorgroup_report(target, comparatorgroup):
     > Path for PDF file.
 
     **comparatorgroup**
-    > ComparatorGroup instance.
+    > `ComparatorGroup` instance.
     """
     if not comparatorgroup.comparisons_performed:
         return "Run perform_all_comparisons()!"
