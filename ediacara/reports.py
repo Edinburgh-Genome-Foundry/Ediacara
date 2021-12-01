@@ -95,18 +95,19 @@ def write_sequencinggroup_report(target, sequencinggroup):
                 comparator.has_comparison_error = True
                 if comparator.geneblocks_outcome == "none":
                     comparator.geneblocks_text = (
-                        "Missing <i>de novo</i> assembly file for comparison!"
+                        "Missing consensus file for comparison!"
                     )
                 elif comparator.geneblocks_outcome == "incorrect_length":
                     comparator.geneblocks_text = (
                         "Incorrect length! " + comparator.incorrect_length_msg
                     )
                 elif comparator.geneblocks_outcome == "geneblocks_error":
-                    comparator.geneblocks_text = "GeneBlocks comparison of <i>de novo<i/> assembly and reference failed."
+                    comparator.geneblocks_text = (
+                        "GeneBlocks comparison of consensus and reference failed."
+                    )
                 elif comparator.geneblocks_outcome == "swapped_diffblocks":
                     comparator.geneblocks_text = (
-                        "Note: the plot compares the <i>de novo</i> assembly to the "
-                        "reference "
+                        "Note: the plot compares the consensus to the reference "
                         + comparator.name
                         + " therefore there are no annotations."
                     )
@@ -115,7 +116,7 @@ def write_sequencinggroup_report(target, sequencinggroup):
                     comparator.geneblocks_text = (
                         "<b>"
                         + comparator.name
-                        + "</b> reference vs <i>de novo</i> assembly of reads:"
+                        + "</b> reference vs consensus of reads:"
                     )
                     comparator.has_comparison_error = False
 
@@ -124,7 +125,7 @@ def write_sequencinggroup_report(target, sequencinggroup):
                     and comparator.is_assembly_reverse_complement
                 ):
                     comparator.geneblocks_text += (
-                        "Note: the <i>de novo<i/> assembly is the "
+                        "Note: the consensus is the "
                         "reverse complement of the reference."
                     )
 
@@ -187,41 +188,41 @@ def write_comparatorgroup_report(target, comparatorgroup):
             else:
                 comparator.comparison_figure_data = None
 
-        if comparator.has_de_novo:
-            comparator.has_comparison_error = True
-            if comparator.geneblocks_outcome == "none":
-                comparator.geneblocks_text = (
-                    "Missing <i>de novo</i> assembly file for comparison!"
-                )
-            elif comparator.geneblocks_outcome == "incorrect_length":
-                comparator.geneblocks_text = (
-                    "Incorrect length! " + comparator.incorrect_length_msg
-                )
-            elif comparator.geneblocks_outcome == "geneblocks_error":
-                comparator.geneblocks_text = "GeneBlocks comparison of <i>de novo<i/> assembly and reference failed."
-            elif comparator.geneblocks_outcome == "swapped_diffblocks":
-                comparator.geneblocks_text = (
-                    "Note: the plot compares the <i>de novo</i> assembly to the "
-                    "reference "
-                    + comparator.name
-                    + " therefore there are no annotations."
-                )
-                comparator.has_comparison_error = False
-            elif comparator.geneblocks_outcome == "all_good":
-                comparator.geneblocks_text = (
-                    "<b>"
-                    + comparator.name
-                    + "</b> reference vs <i>de novo</i> assembly of reads:"
-                )
-                comparator.has_comparison_error = False
+            if comparator.has_de_novo:
+                comparator.has_comparison_error = True
+                if comparator.geneblocks_outcome == "none":
+                    comparator.geneblocks_text = (
+                        "Missing consensus file for comparison!"
+                    )
+                elif comparator.geneblocks_outcome == "incorrect_length":
+                    comparator.geneblocks_text = (
+                        "Incorrect length! " + comparator.incorrect_length_msg
+                    )
+                elif comparator.geneblocks_outcome == "geneblocks_error":
+                    comparator.geneblocks_text = (
+                        "GeneBlocks comparison of consensus and reference failed."
+                    )
+                elif comparator.geneblocks_outcome == "swapped_diffblocks":
+                    comparator.geneblocks_text = (
+                        "Note: the plot compares the consensus to the reference "
+                        + comparator.name
+                        + " therefore there are no annotations."
+                    )
+                    comparator.has_comparison_error = False
+                elif comparator.geneblocks_outcome == "all_good":
+                    comparator.geneblocks_text = (
+                        "<b>"
+                        + comparator.name
+                        + "</b> reference vs consensus of reads:"
+                    )
+                    comparator.has_comparison_error = False
 
             if (
                 hasattr(comparator, "is_assembly_reverse_complement")
                 and comparator.is_assembly_reverse_complement
             ):
                 comparator.geneblocks_text += (
-                    "Note: the <i>de novo<i/> assembly is the "
-                    "reverse complement of the reference."
+                    "Note: the consensus is the reverse complement of the reference."
                 )
 
     html = end_pug_to_html(GROUP_REPORT_TEMPLATE, comparatorgroup=comparatorgroup)

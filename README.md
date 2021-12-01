@@ -11,7 +11,7 @@ The **Edi**nburgh Genome Foundry's **a**lignment **c**omp**ara**tor.
 # pip install ediacara
 pip install --upgrade git+https://github.com/Edinburgh-Genome-Foundry/Ediacara.git@main
 ```
-Using Ediacara requires the plasmid reference sequences (Genbank), the alignments in [PAF format](https://lh3.github.io/minimap2/minimap2.html#10), and a TSV file of coverage (depth) counts. Optionally, the user can also specify *de novo* assembly files that will be compared with the references.
+Using Ediacara requires the plasmid reference sequences (Genbank), the alignments in [PAF format](https://lh3.github.io/minimap2/minimap2.html#10), and a TSV file of coverage (depth) counts. Optionally, the user can also specify consensus (or *de novo* assembly) files that will be compared with the references.
 
 [Badread](https://github.com/rrwick/Badread) is a long read simulator that generates fastq files from reference sequences.
 

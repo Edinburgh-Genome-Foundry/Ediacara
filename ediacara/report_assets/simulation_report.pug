@@ -44,16 +44,16 @@ if comparator.geneblocks_done
 
 if comparator.has_comparison
 
-  h3 <i>De novo</i> assembly
+  h3 Comparison with reference
 
   if comparator.is_comparison_successful
     if geneblocks_done
       p(style='font-size: 8px').
-        #[span.red Note]: GeneBlocks comparison of de novo assembly and reference failed.
+        #[span.red Note]: GeneBlocks comparison of consensus and reference failed.
     else
       if comparator.is_diffblocks_reverse
         p
-          #[span.red Note]: the plot compares the de novo assembly to the reference,
+          #[span.red Note]: the plot compares the consensus to the reference,
           | therefore there are no annotations.
       img#diff-figure(src="{{ comparator.comparison_figure_data }}")
   else
@@ -94,11 +94,11 @@ p.
   Bad read coverage = above the bad read threshold.
 
 p
-  strong Assembly
+  strong Comparison with reference
 p.
-  The reads are assembled into a <i>de novo</i> plasmid sequence that is compared with
-  the reference. If the lengths differ more than 5%, then an error is displayed here,
-  otherwise a
+  If a consensus (or <i>de novo</i> assembly) sequence is created from the reads,
+  then it is compared with the reference. If the lengths differ more than 5%,
+  then an error is displayed here, otherwise a
   <a href="https://edinburgh-genome-foundry.github.io/Geneblocks/">GeneBlocks</a>
   plot is made.
 

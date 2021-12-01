@@ -144,7 +144,7 @@ class ComparatorGroup:
         **Parameters**
 
         **assembly_paths**
-        > Dictionary of construct name: *de novo* assembly file.
+        > Dictionary of construct name: consensus (or *de novo* assembly) file.
         For example: `{"Construct_1": "/path/to/assembly.fa"}`.
         """
         if assembly_paths is None:
@@ -297,16 +297,16 @@ class Comparator:
         self.geneblocks_outcome = "none"  # stores outcome, used in PDF report making
         # Set True if references are DNA Cauldron-simulated files:
         self.dnacauldron = True  # for plotting
-        self.has_de_novo = False  # for de novo assembly comparison
+        self.has_de_novo = False  # for consensus (or de novo assembly) comparison
 
     def perform_comparison(self, assembly_path=None):
-        """Plot coverage and compare reference with *de novo* assembly.
+        """Plot coverage and compare reference with a consensus sequence.
 
 
         **Parameters**
 
         **assembly_path**
-        > Optional. Path to a *de novo* assembly FASTA file (`str`).
+        > Optional. Path to a consensus (or *de novo* assembly) FASTA file (`str`).
         """
         self.fig = self.plot_coverage()
         plt.close(self.fig)
@@ -479,8 +479,8 @@ class Comparator:
 
         self.zz = numpy.sum(histogram_numpy_array, axis=0)
 
-    def compare_with_assembly(self, assembly_path):
-        """Compare the reference with a Canu assembly file.
+    def compare_with_assembly(self, assembly_path, de_novo=False):
+        """Compare the reference with a consensus sequence or a de novo assembly file.
 
         Check length, orientation (sense or reverse complement), then use GeneBlocks to
         highlight differences between reference and the plasmid assembly.
@@ -489,10 +489,13 @@ class Comparator:
         **Parameters**
 
         **assembly_path**
-        > Path to Canu assembly FASTA file (`str`).
+        > Path to a consensus or an assembly FASTA file (`str`).
+
+        **de_novo**
+        > Is it a de novo assembly? If True, check which strand matches the reference.
         """
-        # Note that in this context 'assembly' means a de novo genome assembly created
-        # from sequencing reads.
+        # Note that in this context 'assembly' means a consensus of variant calls,
+        # or a de novo genome assembly created from sequencing reads.
         self.assembly = SeqIO.read(handle=assembly_path, format="fasta")
         length_ratio = len(self.assembly) / len(self.record)
         if 0.95 < length_ratio < 1.05:  # length within reason
@@ -510,7 +513,7 @@ class Comparator:
             else:
                 difference_text = "shorter"
             self.incorrect_length_msg = (
-                "The <i>de novo</i> assembly is %d%% (%d bp) %s than the reference."
+                "The consensus is %d%% (%d bp) %s than the reference."
                 % (int(abs(difference_percent)), difference_bases, difference_text)
             )
 
@@ -520,16 +523,20 @@ class Comparator:
             return
 
         # To find out the orientation of the assembly, we compare using Levenshtein
-        lev_distance = lev(str(self.assembly.seq), str(self.record.seq))
-        lev_rc_distance = lev(
-            str(self.assembly.seq.reverse_complement()), str(self.record.seq)
-        )
-        if lev_distance < lev_rc_distance:
+        if de_novo:
+            lev_distance = lev(str(self.assembly.seq), str(self.record.seq))
+            lev_rc_distance = lev(
+                str(self.assembly.seq.reverse_complement()), str(self.record.seq)
+            )
+            if lev_distance < lev_rc_distance:
+                self.is_assembly_reverse_complement = False
+                assembly_for_diffblocks = self.assembly
+            else:
+                self.is_assembly_reverse_complement = True  # for geneblocks
+                assembly_for_diffblocks = self.assembly.reverse_complement()
+        else:
             self.is_assembly_reverse_complement = False
             assembly_for_diffblocks = self.assembly
-        else:
-            self.is_assembly_reverse_complement = True  # for geneblocks
-            assembly_for_diffblocks = self.assembly.reverse_complement()
 
         try:
             diff_blocks = geneblocks.DiffBlocks.from_sequences(
