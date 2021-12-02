@@ -1,4 +1,5 @@
 import itertools
+import re
 import statistics
 
 import matplotlib.pyplot as plt
@@ -325,6 +326,27 @@ class Comparator:
             )
             self.has_de_novo = True
 
+    def find_big_inserts(self, threshold=50):
+        """Calculate % of reads with big inserts.
+        
+        
+        **Parameters**
+        
+        **threshold**
+        > Size of insert in bp to be considered big (`int`)."""
+        number_of_reads = len(self.paf["16"])  # CIGAR string column
+        number_of_reads_with_big_insert = 0
+        for cigar in self.paf["16"]:
+            for size, mutation in re.findall(r"(\d+)([A-Z]{1})", cigar):
+                if int(size) >= threshold:
+                    if mutation == "I":  # CIGAR code for insert
+                        number_of_reads_with_big_insert += 1
+                        break
+
+        fraction_of_big_inserts = number_of_reads_with_big_insert / number_of_reads
+        # imprecise rounding, but ok for our purposes:
+        self.pct_big_insert = round(fraction_of_big_inserts * 100)  # pct multiplier
+
     def calculate_stats(self):
         """Calculate statistics for the coverage plot, used in plot_coverage()."""
         self.xx = numpy.arange(len(self.record.seq))  # for the plot x axis
@@ -336,6 +358,18 @@ class Comparator:
             self.has_warnings = True
         else:
             self.has_low_coverage = False
+
+        self.find_big_inserts()
+        if self.pct_big_insert >= 50:  # at least half of reads have big insert
+            self.has_errors = True
+            self.has_big_insert = True
+        if self.pct_big_insert >= 5:  # five pct has big insert
+            self.has_warnings = True
+            self.has_reads_with_insert = True
+        else:
+            self.has_big_insert = False
+            self.has_reads_with_insert = False
+
         # This section creates a list of low coverage position to be reported
         indices = [
             i

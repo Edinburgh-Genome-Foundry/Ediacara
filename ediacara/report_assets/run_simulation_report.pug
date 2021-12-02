@@ -70,6 +70,14 @@ each comparatorgroup in sequencinggroup.comparatorgroups
     if comparator.high_error_positions_string
       p Positions with bad coverage: #[span.red {{ comparator.high_error_positions_string }} ]
 
+    if comparator.has_reads_with_insert
+      if comparator.has_big_insert
+        p
+          strong #[span.red ☒] {{ comparator.pct_big_insert }} % of reads have a big insert (>50 bp)!
+      else
+        p
+          strong #[span.yellow ⚠] {{ comparator.pct_big_insert }}% of reads have a big insert (>50 bp)!
+
 
     unless comparator.has_comparison_error
       div(style="display:block; clear:both; page-break-after:always")
