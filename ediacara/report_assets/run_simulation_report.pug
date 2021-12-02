@@ -73,10 +73,13 @@ each comparatorgroup in sequencinggroup.comparatorgroups
     if comparator.has_reads_with_insert
       if comparator.has_big_insert
         p
-          strong #[span.red ☒] {{ comparator.pct_big_insert }} % of reads have a big insert (>50 bp)!
+          strong #[span.red ☒] {{ comparator.pct_big_insert }}% of reads have an insert >50 bp!
       else
         p
-          strong #[span.yellow ⚠] {{ comparator.pct_big_insert }}% of reads have a big insert (>50 bp)!
+          strong #[span.yellow ⚠] {{ comparator.pct_big_insert }}% of reads have an insert >50 bp!
+    else
+      p
+        <b> #[span.green ☑] {{ comparator.pct_big_insert }}</b>% of reads have an insert >50 bp.
 
 
     unless comparator.has_comparison_error

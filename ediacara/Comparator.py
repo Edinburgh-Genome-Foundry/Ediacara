@@ -326,7 +326,7 @@ class Comparator:
             )
             self.has_de_novo = True
 
-    def find_big_inserts(self, threshold=50):
+    def find_big_inserts(self, threshold=100):
         """Calculate % of reads with big inserts.
         
         
@@ -334,18 +334,23 @@ class Comparator:
         
         **threshold**
         > Size of insert in bp to be considered big (`int`)."""
-        number_of_reads = len(self.paf["16"])  # CIGAR string column
-        number_of_reads_with_big_insert = 0
-        for cigar in self.paf["16"]:
+        read_insert_dict = {
+            read_id: False for read_id in self.paf["query_name"].unique()
+        }  # Initialize. Value True when read has insert.
+        for index, row in self.paf.iterrows():
+            read_id = row["query_name"]
+            cigar = row["16"]  # CIGAR string column
             for size, mutation in re.findall(r"(\d+)([A-Z]{1})", cigar):
                 if int(size) >= threshold:
                     if mutation == "I":  # CIGAR code for insert
-                        number_of_reads_with_big_insert += 1
+                        read_insert_dict[read_id] = True
                         break
 
-        fraction_of_big_inserts = number_of_reads_with_big_insert / number_of_reads
+        fraction_of_big_inserts = sum(read_insert_dict.values()) / len(
+            read_insert_dict.keys()
+        )
         # imprecise rounding, but ok for our purposes:
-        self.pct_big_insert = round(fraction_of_big_inserts * 100)  # pct multiplier
+        self.pct_big_insert = round(fraction_of_big_inserts * 100, 1)  # pct multiplier
 
     def calculate_stats(self):
         """Calculate statistics for the coverage plot, used in plot_coverage()."""
