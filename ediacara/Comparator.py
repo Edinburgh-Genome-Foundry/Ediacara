@@ -65,12 +65,13 @@ class ComparatorGroup:
     > The barcode number or ID (`str`).
     """
 
-    def __init__(self, references, alignments, barcode="barcode"):
+    def __init__(self, references, alignments, barcode="barcode", assembly_paths=None):
         self.references = references
         self.paf = alignments["paf"]
         self.tsv = alignments["tsv"]
         self.comparators = []
         self.barcode = barcode
+        self.assembly_paths = assembly_paths
 
     def create_comparator(self, reference_name):
         """Create a Comparator instance from one of the loaded references.
@@ -143,7 +144,7 @@ class ComparatorGroup:
 
         return subset_paf_final
 
-    def perform_all_comparisons(self, assembly_paths=None):
+    def perform_all_comparisons(self):
         """Call perform_comparison() on each Comparator.
 
 
@@ -153,8 +154,10 @@ class ComparatorGroup:
         > Dictionary of construct name: consensus (or *de novo* assembly) file.
         For example: `{"Construct_1": "/path/to/assembly.fa"}`.
         """
-        if assembly_paths is None:
+        if self.assembly_paths is None:
             assembly_paths = {}
+        else:
+            assembly_paths = self.assembly_paths
         for comparator in self.comparators:
             try:
                 assembly_path = assembly_paths[comparator.name]
