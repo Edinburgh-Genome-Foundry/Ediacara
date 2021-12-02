@@ -331,6 +331,11 @@ class Comparator:
         self.yy = self.tsv["depth"].to_list()  # for plotting coverage
         self.median_yy = statistics.median(self.yy)
 
+        if self.median_yy < 30:  # a good cutoff for low-depth sequencing
+            self.has_low_coverage = True
+            self.has_warnings = True
+        else:
+            self.has_low_coverage = False
         # This section creates a list of low coverage position to be reported
         indices = [
             i

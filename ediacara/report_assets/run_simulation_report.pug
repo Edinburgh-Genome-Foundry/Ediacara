@@ -59,6 +59,10 @@ each comparatorgroup in sequencinggroup.comparatorgroups
 
     h3 Coverage plot
 
+    if comparator.has_low_coverage
+      p
+        strong #[span.yellow ⚠] Low coverage!
+
     img#diff-figure(src="{{ comparator.figure_data }}")
 
     p Positions with low coverage: #[span.red {{ comparator.low_coverage_positions_string }} ]
