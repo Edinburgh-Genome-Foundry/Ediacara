@@ -76,7 +76,6 @@ def write_sequencinggroup_report(target, sequencinggroup):
         comparatorgroup.fastq_figure_data = pdf_tools.figure_data(
             comparatorgroup.fastq_plot, fmt="svg"
         )
-
         for comparator in comparatorgroup.comparators:
             comparator.figure_data = pdf_tools.figure_data(comparator.fig, fmt="svg")
 
@@ -128,6 +127,7 @@ def write_sequencinggroup_report(target, sequencinggroup):
                         "Note: the consensus is the "
                         "reverse complement of the reference."
                     )
+        plt.close("all")
 
     html = end_pug_to_html(
         SEQUENCINGGROUP_REPORT_TEMPLATE, sequencinggroup=sequencinggroup

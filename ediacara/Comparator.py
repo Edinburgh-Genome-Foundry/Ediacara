@@ -214,6 +214,7 @@ class ComparatorGroup:
             "Coverage [x]": pandas.Series(median_coverages),
         }
         self.summary_table = pandas.DataFrame(d)
+        plt.close("all")
 
     def plot_fastq_histogram(self, n_bins=50):
         """Plot a histogram of the FASTQ reads.
@@ -323,12 +324,12 @@ class Comparator:
         > Optional. Path to a consensus (or *de novo* assembly) FASTA file (`str`).
         """
         self.fig = self.plot_coverage()
-        plt.close(self.fig)
         if assembly_path is not None:
             self.comparison_figure = self.compare_with_assembly(
                 assembly_path=assembly_path
             )
             self.has_de_novo = True
+        plt.close("all")
 
     def find_big_inserts(self, threshold=100):
         """Calculate % of reads with big inserts.
