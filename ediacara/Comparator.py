@@ -18,13 +18,17 @@ class CustomTranslator(dna_features_viewer.BiopythonTranslator):
 
     def compute_filtered_features(self, features):
         """Display only "From " features and overhangs."""
-        features = [
-            feature
-            for feature in features
-            if (len(feature.qualifiers.get("label", "")[0]) == 4)
-            or ("From " in str(feature.qualifiers.get("label", "")))
-        ]
-        return features
+        filtered_features = []
+        for feature in features:
+            try:  # may not have a 'label'
+                if (len(feature.qualifiers.get("label", "")[0]) == 4) or (
+                    "From " in str(feature.qualifiers.get("label", ""))
+                ):
+                    filtered_features += [feature]
+            except:
+                pass
+
+        return filtered_features
 
 
 class SequencingGroup:
