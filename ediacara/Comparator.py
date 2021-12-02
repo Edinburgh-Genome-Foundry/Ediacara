@@ -36,12 +36,14 @@ class SequencingGroup:
     > List of `ComparatorGroup` instances.
     """
 
-    def __init__(self, comparatorgroups):
+    def __init__(self, comparatorgroups, name="Unnamed"):
         self.comparatorgroups = comparatorgroups
+        self.name = name
 
     def perform_all_comparisons_in_sequencinggroup(self):
         for comparatorgroup in self.comparatorgroups:
             comparatorgroup.perform_all_comparisons()
+        self.number_of_barcodes = len(self.comparatorgroups)
         self.comparisons_performed = True
 
 
@@ -58,13 +60,17 @@ class ComparatorGroup:
     > Dictionary of pandas dataframes: {"paf": df_paf, "tsv": df_tsv}. The PAF dataframe
     was created from the output of `paftools.js sam2paf` and the TSV dataframe was
     created from the output of `samtools depth -aa`.
+
+    **barcode**
+    > The barcode number or ID (`str`).
     """
 
-    def __init__(self, references, alignments):
+    def __init__(self, references, alignments, barcode="barcode"):
         self.references = references
         self.paf = alignments["paf"]
         self.tsv = alignments["tsv"]
         self.comparators = []
+        self.barcode = barcode
 
     def create_comparator(self, reference_name):
         """Create a Comparator instance from one of the loaded references.

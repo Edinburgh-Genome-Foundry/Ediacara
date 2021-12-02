@@ -7,7 +7,11 @@ hr
 h1 Sequencing analysis report
 hr
 
-  p Please see the Appendix on the last page for an explanation of the report.
+p.
+  This document reports the sequencing results of the <b>{{ sequencinggroup.name }}</b> project.
+  There are <b>{{ sequencinggroup.number_of_barcodes }}</b> barcodes in the analysis.
+  Each chapter details the results of a barcode, and within a chapter each section reports on one plasmid.
+  Please see the Appendix on the last page for an explanation of the report.
 
 div(style="margin-top:1cm; margin-bottom:1cm;")
 
@@ -15,6 +19,9 @@ div(style="margin-top:1cm; margin-bottom:1cm;")
 
 
 each comparatorgroup in sequencinggroup.comparatorgroups
+
+  h2 Barcode: {{ comparatorgroup.barcode }}
+  hr
 
   p Out of <b>{{ comparatorgroup.number_of_constructs }}</b> constructs, there were <b>#[span.green {{ comparatorgroup.result_good }}]/#[span.yellow {{ comparatorgroup.result_warning}}]/#[span.red {{ comparatorgroup.result_error}} ]</b> (☑/⚠/☒) good/uncertain/errored constructs. The analysis yielded the following results:
 
@@ -33,16 +40,16 @@ each comparatorgroup in sequencinggroup.comparatorgroups
 
     if comparator.has_errors
       p(style="text-align:left;")
-        b(style='font-size: 50px;') #[span.red ☒] &ensp; #[span.grey {{ comparator.record.id }}]
+        b(style='font-size: 45px;') #[span.red ☒] &ensp; #[span.grey {{ comparator.record.id }}]
     else
       if comparator.has_warnings
         p(style="text-align:left;")
-          b(style='font-size: 50px;') #[span.yellow ⚠] &ensp; #[span.grey {{ comparator.record.id }}]
+          b(style='font-size: 45px;') #[span.yellow ⚠] &ensp; #[span.grey {{ comparator.record.id }}]
 
       else
         //- all good
         p(style="text-align:left;")
-          b(style='font-size: 50px;') #[span.green ☑] &ensp; #[span.grey {{ comparator.record.id }}]
+          b(style='font-size: 45px;') #[span.green ☑] &ensp; #[span.grey {{ comparator.record.id }}]
         //- b(style='font-size: 20px;') &emsp;&emsp; Success!
 
 
@@ -84,16 +91,16 @@ each comparatorgroup in sequencinggroup.comparatorgroups
 
 h2 Appendix
 
-p Each barcode report consists of 3 sections: summary, analysis, appendix.
+p Each barcode chapter consists of a summary and analysis sections.
 
 p
   h5 Summary page
-p The first page summarises the results and other details for each construct.
+p The first page summarises the results and other details for each plasmid construct.
 
 p
   h5 Analysis pages
 p.
-  Each construct is analysed separately. The result is summarised with a symbol:
+  Each plasmid construct is analysed separately. The result is summarised with a symbol:
 
 p #[span.green ☑] : correct construct, based on no detection of errors
 p #[span.yellow ⚠] : warning signs are present, but below the error thresholds
@@ -105,13 +112,10 @@ p.
   The coverage plot displays the number of reads
   aligning to each base of the reference, in blue. This is useful for detecting deletions.
   The grey line shows the median. The dashed lines show the ±stdev.
-  The quality of each read is the proportion of the read aligning to the reference.
-  The number of bad (low quality) reads aligning to each base is displayed in red.
-  This is useful for detecting insertions. The dashed line shows the set threshold.
+
 p.
-  Positions with low coverage and bad read coverage are also listed, if there are any.
+  Positions with low coverage are also listed, if there are any.
   Low coverage = below the coverage threshold.
-  Bad read coverage = above the bad read threshold.
 
 p
   strong Comparison with reference
