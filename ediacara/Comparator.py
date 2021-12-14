@@ -383,7 +383,9 @@ class Comparator:
             vcf_dict["LOC"] += [variant.start]
             for key in vcf_selected_info_keytable.keys():
                 vcf_dict[key] += [variant.INFO.get(key)]
-        vcf_table = pandas.DataFrame.from_dict(vcf_dict)
+        vcf_table = pandas.DataFrame(
+            vcf_dict, columns=["LOC", "REF", "ALT", "TYPE", "DP", "RO", "AO", "AF"]
+        )  # also set the order of the columns
 
         return vcf_table
 
