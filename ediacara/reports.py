@@ -79,6 +79,10 @@ def write_sequencinggroup_report(target, sequencinggroup):
         for comparator in comparatorgroup.comparators:
             comparator.figure_data = pdf_tools.figure_data(comparator.fig, fmt="svg")
 
+            comparator.vcf_table_html = dataframe_to_html(
+                comparator.vcf_table, extra_classes=("definition",)
+            )
+
             if hasattr(comparator, "is_comparison_successful"):
                 if comparator.is_comparison_successful:
                     height = comparator.comparison_figure.figure.get_size_inches()[1]
@@ -176,6 +180,10 @@ def write_comparatorgroup_report(target, comparatorgroup):
 
     for comparator in comparatorgroup.comparators:
         comparator.figure_data = pdf_tools.figure_data(comparator.fig, fmt="svg")
+
+        comparator.vcf_table_html = dataframe_to_html(
+            comparator.vcf_table, extra_classes=("definition",)
+        )
 
         if hasattr(comparator, "is_comparison_successful"):
             if comparator.is_comparison_successful:

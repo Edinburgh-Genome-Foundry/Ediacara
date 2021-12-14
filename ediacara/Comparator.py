@@ -8,9 +8,19 @@ import pandas
 
 from weighted_levenshtein import lev
 from Bio import SeqIO
+import cyvcf2
 
 import dna_features_viewer
 import geneblocks
+
+
+vcf_selected_info_keytable = {
+    "DP": "Total read depth at the locus",
+    "AF": "Estimated allele frequency in the range (0,1]",
+    "RO": "Reference allele observation count",
+    "AO": "Alternate allele observations",
+    "TYPE": "The type of allele (either snp, mnp, ins, del or complex)",
+}
 
 
 class CustomTranslator(dna_features_viewer.BiopythonTranslator):
@@ -357,7 +367,25 @@ class Comparator:
                 assembly_path=assembly_path
             )
             self.has_de_novo = True
+        if vcf_path is not None:
+            self.vcf_table = self.create_vcf_table(vcf_path=vcf_path)
         plt.close("all")
+
+    def create_vcf_table(self, vcf_path):
+        vcf_dict = {key: [] for key in vcf_selected_info_keytable.keys()}
+        vcf_dict["REF"] = []
+        vcf_dict["ALT"] = []
+        vcf_dict["LOC"] = []
+
+        for variant in cyvcf2.VCF(vcf_path):
+            vcf_dict["REF"] += [variant.REF]
+            vcf_dict["ALT"] += [variant.ALT]
+            vcf_dict["LOC"] += [variant.start]
+            for key in vcf_selected_info_keytable.keys():
+                vcf_dict[key] += [variant.INFO.get(key)]
+        vcf_table = pandas.DataFrame.from_dict(vcf_dict)
+
+        return vcf_table
 
     def find_big_inserts(self, threshold=100):
         """Calculate % of reads with big inserts.

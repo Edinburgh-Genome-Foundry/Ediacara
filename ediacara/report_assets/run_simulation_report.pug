@@ -81,13 +81,13 @@ each comparatorgroup in sequencinggroup.comparatorgroups
       p
         <b> #[span.green ☑] {{ comparator.pct_big_insert }}</b>% of reads have an insert >50 bp.
 
-
-    unless comparator.has_comparison_error
-      div(style="display:block; clear:both; page-break-after:always")
-
-
     if comparator.has_de_novo
       h3 Comparison with reference
+
+      {{ comparator.vcf_table_html }}
+  
+    unless comparator.has_comparison_error
+      div(style="display:block; clear:both; page-break-after:always")
 
       if comparator.has_comparison_error
         p
