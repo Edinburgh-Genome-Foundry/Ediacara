@@ -61,7 +61,7 @@ each comparatorgroup in sequencinggroup.comparatorgroups
 
     if comparator.has_low_coverage
       p
-        strong #[span.yellow ⚠] Low coverage!
+        strong #[span.yellow ⚠] Low sequencing depth!
 
     img#diff-figure(src="{{ comparator.figure_data }}")
 
@@ -120,7 +120,7 @@ p.
 
 p #[span.green ☑] : correct construct, based on no detection of errors
 p #[span.yellow ⚠] : warning signs are present, but below the error thresholds
-p #[span.red ☒] : errors were detected in the construct
+p #[span.red ☒] : errors were detected in the construct, or there are problems with the sequencing
 
 p
   strong Coverage
