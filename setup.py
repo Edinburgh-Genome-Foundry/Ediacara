@@ -21,5 +21,6 @@ setup(
         "biopython",
         "dna_features_viewer",
         "geneblocks",
+        "cyvcf2",
     ],
 )

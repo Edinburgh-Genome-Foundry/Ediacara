@@ -68,15 +68,29 @@ class ComparatorGroup:
 
     **barcode**
     > The barcode number or ID (`str`).
+
+    **assembly_paths**
+    > Dictionary of sample: consensus sequence path (`dict`).
+
+    **vcf_paths**
+    > Dictionary of sample: filtered VCF filepath (`dict`).
     """
 
-    def __init__(self, references, alignments, barcode="barcode", assembly_paths=None):
+    def __init__(
+        self,
+        references,
+        alignments,
+        barcode="barcode",
+        assembly_paths=None,
+        vcf_paths=None,
+    ):
         self.references = references
         self.paf = alignments["paf"]
         self.tsv = alignments["tsv"]
         self.comparators = []
         self.barcode = barcode
         self.assembly_paths = assembly_paths
+        self.vcf_paths = vcf_paths
 
     def create_comparator(self, reference_name):
         """Create a Comparator instance from one of the loaded references.
@@ -163,12 +177,26 @@ class ComparatorGroup:
             assembly_paths = {}
         else:
             assembly_paths = self.assembly_paths
+
+        if self.vcf_paths is None:
+            vcf_paths = {}
+        else:
+            vcf_paths = self.vcf_paths
+
         for comparator in self.comparators:
             try:
                 assembly_path = assembly_paths[comparator.name]
             except Exception:
                 assembly_path = None
-            comparator.perform_comparison(assembly_path=assembly_path)
+
+            try:
+                vcf_path = vcf_paths[comparator.name]
+            except Exception:
+                vcf_path = None
+
+            comparator.perform_comparison(
+                assembly_path=assembly_path, vcf_path=vcf_path
+            )
         self.comparisons_performed = True
         self.summarise_analysis()
 
@@ -314,7 +342,7 @@ class Comparator:
         self.dnacauldron = True  # for plotting
         self.has_de_novo = False  # for consensus (or de novo assembly) comparison
 
-    def perform_comparison(self, assembly_path=None):
+    def perform_comparison(self, assembly_path=None, vcf_path=None):
         """Plot coverage and compare reference with a consensus sequence.
 
 
