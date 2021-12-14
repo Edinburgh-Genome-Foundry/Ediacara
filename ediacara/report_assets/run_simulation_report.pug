@@ -141,7 +141,19 @@ p.
   then an error is displayed here, otherwise a
   <a href="https://edinburgh-genome-foundry.github.io/Geneblocks/">GeneBlocks</a>
   plot is made. In this plot, <code>+</code> means that the reference has extra sequence
-  compared to the reads (unless a note tells otherwise). 
+  compared to the reads (unless a note tells otherwise).
+  If variants were called, then a VCF table is also displayed. The columns of the table are:
+   <ul>
+    <li>LOC: Position</li>
+    <li>REF: Reference sequence</li>
+    <li>ALT: Alternative sequence</li>
+    <li>TYPE: The type of allele (either snp, mnp, ins, del or complex)</li>
+    <li>DP: Total read depth at the locus</li>
+    <li>RO: Reference allele observation count</li>
+    <li>AO: Alternate allele observations</li>
+    <li>AF: Estimated allele frequency in the range (0,1]</li>
+  </ul> 
+
 
 
 
