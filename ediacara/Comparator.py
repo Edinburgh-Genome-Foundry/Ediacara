@@ -344,6 +344,7 @@ class Comparator:
         self.paf = alignment["paf"]
         self.tsv = alignment["tsv"]
         self.coverage_cutoff = 0.5  # fraction of median coverage
+        self.coverage_cutoff_pct = int(self.coverage_cutoff * 100)  # for PDF report
         self.calculate_bad_reads = False  # for an old approach
         self.reference_length = len(self.record)
         self.has_warnings = False
