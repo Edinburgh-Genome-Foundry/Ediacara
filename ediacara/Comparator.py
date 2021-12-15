@@ -639,54 +639,73 @@ class Comparator:
             return
 
         # To find out the orientation of the assembly, we compare using Levenshtein
+        lev_distance = lev(str(self.assembly.seq), str(self.record.seq))
         if de_novo:
-            lev_distance = lev(str(self.assembly.seq), str(self.record.seq))
             lev_rc_distance = lev(
                 str(self.assembly.seq.reverse_complement()), str(self.record.seq)
             )
             if lev_distance < lev_rc_distance:
                 self.is_assembly_reverse_complement = False
                 assembly_for_diffblocks = self.assembly
+                if lev_distance > 50:  # more than 50 differences are too much to plot
+                    self.perform_geneblocks = False
+                else:
+                    self.perform_geneblocks = True
             else:
                 self.is_assembly_reverse_complement = True  # for geneblocks
                 assembly_for_diffblocks = self.assembly.reverse_complement()
-        else:
+                if (
+                    lev_rc_distance > 50
+                ):  # more than 50 differences are too much to plot
+                    self.perform_geneblocks = False
+                else:
+                    self.perform_geneblocks = True
+        else:  # consensus sequence, using the reference as template
             self.is_assembly_reverse_complement = False
             assembly_for_diffblocks = self.assembly
+            if lev_distance > 50:  # more than 50 differences are too much to plot
+                self.perform_geneblocks = False
+            else:
+                self.perform_geneblocks = True
 
-        try:
-            diff_blocks = geneblocks.DiffBlocks.from_sequences(
-                assembly_for_diffblocks, self.record
-            )
-        except KeyError:
-            self.geneblocks_done = False
-            self.geneblocks_outcome = "geneblocks_error"
-        else:  # diffblocks had no error
-            self.geneblocks_done = True
-            ax1, ax2 = diff_blocks.plot(figure_width=5)
-            self.is_diffblocks_reverse = False
-            self.is_comparison_successful = True
-            self.geneblocks_outcome = "all_good"
-
-            return ax1
-
-        # We try again as due to a bug in geneblocks, the reverse order may work:
-        if self.geneblocks_outcome == "geneblocks_error":
+        if self.perform_geneblocks:
             try:
                 diff_blocks = geneblocks.DiffBlocks.from_sequences(
-                    self.record, assembly_for_diffblocks
+                    assembly_for_diffblocks, self.record
                 )
             except KeyError:
-                return
-
-            else:
-                self.geneblocks_done = True  # overwrite
-                ax1, ax2 = diff_blocks.plot(figure_width=7)
-                self.is_diffblocks_reverse = True
+                self.geneblocks_done = False
+                self.geneblocks_outcome = "geneblocks_error"
+            else:  # diffblocks had no error
+                self.geneblocks_done = True
+                ax1, ax2 = diff_blocks.plot(figure_width=5)
+                self.is_diffblocks_reverse = False
                 self.is_comparison_successful = True
-                self.geneblocks_outcome = "swapped_diffblocks"
+                self.geneblocks_outcome = "all_good"
 
                 return ax1
+
+            # We try again as due to a bug in geneblocks, the reverse order may work:
+            if self.geneblocks_outcome == "geneblocks_error":
+                try:
+                    diff_blocks = geneblocks.DiffBlocks.from_sequences(
+                        self.record, assembly_for_diffblocks
+                    )
+                except KeyError:
+                    return
+
+                else:
+                    self.geneblocks_done = True  # overwrite
+                    ax1, ax2 = diff_blocks.plot(figure_width=7)
+                    self.is_diffblocks_reverse = True
+                    self.is_comparison_successful = True
+                    self.geneblocks_outcome = "swapped_diffblocks"
+
+                    return ax1
+
+        else:  # too many differences
+            self.geneblocks_done = False
+            self.geneblocks_outcome = "too_many_differences"
 
     def filter_fastq(self, fastq_path, target=None):
         """Filter original FASTQ file for reads that best map to the reference.
