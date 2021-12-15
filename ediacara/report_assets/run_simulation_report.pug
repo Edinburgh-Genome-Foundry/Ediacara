@@ -85,7 +85,7 @@ each comparatorgroup in sequencinggroup.comparatorgroups
       h3 Comparison with reference
 
       if comparator.vcf_table_message
-          strong #[span.yellow ⚠] Note: only the first 10 variants are displayed.
+          strong #[span.yellow ⚠] Note: only the first {{ sequencinggroup.vcf_cutoff }} variants are displayed.
 
       {{ comparator.vcf_table_html }}
 

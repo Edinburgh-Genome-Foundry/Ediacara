@@ -54,6 +54,7 @@ class SequencingGroup:
     def __init__(self, comparatorgroups, name="Unnamed"):
         self.comparatorgroups = comparatorgroups
         self.name = name
+        self.vcf_cutoff = 20  # max number of VCF entries to display in report
 
     def perform_all_comparisons_in_sequencinggroup(self):
         for comparatorgroup in self.comparatorgroups:

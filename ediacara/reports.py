@@ -79,10 +79,11 @@ def write_sequencinggroup_report(target, sequencinggroup):
         for comparator in comparatorgroup.comparators:
             comparator.figure_data = pdf_tools.figure_data(comparator.fig, fmt="svg")
 
-            if comparator.vcf_table.shape[0] > 10:  # number of VCF entries
-                # keep only first 10:
+            if comparator.vcf_table.shape[0] > sequencinggroup.vcf_cutoff:
+                # keep first few only:
                 comparator.vcf_table_html = dataframe_to_html(
-                    comparator.vcf_table[:10], extra_classes=("definition",)
+                    comparator.vcf_table[: sequencinggroup.vcf_cutoff],
+                    extra_classes=("definition",),
                 )
                 comparator.vcf_table_message = True
             else:
