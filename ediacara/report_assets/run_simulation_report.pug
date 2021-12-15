@@ -86,6 +86,9 @@ each comparatorgroup in sequencinggroup.comparatorgroups
 
       {{ comparator.vcf_table_html }}
   
+      if comparator.vcf_table_message
+        strong #[span.yellow ⚠] Note: only the first 10 variants are displayed.
+
     unless comparator.has_comparison_error
       div(style="display:block; clear:both; page-break-after:always")
 
