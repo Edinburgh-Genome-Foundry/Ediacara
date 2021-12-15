@@ -79,18 +79,25 @@ def write_sequencinggroup_report(target, sequencinggroup):
         for comparator in comparatorgroup.comparators:
             comparator.figure_data = pdf_tools.figure_data(comparator.fig, fmt="svg")
 
-            if comparator.vcf_table.shape[0] > sequencinggroup.vcf_cutoff:
-                # keep first few only:
-                comparator.vcf_table_html = dataframe_to_html(
-                    comparator.vcf_table[: sequencinggroup.vcf_cutoff],
-                    extra_classes=("definition",),
-                )
+            # Keep first few only:
+            if comparator.vcf_table.shape[0] > sequencinggroup.vcf_cutoff:  # 0 for rows
+                vcf_table = comparator.vcf_table[: sequencinggroup.vcf_cutoff]
                 comparator.vcf_table_message = True
             else:
-                comparator.vcf_table_html = dataframe_to_html(
-                    comparator.vcf_table, extra_classes=("definition",)
-                )
+                vcf_table = comparator.vcf_table
                 comparator.vcf_table_message = False
+
+            # Convert to string then truncate too long entries and add three dots:
+            columnwidth = 15  # wider columns don't display well in PDF
+            vcf_table = vcf_table.apply(
+                lambda x: x.astype(str).apply(
+                    lambda y: y[:columnwidth] + "..." if len(y) > columnwidth else y
+                )
+            )
+
+            comparator.vcf_table_html = dataframe_to_html(
+                vcf_table, extra_classes=("definition",)
+            )
 
             if hasattr(comparator, "is_comparison_successful"):
                 if comparator.is_comparison_successful:
