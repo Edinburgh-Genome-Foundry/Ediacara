@@ -84,25 +84,23 @@ each comparatorgroup in sequencinggroup.comparatorgroups
     if comparator.has_de_novo
       h3 Comparison with reference
 
-      {{ comparator.vcf_table_html }}
-  
       if comparator.vcf_table_message
-        strong #[span.yellow ⚠] Note: only the first 10 variants are displayed.
+          strong #[span.yellow ⚠] Note: only the first 10 variants are displayed.
 
-    unless comparator.has_comparison_error
-      div(style="display:block; clear:both; page-break-after:always")
+      {{ comparator.vcf_table_html }}
 
       if comparator.has_comparison_error
         p
-          strong #[span.red Error!]
-          | {{ comparator.geneblocks_text }}
-
+          strong #[span.red ☒] {{ comparator.geneblocks_text }}
       else
+
+        div(style="display:block; clear:both; page-break-after:always")
+
         p {{ comparator.geneblocks_text }}
 
         img#diff-figure(src="{{ comparator.comparison_figure_data }}")
 
-      div(style="display:block; clear:both; page-break-after:always")
+    div(style="display:block; clear:both; page-break-after:always")
 
     //- <div style = "display:block; clear:both; page-break-after:always;"></div>
 

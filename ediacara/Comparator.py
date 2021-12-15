@@ -706,6 +706,7 @@ class Comparator:
         else:  # too many differences
             self.geneblocks_done = False
             self.geneblocks_outcome = "too_many_differences"
+            self.is_comparison_successful = False
 
     def filter_fastq(self, fastq_path, target=None):
         """Filter original FASTQ file for reads that best map to the reference.
