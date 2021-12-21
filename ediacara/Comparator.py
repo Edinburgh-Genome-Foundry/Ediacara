@@ -57,8 +57,10 @@ class SequencingGroup:
         self.vcf_cutoff = 20  # max number of VCF entries to display in report
 
     def perform_all_comparisons_in_sequencinggroup(self):
+        self.number_of_reads = 0
         for comparatorgroup in self.comparatorgroups:
             comparatorgroup.perform_all_comparisons()
+            self.number_of_reads += comparatorgroup.n_fastq_reads
         self.number_of_barcodes = len(self.comparatorgroups)
         self.comparisons_performed = True
 
