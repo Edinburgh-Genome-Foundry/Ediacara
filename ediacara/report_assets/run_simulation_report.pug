@@ -10,7 +10,7 @@ hr
 p.
   This document reports the sequencing results of the <b>{{ sequencinggroup.name }}</b> project.
   There are <b>{{ sequencinggroup.number_of_barcodes }}</b> barcodes in the analysis.
-  Each chapter details the results of a barcode, and within a chapter each section reports on one plasmid.
+  Each chapter details the results of one barcode, and within a chapter each section reports on one plasmid.
   Please see the Appendix on the last page for an explanation of the report.
 
 div(style="margin-top:1cm; margin-bottom:1cm;")
@@ -23,7 +23,11 @@ each comparatorgroup in sequencinggroup.comparatorgroups
   h2 Barcode: {{ comparatorgroup.barcode }}
   hr
 
-  p Out of <b>{{ comparatorgroup.number_of_constructs }}</b> constructs, there were <b>#[span.green {{ comparatorgroup.result_good }}]/#[span.yellow {{ comparatorgroup.result_warning}}]/#[span.red {{ comparatorgroup.result_error}} ]</b> (☑/⚠/☒) good/uncertain/errored constructs. The analysis yielded the following results:
+  p.
+    Out of <b>{{ comparatorgroup.number_of_constructs }}</b> constructs, there were 
+    <b>#[span.green {{ comparatorgroup.result_good }}] / #[span.yellow {{ comparatorgroup.result_warning}}] / 
+    #[span.red {{ comparatorgroup.result_error}} ]</b> (☑/⚠/☒/⍰) good / warning / errored / uncertain constructs. 
+    The analysis yielded the following results:
 
   {{ comparatorgroup.report_table }}
 

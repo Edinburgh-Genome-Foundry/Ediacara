@@ -73,8 +73,9 @@ def write_sequencinggroup_report(target, sequencinggroup):
         )
 
         # Histogram of reads in the report summary
+        histogram_height = comparatorgroup.fastq_plot.get_size_inches()[1]
         comparatorgroup.fastq_figure_data = pdf_tools.figure_data(
-            comparatorgroup.fastq_plot, fmt="svg"
+            comparatorgroup.fastq_plot, fmt="svg", size=[8, histogram_height]
         )
         for comparator in comparatorgroup.comparators:
             comparator.figure_data = pdf_tools.figure_data(comparator.fig, fmt="svg")
