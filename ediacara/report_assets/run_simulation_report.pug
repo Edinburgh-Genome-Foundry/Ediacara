@@ -152,7 +152,8 @@ p.
   <a href="https://edinburgh-genome-foundry.github.io/Geneblocks/">GeneBlocks</a>
   plot is made. In this plot, <code>+</code> means that the reference has extra sequence
   compared to the reads (unless a note tells otherwise).
-  If variants were called, then a VCF table is also displayed. The columns of the table are:
+  If variants were called, then a VCF table is also displayed. Both the reported and the VCF table positions are zero-based,
+  but the VCF table reports the position of the variation, rather than the nucleotide. The columns of the table are:
    <ul>
     <li>LOC: Position</li>
     <li>REF: Reference sequence</li>
