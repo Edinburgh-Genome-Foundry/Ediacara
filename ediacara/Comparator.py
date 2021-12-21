@@ -227,7 +227,9 @@ class ComparatorGroup:
         for comparator in self.comparators:
             names += [comparator.name]
             reference_lengths += [str(comparator.reference_length)]
-            number_of_reads_aligning += [str(len(comparator.paf))]
+            number_of_reads_aligning += [
+                str(len(comparator.paf["query_name"].unique()))
+            ]
             median_coverages += [str(int(comparator.median_yy))]
 
             if comparator.has_errors:
