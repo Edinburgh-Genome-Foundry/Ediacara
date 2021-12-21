@@ -273,6 +273,10 @@ class ComparatorGroup:
         ax.set_ylabel("Number of reads")
         ax.set_xlabel("Read length [bp]")
 
+        # Mark expected lengths for interpreting the plot:
+        for comparator in self.comparators:
+            plt.axvline(x=len(comparator.record), color="#fd5a31")
+
         return fig
 
     @staticmethod
