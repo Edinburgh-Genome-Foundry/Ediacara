@@ -219,6 +219,7 @@ class ComparatorGroup:
         self.result_good = 0
         self.result_warning = 0
         self.result_error = 0
+        self.result_uncertain = 0
 
         names = []
         reference_lengths = []
@@ -234,16 +235,20 @@ class ComparatorGroup:
             ]
             median_coverages += [str(int(comparator.median_yy))]
 
-            if comparator.has_errors:
-                self.result_error += 1
-                results += ["☒"]
+            if comparator.is_uncertain:
+                self.result_uncertain += 1
+                results += ["⍰"]
             else:
-                if comparator.has_warnings:
-                    self.result_warning += 1
-                    results += ["⚠"]
+                if comparator.has_errors:
+                    self.result_error += 1
+                    results += ["☒"]
                 else:
-                    self.result_good += 1
-                    results += ["☑"]
+                    if comparator.has_warnings:
+                        self.result_warning += 1
+                        results += ["⚠"]
+                    else:
+                        self.result_good += 1
+                        results += ["☑"]
 
         self.n_fastq_reads = len(set(self.paf.query_name))
         self.fastq_plot = self.plot_fastq_histogram()
@@ -361,6 +366,7 @@ class Comparator:
         # Set True if references are DNA Cauldron-simulated files:
         self.dnacauldron = True  # for plotting
         self.has_de_novo = False  # for consensus (or de novo assembly) comparison
+        self.is_uncertain = True  # for sequencing data quality, used in report
 
     def perform_comparison(self, assembly_path=None, vcf_path=None):
         """Plot coverage and compare reference with a consensus sequence.
@@ -435,6 +441,7 @@ class Comparator:
             self.has_low_coverage = True
             self.has_warnings = True
         else:
+            self.is_uncertain = False
             self.has_low_coverage = False
 
         self.find_big_inserts()
