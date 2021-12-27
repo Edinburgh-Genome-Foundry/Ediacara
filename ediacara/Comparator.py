@@ -473,7 +473,7 @@ class Comparator:
         if self.low_coverage_positions_string == "":
             self.low_coverage_positions_string = "-"  # looks better in the pdf report
         else:
-            self.has_errors = True
+            self.has_warnings = True
 
         # This section creates a list of bad position to be reported
         if self.calculate_bad_reads:
