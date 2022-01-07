@@ -30,7 +30,7 @@ class CustomTranslator(dna_features_viewer.BiopythonTranslator):
         """Display only "From " features and overhangs."""
         filtered_features = []
         for feature in features:
-            try:  # may not have a 'label'
+            try:  # may not have a 'label', count 4 to include overhang annotations
                 if (len(feature.qualifiers.get("label", "")[0]) == 4) or (
                     "From " in str(feature.qualifiers.get("label", ""))
                 ):
