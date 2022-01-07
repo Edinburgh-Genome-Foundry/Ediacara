@@ -1,3 +1,5 @@
+import pandas as pd
+
 from Bio import SeqFeature
 from Bio import SeqIO
 
@@ -15,6 +17,8 @@ class AssemblyTranslator(dna_features_viewer.BiopythonTranslator):
             return "#f5685e"
         elif feature.qualifiers[ediacara_qualifier] == "correct_part":
             return "#79d300"
+        elif feature.qualifiers[ediacara_qualifier] == "unknown_part":
+            return "#FFFFFF"
         else:
             return "#7245dc"  # default dna_features_viewer colour
 
@@ -34,19 +38,39 @@ class Assembly:
     **alignment**
     > Path (`str`) to minimap2 alignment PAF file, created with the `-cx asm5` options.
     In this, the part and reference sequences are aligned against the de novo sequence.
+
+    **assembly_plan**
+    > Path of assembly plan CSV file (DNA Cauldron output format, with header line).
+    May contain additional entries, the correct line is chosen by reference sequence ID.
     """
 
-    def __init__(self, assembly_path, reference_path, alignment_path):
+    def __init__(
+        self, assembly_path, reference_path, alignment_path, assembly_plan=None
+    ):
         self.assembly = SeqIO.read(handle=assembly_path, format="fasta")
         self.reference = SeqIO.read(handle=reference_path, format="genbank")
         self.paf = ComparatorGroup.load_paf(alignment_path)
         self.paf.columns = self.paf.columns[:-1].to_list() + ["CIGAR"]  # -1 is last
+
+        if assembly_plan is None:
+            self.assembly_plan = None
+        else:
+            plan_df = pd.read_csv(assembly_plan, skiprows=1, header=None)  # skip header
+            self.assembly_plan = plan_df[plan_df[0] == self.reference.id]
+            if len(self.assembly_plan) == 0:
+                raise ValueError("Error! Assembly plan doesn't contain the reference!")
+            if len(self.assembly_plan) > 1:
+                raise ValueError(
+                    "Error! More than one assembly plan entry matches the reference!"
+                )
 
     def interpret_alignment(self):
         for index, row in self.paf.iterrows():
             # May be useful to exclude reference:
             # if row["query_name"] == self.reference.id:
             #     continue
+            part_type = self.evaluate_part_name(row["query_name"])
+
             location = SeqFeature.FeatureLocation(
                 row["target_start"], row["target_end"]
             )
@@ -54,7 +78,15 @@ class Assembly:
                 location=location,
                 type="misc_feature",
                 id=row["query_name"],
-                qualifiers={"label": row["query_name"], "ediacara": "correct_part"},
+                qualifiers={"label": row["query_name"], "ediacara": part_type},
             )
 
             self.assembly.features.append(feature)
+
+    def evaluate_part_name(self, name):
+        if self.assembly_plan is None:
+            return "unknown_part"
+        if name in self.assembly_plan.iloc[0].to_list():  # has only one line
+            return "correct_part"
+        else:
+            return "wrong_part"
