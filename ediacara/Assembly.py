@@ -85,6 +85,36 @@ class Assembly:
 
             self.assembly.features.append(feature)
 
+    def subset_paf(self):
+        selected_columns = [
+            "query_name",
+            "query_length",
+            "query_start",
+            "query_end",
+            "strand",
+            "target_start",
+            "target_end",
+            "mapping_matches",
+            "mapping_size",
+            "mapping_quality",
+        ]
+        paf_subset = self.paf[selected_columns]
+        new_columnnames = [
+            "Name",
+            "Length",
+            "Start",
+            "End",
+            "Strand",
+            "T Start",
+            "T End",
+            "Matches",
+            "Size",
+            "Quality",
+        ]
+        paf_subset.columns = new_columnnames
+
+        return paf_subset
+
     def evaluate_part_name(self, name):
         if self.assembly_plan is None:
             return "unknown_part"
