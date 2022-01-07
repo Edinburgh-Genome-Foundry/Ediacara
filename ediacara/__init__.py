@@ -1,3 +1,4 @@
+from .Assembly import Assembly
 from .Comparator import Comparator, ComparatorGroup, SequencingGroup
 
 from .reports import (
