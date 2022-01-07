@@ -17,6 +17,7 @@ from .version import __version__
 THIS_PATH = os.path.dirname(os.path.realpath(__file__))
 ASSETS_PATH = os.path.join(THIS_PATH, "report_assets")
 SEQUENCINGGROUP_REPORT_TEMPLATE = os.path.join(ASSETS_PATH, "run_simulation_report.pug")
+ASSEMBLY_ANALYSIS_REPORT_TEMPLATE = os.path.join(ASSETS_PATH, "assembly_report.pug")
 STYLESHEET = os.path.join(ASSETS_PATH, "report_style.css")
 
 
@@ -31,6 +32,28 @@ def end_pug_to_html(template, **context):
         if k not in context:
             context[k] = defaults[k]
     return pug_to_html(template, **context)
+
+
+def write_assembly_analysis_report(target, assemblybatch):
+    """Write a sequencing run report with a PDF summary.
+
+
+    **Parameters**
+
+    **target**
+    > Path for PDF file.
+
+    **assemblybatch**
+    > `AssemblyBatch` instance.
+    """
+    for assembly in assemblybatch.assemblies:
+        assembly.assembly_figure_data = pdf_tools.figure_data(
+            assembly.assembly_figure, fmt="svg"
+        )
+    html = end_pug_to_html(
+        ASSEMBLY_ANALYSIS_REPORT_TEMPLATE, assemblybatch=assemblybatch
+    )
+    write_report(html, target, extra_stylesheets=(STYLESHEET,))
 
 
 def write_sequencinggroup_report(target, sequencinggroup):
@@ -157,4 +180,3 @@ def write_sequencinggroup_report(target, sequencinggroup):
         SEQUENCINGGROUP_REPORT_TEMPLATE, sequencinggroup=sequencinggroup
     )
     write_report(html, target, extra_stylesheets=(STYLESHEET,))
-

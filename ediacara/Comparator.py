@@ -49,6 +49,9 @@ class SequencingGroup:
 
     **comparatorgroups**
     > List of `ComparatorGroup` instances.
+
+    **name**
+    > Name of the sequencing project (`str`).
     """
 
     def __init__(self, comparatorgroups, name="Unnamed"):

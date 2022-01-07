@@ -25,6 +25,28 @@ class AssemblyTranslator(dna_features_viewer.BiopythonTranslator):
             return "#7245dc"  # default dna_features_viewer colour
 
 
+class AssemblyBatch:
+    """Batch of Assembly class instances.
+    
+    
+    **Parameters**
+    
+    **assemblies**
+    > List of `Assembly` instances.
+
+    **name**
+    > Name of the assembly analysis project (`str`).
+    """
+
+    def __init__(self, assemblies, name="Unnamed"):
+        self.assemblies = assemblies
+        self.name = name
+
+    def perform_all_interpretations_in_group(self):
+        for assembly in self.assemblies:
+            assembly.interpret_alignment()
+
+
 class Assembly:
     """Compare an assembly sequence to parts and simulated reference.
 
@@ -84,6 +106,7 @@ class Assembly:
             )
 
             self.assembly.features.append(feature)
+        self.assembly_figure = self.plot_assembly()
 
     def subset_paf(self):
         selected_columns = [
@@ -124,3 +147,8 @@ class Assembly:
             return "correct_part"
         else:
             return "wrong_part"
+
+    def plot_assembly(self):
+        graphic_record = AssemblyTranslator().translate_record(self.assembly)
+        ax, _ = graphic_record.plot(figure_width=8, strand_in_label_threshold=7)
+        return ax

@@ -1,0 +1,54 @@
+#sidebar: p {{sidebar_text}}
+
+.logos
+  img(src="file:///{{ egf_logo_url }}" style="height:40px; width: auto")
+
+hr
+h1 Assembly analysis report
+hr
+
+p.
+  This document reports the sequencing results of the <b>{{ assemblybatch.name }}</b> project.
+  Each chapter details the results of an plasmid (assembly).
+  Please see the Appendix on the last page for an explanation of the report.
+ 
+div(style="margin-top:1cm; margin-bottom:1cm;")
+
+<div style = "display:block; clear:both; page-break-after:always;"></div>
+
+
+each assembly in assemblybatch.assemblies
+
+  h2 {{ assembly.reference.id }}
+  hr
+
+  p Plot of the aligning parts:
+
+  img#diff-figure(src="{{ assembly.assembly_figure_data }}")
+
+  p None of the parts match the unannotated segments (if any).
+
+  <div style = "display:block; clear:both; page-break-after:always;"></div>
+
+//- <div style = "display:block; clear:both; page-break-after:always;"></div>
+
+
+
+h2 Appendix
+
+p Each chapter describes results on a plasmid sequence (<i>de novo</i> assembly).
+
+
+style.
+  .green {
+    color: #86bf86
+  }
+  .grey {
+    color: #a9a9a9
+  }
+  .red {
+    color: #fd5a31
+  }
+  .yellow {
+    color: #f7b500
+  }
