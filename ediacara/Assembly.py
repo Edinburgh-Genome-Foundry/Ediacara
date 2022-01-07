@@ -19,6 +19,8 @@ class AssemblyTranslator(dna_features_viewer.BiopythonTranslator):
             return "#79d300"
         elif feature.qualifiers[ediacara_qualifier] == "unknown_part":
             return "#FFFFFF"
+        elif feature.qualifiers[ediacara_qualifier] == "reference":
+            return "#d3d3d3"
         else:
             return "#7245dc"  # default dna_features_viewer colour
 
@@ -86,7 +88,9 @@ class Assembly:
     def evaluate_part_name(self, name):
         if self.assembly_plan is None:
             return "unknown_part"
-        if name in self.assembly_plan.iloc[0].to_list():  # has only one line
+        elif name == self.reference.id:
+            return "reference"
+        elif name in self.assembly_plan.iloc[0].to_list():  # has only one line
             return "correct_part"
         else:
             return "wrong_part"
