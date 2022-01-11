@@ -78,6 +78,7 @@ class Assembly:
 
         if assembly_plan is None:
             self.assembly_plan = None
+            self.parts = []
         else:
             plan_df = pd.read_csv(assembly_plan, skiprows=1, header=None)  # skip header
             self.assembly_plan = plan_df[plan_df[0] == self.reference.id]
@@ -87,6 +88,7 @@ class Assembly:
                 raise ValueError(
                     "Error! More than one assembly plan entry matches the reference!"
                 )
+            self.parts = self.assembly_plan.iloc[0].to_list()  # has only one line
 
     def interpret_alignment(self):
         for index, row in self.paf.iterrows():
@@ -143,7 +145,7 @@ class Assembly:
             return "unknown_part"
         elif name == self.reference.id:
             return "reference"
-        elif name in self.assembly_plan.iloc[0].to_list():  # has only one line
+        elif name in self.parts:
             return "correct_part"
         else:
             return "wrong_part"
