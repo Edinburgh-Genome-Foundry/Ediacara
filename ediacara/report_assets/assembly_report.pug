@@ -26,7 +26,7 @@ each assembly in assemblybatch.assemblies
 
   img#diff-figure(src="{{ assembly.assembly_figure_data }}")
 
-  p None of the parts match the unannotated segments (if any).
+  p Alignment table:
 
   {{ assembly.report_table }}
 
@@ -41,11 +41,14 @@ h2 Appendix
 p.
   Each chapter describes results on a plasmid sequence (<i>de novo</i> assembly).
   The provided (part) sequences were aligned against the sequence assembled from the reads.
-  The plot shows alignment regions as annotations. If an assembly plan is provided,
+  The plot shows alignment regions as annotations. If there are unannotated segments, 
+  then none of the parts aligned there. If an assembly plan is provided,
   then annotations are coloured based on whether they are expected in the plasmid: 
-  green: parts is expected in the construct; red: parts shouldn't be in the construct.
+  green: part is expected in the construct; red: part shouldn't be in the construct.
   Grey is the reference expected sequence for the plasmid.
-  The columns of the alignment table are:
+  The alignments are provided in a 
+  <a href="https://github.com/lh3/miniasm/blob/master/PAF.md">PAF (pairwise mapping format) table</a>.
+  The columns of the table are:
    <ul>
     <li>Name: Query sequence name</li>
     <li>Length: Query sequence length</li>
