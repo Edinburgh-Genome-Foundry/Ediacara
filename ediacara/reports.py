@@ -50,6 +50,11 @@ def write_assembly_analysis_report(target, assemblybatch):
         assembly.assembly_figure_data = pdf_tools.figure_data(
             assembly.assembly_figure, fmt="svg"
         )
+
+        assembly.report_table = dataframe_to_html(
+            assembly.subset_paf(), extra_classes=("definition",)
+        )
+
     html = end_pug_to_html(
         ASSEMBLY_ANALYSIS_REPORT_TEMPLATE, assemblybatch=assemblybatch
     )

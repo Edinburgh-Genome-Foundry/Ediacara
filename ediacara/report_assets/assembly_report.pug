@@ -9,7 +9,7 @@ hr
 
 p.
   This document reports the sequencing results of the <b>{{ assemblybatch.name }}</b> project.
-  Each chapter details the results of an plasmid (assembly).
+  Each chapter details the results of a plasmid (assembly).
   Please see the Appendix on the last page for an explanation of the report.
  
 div(style="margin-top:1cm; margin-bottom:1cm;")
@@ -28,6 +28,8 @@ each assembly in assemblybatch.assemblies
 
   p None of the parts match the unannotated segments (if any).
 
+  {{ assembly.report_table }}
+
   <div style = "display:block; clear:both; page-break-after:always;"></div>
 
 //- <div style = "display:block; clear:both; page-break-after:always;"></div>
@@ -36,7 +38,26 @@ each assembly in assemblybatch.assemblies
 
 h2 Appendix
 
-p Each chapter describes results on a plasmid sequence (<i>de novo</i> assembly).
+p.
+  Each chapter describes results on a plasmid sequence (<i>de novo</i> assembly).
+  The provided (part) sequences were aligned against the sequence assembled from the reads.
+  The plot shows alignment regions as annotations. If an assembly plan is provided,
+  then annotations are coloured based on whether they are expected in the plasmid: 
+  green: parts is expected in the construct; red: parts shouldn't be in the construct.
+  Grey is the reference expected sequence for the plasmid.
+  The columns of the alignment table are:
+   <ul>
+    <li>Name: Query sequence name</li>
+    <li>Length: Query sequence length</li>
+    <li>Start: Query start coordinate</li>
+    <li>End: Query end coordinate</li>
+    <li>Strand: `+` if query and target on the same strand; `–` if opposite</li>
+    <li>T Start: Target start coordinate on the original strand</li>
+    <li>T End: Target end coordinate on the original strand</li>
+    <li>Matches: Number of matching bases in the mapping (includes mismatches but not indels)</li>
+    <li>Size: Number bases, including gaps (indels), in the mapping</li>
+    <li>Quality: Mapping quality (0–255 with 255 for missing)</li>
+  </ul> 
 
 
 style.
