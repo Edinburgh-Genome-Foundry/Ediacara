@@ -313,6 +313,9 @@ class ComparatorGroup:
                     row = paf_line[0:12] + [";".join(paf_line[12:-1])] + [paf_line[-1]]
                     rows += [row]
             paf = pandas.DataFrame(rows)
+            # Set numeric columns:
+            numeric_columns = [1, 2, 3, 6, 7, 8, 9, 10, 11]  # see list below
+            paf[numeric_columns] = paf[numeric_columns].apply(pandas.to_numeric)
 
         # First 12 columns are defined by the format:
         columns_12 = [
