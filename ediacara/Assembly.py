@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 
 from Bio import SeqFeature
@@ -66,13 +68,26 @@ class Assembly:
     **assembly_plan**
     > Path of assembly plan CSV file (DNA Cauldron output format, with header line).
     May contain additional entries, the correct line is chosen by reference sequence ID.
+
+    **use_file_names_as_ids**
+    > If True, uses the Genbank file name as sequence ID.
     """
 
     def __init__(
-        self, assembly_path, reference_path, alignment_path, assembly_plan=None
+        self,
+        assembly_path,
+        reference_path,
+        alignment_path,
+        assembly_plan=None,
+        use_file_names_as_ids=True,
     ):
         self.assembly = SeqIO.read(handle=assembly_path, format="fasta")
         self.reference = SeqIO.read(handle=reference_path, format="genbank")
+        if use_file_names_as_ids:
+            basename = os.path.basename(reference_path)
+            basename_no_extension = os.path.splitext(basename)[0]
+            self.reference.id = basename_no_extension
+
         self.paf = ComparatorGroup.load_paf(alignment_path)
         self.paf.columns = self.paf.columns[:-1].to_list() + ["CIGAR"]  # -1 is last
 
