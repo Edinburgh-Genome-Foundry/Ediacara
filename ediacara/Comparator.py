@@ -301,7 +301,18 @@ class ComparatorGroup:
         **paf_path**
         > Path (`str`) to PAF file: `paftools.js sam2paf aln.sam > aln.paf`.
         """
-        paf = pandas.read_csv(paf_path, sep="\t", header=None)
+        try:
+            paf = pandas.read_csv(paf_path, sep="\t", header=None)
+        except Exception:  # unequal number of columns, the first 12 is assumed to be OK
+            # The last column is CIGAR, so we need to read lines one by one:
+            rows = []
+            with open(paf_path, "r") as f_input:
+                paf_lines = f_input.read().splitlines()
+                for paf_line in paf_lines:
+                    paf_line = paf_line.split("\t")  # PAF is tab separated
+                    row = paf_line[0:12] + [";".join(paf_line[12:-1])] + [paf_line[-1]]
+                    rows += [row]
+            paf = pandas.DataFrame(rows)
 
         # First 12 columns are defined by the format:
         columns_12 = [
@@ -421,7 +432,7 @@ class Comparator:
         }  # Initialize. Value True when read has insert.
         for index, row in self.paf.iterrows():
             read_id = row["query_name"]
-            cigar = row["16"]  # CIGAR string column
+            cigar = row.tail(1).item()  # CIGAR string column is the last
             for size, mutation in re.findall(r"(\d+)([A-Z]{1})", cigar):
                 if int(size) >= threshold:
                     if mutation == "I":  # CIGAR code for insert
