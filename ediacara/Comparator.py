@@ -619,6 +619,8 @@ class Comparator:
 
         # To find out the orientation of the assembly, we compare using Levenshtein
         lev_distance = lev(str(self.assembly.seq), str(self.record.seq))
+        lev_cutoff = 50  # more than this is too much to plot. Also for most plasmids,
+        # this represents ~1% difference, which is too much error.
         if de_novo:
             lev_rc_distance = lev(
                 str(self.assembly.seq.reverse_complement()), str(self.record.seq)
@@ -626,23 +628,21 @@ class Comparator:
             if lev_distance < lev_rc_distance:
                 self.is_assembly_reverse_complement = False
                 assembly_for_diffblocks = self.assembly
-                if lev_distance > 50:  # more than 50 differences are too much to plot
+                if lev_distance > lev_cutoff:
                     self.perform_geneblocks = False
                 else:
                     self.perform_geneblocks = True
             else:
                 self.is_assembly_reverse_complement = True  # for geneblocks
                 assembly_for_diffblocks = self.assembly.reverse_complement()
-                if (
-                    lev_rc_distance > 50
-                ):  # more than 50 differences are too much to plot
+                if lev_rc_distance > lev_cutoff:
                     self.perform_geneblocks = False
                 else:
                     self.perform_geneblocks = True
         else:  # consensus sequence, using the reference as template
             self.is_assembly_reverse_complement = False
             assembly_for_diffblocks = self.assembly
-            if lev_distance > 50:  # more than 50 differences are too much to plot
+            if lev_distance > lev_cutoff:
                 self.perform_geneblocks = False
             else:
                 self.perform_geneblocks = True
