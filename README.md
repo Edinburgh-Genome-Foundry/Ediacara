@@ -1,3 +1,8 @@
+<p align="center">
+<img alt="Ediacara logo" title="Ediacara" src="images/logo.png" width="120">
+</p>
+
+
 # Ediacara
 
 **Work in progress**
