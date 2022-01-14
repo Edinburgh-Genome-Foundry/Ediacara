@@ -137,7 +137,7 @@ def write_sequencinggroup_report(target, sequencinggroup):
                 else:
                     comparator.comparison_figure_data = None
 
-            if comparator.has_de_novo:
+            if comparator.has_consensus:
                 comparator.has_comparison_error = True
                 if comparator.geneblocks_outcome == "none":
                     comparator.geneblocks_text = (
@@ -172,14 +172,6 @@ def write_sequencinggroup_report(target, sequencinggroup):
                     )
                     comparator.has_comparison_error = False
 
-                if (
-                    hasattr(comparator, "is_assembly_reverse_complement")
-                    and comparator.is_assembly_reverse_complement
-                ):
-                    comparator.geneblocks_text += (
-                        "Note: the consensus is the "
-                        "reverse complement of the reference."
-                    )
         plt.close("all")
 
     html = end_pug_to_html(

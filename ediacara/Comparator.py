@@ -186,7 +186,7 @@ class ComparatorGroup:
         **Parameters**
 
         **assembly_paths**
-        > Dictionary of construct name: consensus (or *de novo* assembly) file.
+        > Dictionary of construct name: consensus sequence file.
         For example: `{"Construct_1": "/path/to/assembly.fa"}`.
         """
         if self.assembly_paths is None:
@@ -382,7 +382,7 @@ class Comparator:
         self.geneblocks_outcome = "none"  # stores outcome, used in PDF report making
         # Set True if references are DNA Cauldron-simulated files:
         self.dnacauldron = True  # for plotting
-        self.has_de_novo = False  # for consensus (or de novo assembly) comparison
+        self.has_consensus = False  # for consensus sequence comparison
         self.is_uncertain = True  # for sequencing data quality, used in report
 
     def perform_comparison(self, assembly_path=None, vcf_path=None):
@@ -392,14 +392,14 @@ class Comparator:
         **Parameters**
 
         **assembly_path**
-        > Optional. Path to a consensus (or *de novo* assembly) FASTA file (`str`).
+        > Optional. Path to a consensus FASTA file (`str`).
         """
         self.fig = self.plot_coverage()
         if assembly_path is not None:
             self.comparison_figure = self.compare_with_assembly(
                 assembly_path=assembly_path
             )
-            self.has_de_novo = True
+            self.has_consensus = True
         if vcf_path is not None:
             self.vcf_table = self.create_vcf_table(vcf_path=vcf_path)
         plt.close("all")
@@ -574,8 +574,8 @@ class Comparator:
 
         self.zz = numpy.sum(histogram_numpy_array, axis=0)
 
-    def compare_with_assembly(self, assembly_path, de_novo=False):
-        """Compare the reference with a consensus sequence or a de novo assembly file.
+    def compare_with_assembly(self, assembly_path):
+        """Compare the reference with a consensus sequence.
 
         Check length, orientation (sense or reverse complement), then use GeneBlocks to
         highlight differences between reference and the plasmid assembly.
@@ -584,13 +584,9 @@ class Comparator:
         **Parameters**
 
         **assembly_path**
-        > Path to a consensus or an assembly FASTA file (`str`).
-
-        **de_novo**
-        > Is it a de novo assembly? If True, check which strand matches the reference.
+        > Path to a consensus FASTA file (`str`).
         """
-        # Note that in this context 'assembly' means a consensus of variant calls,
-        # or a de novo genome assembly created from sequencing reads.
+        # Note that in this context 'assembly' means a consensus of variant calls
         self.assembly = SeqIO.read(handle=assembly_path, format="fasta")
         length_ratio = len(self.assembly) / len(self.record)
         if 0.95 < length_ratio < 1.05:  # length within reason
@@ -621,31 +617,11 @@ class Comparator:
         lev_distance = lev(str(self.assembly.seq), str(self.record.seq))
         lev_cutoff = 50  # more than this is too much to plot. Also for most plasmids,
         # this represents ~1% difference, which is too much error.
-        if de_novo:
-            lev_rc_distance = lev(
-                str(self.assembly.seq.reverse_complement()), str(self.record.seq)
-            )
-            if lev_distance < lev_rc_distance:
-                self.is_assembly_reverse_complement = False
-                assembly_for_diffblocks = self.assembly
-                if lev_distance > lev_cutoff:
-                    self.perform_geneblocks = False
-                else:
-                    self.perform_geneblocks = True
-            else:
-                self.is_assembly_reverse_complement = True  # for geneblocks
-                assembly_for_diffblocks = self.assembly.reverse_complement()
-                if lev_rc_distance > lev_cutoff:
-                    self.perform_geneblocks = False
-                else:
-                    self.perform_geneblocks = True
-        else:  # consensus sequence, using the reference as template
-            self.is_assembly_reverse_complement = False
-            assembly_for_diffblocks = self.assembly
-            if lev_distance > lev_cutoff:
-                self.perform_geneblocks = False
-            else:
-                self.perform_geneblocks = True
+        assembly_for_diffblocks = self.assembly
+        if lev_distance > lev_cutoff:
+            self.perform_geneblocks = False
+        else:
+            self.perform_geneblocks = True
 
         if self.perform_geneblocks:
             try:

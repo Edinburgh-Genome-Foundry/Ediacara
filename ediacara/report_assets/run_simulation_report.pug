@@ -95,7 +95,7 @@ each comparatorgroup in sequencinggroup.comparatorgroups
       p
         <b> #[span.green ☑] {{ comparator.pct_big_insert }}</b>% of reads have an insert >50 bp.
 
-    if comparator.has_de_novo
+    if comparator.has_consensus
       h3 Comparison with reference
 
       if comparator.vcf_table_message
@@ -170,8 +170,6 @@ p.
     <li>AO: Alternate allele observations</li>
     <li>AF: Estimated allele frequency in the range (0,1]</li>
   </ul> 
-
-
 
 
 
