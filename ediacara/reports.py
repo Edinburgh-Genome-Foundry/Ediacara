@@ -13,6 +13,7 @@ from pdf_reports import (
 import pdf_reports.tools as pdf_tools
 
 from .version import __version__
+from .Comparator import result_keywords
 
 THIS_PATH = os.path.dirname(os.path.realpath(__file__))
 ASSETS_PATH = os.path.join(THIS_PATH, "report_assets")
@@ -79,9 +80,9 @@ def write_sequencinggroup_report(target, sequencinggroup):
         if len(tds) == 0:
             return
         result = tds[1]  # second element of list is the result symbol
-        if result.text == "☑":
+        if result.text == result_keywords["good"]:
             add_css_class(tr, "positive")
-        elif result.text == "☒":
+        elif result.text == result_keywords["error"]:
             add_css_class(tr, "negative")
 
     if not sequencinggroup.comparisons_performed:

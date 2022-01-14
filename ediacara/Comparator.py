@@ -22,6 +22,13 @@ vcf_selected_info_keytable = {
     "TYPE": "The type of allele (either snp, mnp, ins, del or complex)",
 }
 
+result_keywords = {
+    "good": "PASS",
+    "error": "FAIL",
+    "warning": "WARNING",
+    "uncertain": "LOW_COVERAGE",
+}
+
 
 class CustomTranslator(dna_features_viewer.BiopythonTranslator):
     """Custom translator."""
@@ -58,6 +65,7 @@ class SequencingGroup:
         self.comparatorgroups = comparatorgroups
         self.name = name
         self.vcf_cutoff = 20  # max number of VCF entries to display in report
+        self.result_keywords = result_keywords
 
     def perform_all_comparisons_in_sequencinggroup(self):
         self.number_of_reads = 0
@@ -164,17 +172,19 @@ class ComparatorGroup:
 
         # Filter for selected reads ..
         subset_paf_filtered = self.paf[self.paf["query_name"].isin(selected_reads)]
+
         # .. add column for counts of multialigning reads,
-        # this is for the compensation in get_weak_read_histogram_data():
-        groups = (
-            subset_paf_filtered.groupby("query_name")["query_name"]
-            .size()
-            .reset_index(name="multialign")
-        )
-        subset_paf_filtered_merged = subset_paf_filtered.merge(groups, how="left")
+        # # this is for the compensation in get_weak_read_histogram_data():
+        # groups = (
+        #     subset_paf_filtered.groupby("query_name")["query_name"]
+        #     .size()
+        #     .reset_index(name="multialign")
+        # )
+        # subset_paf_filtered_merged = subset_paf_filtered.merge(groups, how="left")
+
         # ..then get only the reads aligning to reference:
-        subset_paf_final = subset_paf_filtered_merged[
-            subset_paf_filtered_merged["target_name"] == reference_name
+        subset_paf_final = subset_paf_filtered[
+            subset_paf_filtered["target_name"] == reference_name
         ]
 
         return subset_paf_final
@@ -240,18 +250,19 @@ class ComparatorGroup:
 
             if comparator.is_uncertain:
                 self.result_uncertain += 1
-                results += ["⍰"]
+                comparator.result = result_keywords["uncertain"]
             else:
                 if comparator.has_errors:
                     self.result_error += 1
-                    results += ["☒"]
+                    comparator.result = result_keywords["error"]
                 else:
                     if comparator.has_warnings:
                         self.result_warning += 1
-                        results += ["⚠"]
+                        comparator.result = result_keywords["warning"]
                     else:
                         self.result_good += 1
-                        results += ["☑"]
+                        comparator.result = result_keywords["good"]
+            results += [comparator.result]
 
         self.n_fastq_reads = len(set(self.paf.query_name))
         self.fastq_plot = self.plot_fastq_histogram()

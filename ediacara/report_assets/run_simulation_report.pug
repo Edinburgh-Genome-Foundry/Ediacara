@@ -27,11 +27,10 @@ each comparatorgroup in sequencinggroup.comparatorgroups
   hr
 
   p.
-    Out of <b>{{ comparatorgroup.number_of_constructs }}</b> constructs, there were 
+    Results for the <b>{{ comparatorgroup.number_of_constructs }}</b> construct(s) in the pool:
     <b>#[span.green {{ comparatorgroup.result_good }}] / #[span.yellow {{ comparatorgroup.result_warning }}] / 
     #[span.red {{ comparatorgroup.result_error }} ] / #[span.grey {{ comparatorgroup.result_uncertain }} ]
-    </b> (☑/⚠/☒/⍰) good / warning / errored / uncertain constructs. 
-    The analysis yielded the following results:
+    </b> (pass / warning / fail / low coverage).
 
   {{ comparatorgroup.report_table }}
 
@@ -66,10 +65,11 @@ each comparatorgroup in sequencinggroup.comparatorgroups
             b(style='font-size: 45px;') #[span.green ☑] &ensp; #[span.grey {{ comparator.record.id }}]
           //- b(style='font-size: 20px;') &emsp;&emsp; Success!
 
+    p Result: {{ comparator.result }}
 
     p Length of reference: 
-      strong #[span.green {{ comparator.reference_length }}]
-      | bp.
+      strong {{ comparator.reference_length }}
+      |  bp.
 
     h3 Coverage plot
 
@@ -133,10 +133,10 @@ p
 p.
   Each plasmid construct is analysed separately. The result is summarised with a symbol:
 
-p #[span.green ☑] : correct construct, based on no detection of errors
-p #[span.yellow ⚠] : warning signs are present, review the construct and make a decision
-p #[span.red ☒] : errors were detected in the construct
-p #[span.grey ⍰] : sequencing problems, insufficient reads
+p #[span.green ☑ / {{ sequencinggroup.result_keywords.good }} ] : correct construct, based on no detection of errors
+p #[span.yellow ⚠ / {{ sequencinggroup.result_keywords.warning }} ] : warning signs are present, review the results and make a decision
+p #[span.red ☒ / {{ sequencinggroup.result_keywords.error }} ] : errors were detected in the construct
+p #[span.grey ⍰ / {{ sequencinggroup.result_keywords.uncertain }} ] : sequencing problems, insufficient reads
 
 p
   strong Coverage
