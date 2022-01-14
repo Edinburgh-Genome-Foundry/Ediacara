@@ -22,6 +22,12 @@ each assembly in assemblybatch.assemblies
   h2 {{ assembly.reference.id }}
   hr
 
+  if assembly.reverse_complement
+    p
+      strong Note
+      | : the assembly is in reverse complement, compared to the reference.
+
+
   p Plot of the aligning parts:
 
   img#diff-figure(src="{{ assembly.assembly_figure_data }}")

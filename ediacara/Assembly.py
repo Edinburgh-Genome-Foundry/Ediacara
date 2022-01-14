@@ -106,6 +106,7 @@ class Assembly:
             self.parts = self.assembly_plan.iloc[0].to_list()  # has only one line
 
     def interpret_alignment(self):
+        seq_matches = 0  # counts signed matches to reference for evaluating orientation
         for index, row in self.paf.iterrows():
             # May be useful to exclude reference:
             # if row["query_name"] == self.reference.id:
@@ -123,6 +124,15 @@ class Assembly:
             )
 
             self.assembly.features.append(feature)
+
+            if part_type == "reference":
+                if row["strand"] == "+":
+                    sign = 1
+                else:
+                    sign = -1
+                seq_matches += sign * int(row["mapping_matches"])
+
+        self.reverse_complement = True if seq_matches < 0 else False
         self.assembly_figure = self.plot_assembly()
 
     def subset_paf(self):
