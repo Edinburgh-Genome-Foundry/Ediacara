@@ -114,6 +114,8 @@ def write_sequencinggroup_report(target, sequencinggroup):
                 vcf_table = comparator.vcf_table
                 comparator.vcf_table_message = False
 
+            # This column has lists, does not look good in print:
+            vcf_table["ALT"] = vcf_table["ALT"].apply(lambda x: ", ".join(x))
             # Convert to string then truncate too long entries and add three dots:
             columnwidth = 15  # wider columns don't display well in PDF
             vcf_table = vcf_table.apply(
