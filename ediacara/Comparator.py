@@ -266,7 +266,7 @@ class ComparatorGroup:
             "Coverage [x]": pandas.Series(median_coverages),
         }
         self.summary_table = pandas.DataFrame(d)
-        plt.close("all")
+        # plt.close("all")
 
     def plot_fastq_histogram(self, n_bins=50):
         """Plot a histogram of the FASTQ reads.
@@ -402,7 +402,7 @@ class Comparator:
             self.has_consensus = True
         if vcf_path is not None:
             self.vcf_table = self.create_vcf_table(vcf_path=vcf_path)
-        plt.close("all")
+        # plt.close("all")
 
     def create_vcf_table(self, vcf_path):
         vcf_dict = {key: [] for key in vcf_selected_info_keytable.keys()}
