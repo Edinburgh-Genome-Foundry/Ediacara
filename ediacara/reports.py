@@ -174,7 +174,7 @@ def write_sequencinggroup_report(target, sequencinggroup):
                     )
                     comparator.has_comparison_error = False
 
-        plt.close("all")
+        # plt.close("all")
 
     html = end_pug_to_html(
         SEQUENCINGGROUP_REPORT_TEMPLATE, sequencinggroup=sequencinggroup
