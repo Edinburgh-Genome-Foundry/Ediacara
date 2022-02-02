@@ -13,6 +13,7 @@ setup(
     long_description_content_type="text/x-rst",
     keywords="biology",
     packages=find_packages(exclude="docs"),
+    include_package_data=True,
     install_requires=[
         "matplotlib",
         "numpy",
@@ -22,5 +23,6 @@ setup(
         "dna_features_viewer",
         "geneblocks",
         "cyvcf2",
+        "pdf_reports",
     ],
 )
