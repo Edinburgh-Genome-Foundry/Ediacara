@@ -132,12 +132,11 @@ p The first page summarises the results and other details for each plasmid const
 p
   h5 Analysis pages
 p.
-  Each plasmid construct is analysed separately. The result is summarised with a symbol:
-
-p #[span.green ☑ / {{ sequencinggroup.result_keywords.good }} ] : correct construct, based on no detection of errors
-p #[span.yellow ⚠ / {{ sequencinggroup.result_keywords.warning }} ] : warning signs are present, review the results and make a decision
-p #[span.red ☒ / {{ sequencinggroup.result_keywords.error }} ] : errors were detected in the construct
-p #[span.grey ⍰ / {{ sequencinggroup.result_keywords.uncertain }} ] : sequencing problems, insufficient reads
+  Each plasmid construct is analysed separately. The result is summarised with a symbol:<br>
+  #[span.green ☑ / {{ sequencinggroup.result_keywords.good }} ] : correct construct, based on no detection of errors<br>
+  #[span.yellow ⚠ / {{ sequencinggroup.result_keywords.warning }} ] : warning signs are present, review the results and make a decision<br>
+  #[span.red ☒ / {{ sequencinggroup.result_keywords.error }} ] : errors were detected in the construct<br>
+  #[span.grey ⍰ / {{ sequencinggroup.result_keywords.uncertain }} ] : sequencing problems, insufficient reads<br>
 
 p
   strong Coverage
@@ -157,8 +156,10 @@ p.
   then it is compared with the reference. If the lengths differ more than 5%,
   then an error is displayed here, otherwise a
   <a href="https://edinburgh-genome-foundry.github.io/Geneblocks/">GeneBlocks</a>
-  plot is made. In this plot, <code>+</code> means that the reference has extra sequence
-  compared to the reads (unless a note tells otherwise).
+  plot is made. In this plot, the reference is displayed,
+  and annotated with changes compared to the consensus obtained from the reads
+  (unless a note tells otherwise). For example, <code>+G</code> means that the reference
+  file has an extra G compared to the DNA sample, in other words, the DNA has a G deletion.
   If a VCF file of a variant call is provided, then a VCF table is also displayed.
   Both the reported and the VCF table positions are zero-based,
   but the VCF table reports the position of the variation, rather than the nucleotide.

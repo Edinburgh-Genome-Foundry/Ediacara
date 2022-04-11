@@ -161,9 +161,10 @@ def write_sequencinggroup_report(target, sequencinggroup):
                     )
                 elif comparator.geneblocks_outcome == "swapped_diffblocks":
                     comparator.geneblocks_text = (
-                        "Note: the plot compares the consensus to the reference "
+                        "Note: plotting the reference against the consensus failed."
+                        + " Instead, this plot compares the consensus to the reference "
                         + comparator.name
-                        + " therefore there are no annotations."
+                        + " , therefore there are no annotations."
                     )
                     comparator.has_comparison_error = False
                 elif comparator.geneblocks_outcome == "all_good":
