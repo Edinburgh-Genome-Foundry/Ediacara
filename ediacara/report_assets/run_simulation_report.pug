@@ -159,8 +159,11 @@ p.
   <a href="https://edinburgh-genome-foundry.github.io/Geneblocks/">GeneBlocks</a>
   plot is made. In this plot, <code>+</code> means that the reference has extra sequence
   compared to the reads (unless a note tells otherwise).
-  If variants were called, then a VCF table is also displayed. Both the reported and the VCF table positions are zero-based,
-  but the VCF table reports the position of the variation, rather than the nucleotide. The columns of the table are:
+  If a VCF file of a variant call is provided, then a VCF table is also displayed.
+  Both the reported and the VCF table positions are zero-based,
+  but the VCF table reports the position of the variation, rather than the nucleotide.
+  Note that the reported depths (DP) may be lower than the ones in the coverage plot,
+  depending on how the variant call was performed. The columns of the table are:
    <ul>
     <li>LOC: Position</li>
     <li>REF: Reference sequence</li>
@@ -169,7 +172,6 @@ p.
     <li>DP: Total read depth at the locus</li>
     <li>RO: Reference allele observation count</li>
     <li>AO: Alternate allele observations</li>
-    <li>AF: Estimated allele frequency in the range (0,1]</li>
   </ul> 
 
 

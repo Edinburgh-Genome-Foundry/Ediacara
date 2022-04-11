@@ -16,7 +16,6 @@ import geneblocks
 
 vcf_selected_info_keytable = {
     "DP": "Total read depth at the locus",
-    "AF": "Estimated allele frequency in the range (0,1]",
     "RO": "Reference allele observation count",
     "AO": "Alternate allele observations",
     "TYPE": "The type of allele (either snp, mnp, ins, del or complex)",
@@ -417,7 +416,7 @@ class Comparator:
             for key in vcf_selected_info_keytable.keys():
                 vcf_dict[key] += [variant.INFO.get(key)]
         vcf_table = pandas.DataFrame(
-            vcf_dict, columns=["LOC", "REF", "ALT", "TYPE", "DP", "RO", "AO", "AF"]
+            vcf_dict, columns=["LOC", "REF", "ALT", "TYPE", "DP", "RO", "AO"]
         )  # also set the order of the columns
 
         return vcf_table
