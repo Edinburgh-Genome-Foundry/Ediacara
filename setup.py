@@ -8,7 +8,7 @@ setup(
     name="ediacara",
     version=version["__version__"],
     author="Peter Vegh",
-    description="EGF's alignment comparator",
+    description="EGF's alignment reporter",
     long_description=open("pypi-readme.rst").read(),
     long_description_content_type="text/x-rst",
     keywords="biology",

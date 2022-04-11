@@ -1,7 +1,7 @@
 Ediacara
 ========
 
-The Edinburgh Genome Foundry's alignment comparator.
+The Edinburgh Genome Foundry's alignment reporter.
 
 
 **Install:**

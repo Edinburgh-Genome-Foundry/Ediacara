@@ -25,8 +25,7 @@ STYLESHEET = os.path.join(ASSETS_PATH, "report_style.css")
 def end_pug_to_html(template, **context):
     now = datetime.now().strftime("%Y-%m-%d")
     defaults = {
-        "sidebar_text": "Generated on %s by EGF's alignment comparator (version %s)"
-        % (now, __version__),
+        "sidebar_text": "Generated on %s by Ediacara (version %s)" % (now, __version__),
         "ediacara_logo_url": os.path.join(ASSETS_PATH, "imgs", "logo.png"),
     }
     for k in defaults:
