@@ -33,6 +33,11 @@ each assembly in assemblybatch.assemblies
 
   img#diff-figure(src="{{ assembly.assembly_figure_data }}")
 
+  //- if assembly.has_assembly_plan
+  //-   p Has assembly plan. 
+  //- else
+  //-   p No assembly plan.
+
   p Alignment table:
 
   {{ assembly.report_table }}

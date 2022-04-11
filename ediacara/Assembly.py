@@ -94,7 +94,9 @@ class Assembly:
         if assembly_plan is None:
             self.assembly_plan = None
             self.parts = []
+            self.has_assembly_plan = False
         else:
+            self.has_assembly_plan = True
             plan_df = pd.read_csv(assembly_plan, skiprows=1, header=None)  # skip header
             self.assembly_plan = plan_df[plan_df[0] == self.reference.id]
             if len(self.assembly_plan) == 0:
