@@ -4,6 +4,7 @@
 
 # Ediacara
 
+![version](https://img.shields.io/badge/current_version-0.1.1-blue)
 [![build](https://github.com/Edinburgh-Genome-Foundry/Ediacara/actions/workflows/build.yml/badge.svg)](https://github.com/Edinburgh-Genome-Foundry/Ediacara/actions/workflows/build.yml)
 
 Ediacara helps interpreting sequencing data of assembled DNA constructs (plasmids). It's used in the [Sequeduct pipeline](https://github.com/Edinburgh-Genome-Foundry/Sequeduct/).
