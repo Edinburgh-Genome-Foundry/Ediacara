@@ -1,0 +1,11 @@
+EGF2_2	7604	0	7604	+	EGF2_2	7592	0	7592	7592	7604	60	NM:i:12	ms:i:7210	AS:i:7205	nn:i:0	tp:A:P	cm:i:750	s1:i:7457	s2:i:247	de:f:0.0012	rl:i:0	cg:Z:137M1I310M1I246M1I1141M1I379M1I494M1I2186M4I261M1I248M1I2190M
+feature_8	2721	949	2721	+	EGF2_2	7592	0	1769	1769	1772	60	NM:i:3	ms:i:1643	AS:i:1643	nn:i:0	tp:A:P	cm:i:171	s1:i:1707	s2:i:0	de:f:0.0017	rl:i:0	cg:Z:137M1I310M1I246M1I1076M
+conn_LR	1905	1259	1462	-	EGF2_2	7592	1631	1834	203	203	60	NM:i:0	ms:i:203	AS:i:203	nn:i:0	tp:A:P	cm:i:19	s1:i:183	s2:i:0	de:f:0	rl:i:0	cg:Z:203M
+feature_10	2166	6	2159	+	EGF2_2	7592	1834	3985	2151	2153	60	NM:i:2	ms:i:2067	AS:i:2067	nn:i:0	tp:A:P	cm:i:206	s1:i:2105	s2:i:617	de:f:0.0009	rl:i:0	cg:Z:379M1I494M1I1278M
+feature_12	390	7	383	+	EGF2_2	7592	3981	4357	376	376	60	NM:i:0	ms:i:376	AS:i:376	nn:i:0	tp:A:P	cm:i:34	s1:i:357	s2:i:0	de:f:0	rl:i:0	cg:Z:376M
+feature_12_alternative	390	7	379	+	EGF2_2	7592	3981	4353	372	372	60	NM:i:0	ms:i:372	AS:i:372	nn:i:0	tp:A:P	cm:i:34	s1:i:357	s2:i:0	de:f:0	rl:i:0	cg:Z:372M
+feature_14	554	6	547	+	EGF2_2	7592	4352	4893	541	541	60	NM:i:0	ms:i:541	AS:i:541	nn:i:0	tp:A:P	cm:i:56	s1:i:528	s2:i:0	de:f:0	rl:i:0	cg:Z:541M
+feature_16	1294	15	1287	+	EGF2_2	7592	4893	6163	1270	1272	60	NM:i:2	ms:i:1186	AS:i:1186	nn:i:0	tp:A:P	cm:i:129	s1:i:1250	s2:i:0	de:f:0.0016	rl:i:0	cg:Z:261M1I248M1I761M
+feature_18_alternative	1451	11	1440	+	EGF2_2	7592	6163	7592	1429	1429	60	NM:i:0	ms:i:1429	AS:i:1429	nn:i:0	tp:A:P	cm:i:140	s1:i:1408	s2:i:596	de:f:0	rl:i:0	cg:Z:1429M
+feature_18	1451	6	1440	+	EGF2_2	7592	6158	7592	1434	1434	60	NM:i:0	ms:i:1434	AS:i:1434	nn:i:0	tp:A:P	cm:i:140	s1:i:1408	s2:i:596	de:f:0	rl:i:0	cg:Z:1434M
+part_carrier	2329	235	852	-	EGF2_2	7592	114	727	612	617	60	NM:i:5	ms:i:452	AS:i:425	nn:i:0	tp:A:P	cm:i:45	s1:i:518	s2:i:0	de:f:0.0081	rl:i:0	cg:Z:23M1I96M1I214M1I246M1I34M

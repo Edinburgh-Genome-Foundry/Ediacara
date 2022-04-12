@@ -66,3 +66,43 @@ def test_write_sequencinggroup_report(tmpdir):
     sequencinggroup = edi.SequencingGroup(comparatorgroups, name=params_projectname)
     sequencinggroup.perform_all_comparisons_in_sequencinggroup()
     edi.write_sequencinggroup_report(target=pdf_file, sequencinggroup=sequencinggroup)
+
+
+def test_write_assembly_analysis_report(tmpdir):
+
+    samplesheet_csv = os.path.join(data_dir, "review", "entries_review.csv")
+    assembly_plan_path = os.path.join(data_dir, "review", "assembly_plan.csv")
+    params_projectname = "Test review"
+    pdf_file = os.path.join(str(tmpdir), "review_report.pdf")
+
+    entries = pd.read_csv(samplesheet_csv, header=None)
+    entries.columns = [
+        "project",
+        "entry",
+        "barcode",
+        "sample",
+        "result",
+        "gb",
+        "fa",
+        "consensus",
+        "paf",
+    ]
+    # have them in order in the pdf
+    entries.sort_values(by=["barcode", "sample"], inplace=True)
+
+    consensus_list = []
+    for index, row in entries.iterrows():
+        assembly = edi.Assembly(
+            assembly_path=os.path.join(data_dir, row["consensus"]),
+            reference_path=os.path.join(data_dir, row["gb"]),
+            alignment_path=os.path.join(data_dir, "review", row["paf"]),
+            assembly_plan=assembly_plan_path,
+        )
+        consensus_list += [assembly]
+
+    assemblybatch = edi.AssemblyBatch(
+        assemblies=consensus_list, name=params_projectname
+    )
+    assemblybatch.perform_all_interpretations_in_group()
+
+    edi.write_assembly_analysis_report(pdf_file, assemblybatch)
