@@ -1,4 +1,9 @@
+import os
+import pytest
+
 import ediacara as edi
+
+data_dir = os.path.join("tests", "data")
 
 
 def test_comparator():
@@ -9,9 +14,5 @@ def test_comparatorgroup():
     edi.ComparatorGroup
 
 
-def test_write_pdf_report():
-    edi.write_pdf_report
-
-
-def write_comparatorgroup_report():
-    edi.write_comparatorgroup_report
+def write_sequencinggroup_report():
+    edi.write_sequencinggroup_report

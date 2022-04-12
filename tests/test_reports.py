@@ -1,0 +1,68 @@
+import os
+import pandas as pd
+
+from Bio import SeqIO
+import ediacara as edi
+
+data_dir = os.path.join("tests", "data")
+
+samplesheet_csv = os.path.join(data_dir, "entries.csv")
+params_projectname = "EGF test"
+
+
+def test_write_sequencinggroup_report(tmpdir):
+    pdf_file = os.path.join(str(tmpdir), "report.pdf")
+    entries = pd.read_csv(samplesheet_csv, header=None)
+
+    entries.columns = [
+        "projectname",
+        "entry",
+        "barcode",
+        "sample",
+        "fasta",
+        "vcf",
+        "paf",
+        "tsv",
+        "consensus_fasta",
+    ]
+    # have them in order in the pdf
+    entries.sort_values(by=["barcode", "sample"], inplace=True)
+
+    comparatorgroups = []
+    for index, row in entries.iterrows():
+        entry = row["entry"]
+        sample = row["sample"]
+        vcf = os.path.join(data_dir, row["vcf"])
+
+        reference_gb = os.path.join(data_dir, row["sample"] + ".gb")
+        record = SeqIO.read(reference_gb, "genbank")
+        record.id = sample
+        references = {record.id: record}
+
+        tsv_file = os.path.join(data_dir, row["tsv"])
+        paf_path = os.path.join(data_dir, row["paf"])
+
+        tsv = edi.ComparatorGroup.load_tsv(tsv_file)
+        paf = edi.ComparatorGroup.load_paf(paf_path)
+
+        assembly_paths = {sample: os.path.join(data_dir, row["consensus_fasta"])}
+        vcf_paths = {sample: vcf}
+
+        comparator_group = edi.ComparatorGroup(
+            references=references,
+            alignments={"paf": paf, "tsv": tsv},
+            barcode=row["barcode"],
+            assembly_paths=assembly_paths,
+            vcf_paths=vcf_paths,
+        )
+
+        list_of_constructs = [sample]
+        for element in list_of_constructs:
+            comparator_group.add_comparator(element)
+
+        comparatorgroups += [comparator_group]
+
+    # Create PDF report
+    sequencinggroup = edi.SequencingGroup(comparatorgroups, name=params_projectname)
+    sequencinggroup.perform_all_comparisons_in_sequencinggroup()
+    edi.write_sequencinggroup_report(target=pdf_file, sequencinggroup=sequencinggroup)
