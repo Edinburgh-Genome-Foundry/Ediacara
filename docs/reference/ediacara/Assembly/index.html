@@ -1,0 +1,2313 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.4, mkdocs-material-7.3.0">
+    
+    
+      
+        <title>Assembly - Ediacara</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.8b42a75e.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#4cae4f">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="green" data-md-color-accent="lightgreen">
+  
+    
+    <script>function __prefix(e){return new URL("../../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#module-ediacaraassembly" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Ediacara" class="md-header__button md-logo" aria-label="Ediacara" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Ediacara
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Assembly
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/Edinburgh-Genome-Foundry/Ediacara/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ediacara
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Ediacara" class="md-nav__button md-logo" aria-label="Ediacara" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Ediacara
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/Edinburgh-Genome-Foundry/Ediacara/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ediacara
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1">
+          Ediacara
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Ediacara" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Ediacara
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Assembly
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Assembly
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#assembly" class="md-nav__link">
+    Assembly
+  </a>
+  
+    <nav class="md-nav" aria-label="Assembly">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evaluate_part_name" class="md-nav__link">
+    evaluate_part_name
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interpret_alignment" class="md-nav__link">
+    interpret_alignment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plot_assembly" class="md-nav__link">
+    plot_assembly
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subset_paf" class="md-nav__link">
+    subset_paf
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assemblybatch" class="md-nav__link">
+    AssemblyBatch
+  </a>
+  
+    <nav class="md-nav" aria-label="AssemblyBatch">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methods_1" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#perform_all_interpretations_in_group" class="md-nav__link">
+    perform_all_interpretations_in_group
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assemblytranslator" class="md-nav__link">
+    AssemblyTranslator
+  </a>
+  
+    <nav class="md-nav" aria-label="AssemblyTranslator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-variables" class="md-nav__link">
+    Class variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#static-methods" class="md-nav__link">
+    Static methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quick_class_plot" class="md-nav__link">
+    quick_class_plot
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods_2" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute_feature_box_color" class="md-nav__link">
+    compute_feature_box_color
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute_feature_box_linewidth" class="md-nav__link">
+    compute_feature_box_linewidth
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute_feature_color" class="md-nav__link">
+    compute_feature_color
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute_feature_fontdict" class="md-nav__link">
+    compute_feature_fontdict
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute_feature_html" class="md-nav__link">
+    compute_feature_html
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute_feature_label" class="md-nav__link">
+    compute_feature_label
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute_feature_label_link_color" class="md-nav__link">
+    compute_feature_label_link_color
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute_feature_legend_text" class="md-nav__link">
+    compute_feature_legend_text
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute_feature_linewidth" class="md-nav__link">
+    compute_feature_linewidth
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute_filtered_features" class="md-nav__link">
+    compute_filtered_features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quick_plot" class="md-nav__link">
+    quick_plot
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#translate_feature" class="md-nav__link">
+    translate_feature
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#translate_record" class="md-nav__link">
+    translate_record
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Comparator/" class="md-nav__link">
+        Comparator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        Index
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reports/" class="md-nav__link">
+        Reports
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../version/" class="md-nav__link">
+        Version
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#assembly" class="md-nav__link">
+    Assembly
+  </a>
+  
+    <nav class="md-nav" aria-label="Assembly">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evaluate_part_name" class="md-nav__link">
+    evaluate_part_name
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interpret_alignment" class="md-nav__link">
+    interpret_alignment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plot_assembly" class="md-nav__link">
+    plot_assembly
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subset_paf" class="md-nav__link">
+    subset_paf
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assemblybatch" class="md-nav__link">
+    AssemblyBatch
+  </a>
+  
+    <nav class="md-nav" aria-label="AssemblyBatch">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methods_1" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#perform_all_interpretations_in_group" class="md-nav__link">
+    perform_all_interpretations_in_group
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assemblytranslator" class="md-nav__link">
+    AssemblyTranslator
+  </a>
+  
+    <nav class="md-nav" aria-label="AssemblyTranslator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-variables" class="md-nav__link">
+    Class variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#static-methods" class="md-nav__link">
+    Static methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quick_class_plot" class="md-nav__link">
+    quick_class_plot
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods_2" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute_feature_box_color" class="md-nav__link">
+    compute_feature_box_color
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute_feature_box_linewidth" class="md-nav__link">
+    compute_feature_box_linewidth
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute_feature_color" class="md-nav__link">
+    compute_feature_color
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute_feature_fontdict" class="md-nav__link">
+    compute_feature_fontdict
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute_feature_html" class="md-nav__link">
+    compute_feature_html
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute_feature_label" class="md-nav__link">
+    compute_feature_label
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute_feature_label_link_color" class="md-nav__link">
+    compute_feature_label_link_color
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute_feature_legend_text" class="md-nav__link">
+    compute_feature_legend_text
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute_feature_linewidth" class="md-nav__link">
+    compute_feature_linewidth
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute_filtered_features" class="md-nav__link">
+    compute_filtered_features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quick_plot" class="md-nav__link">
+    quick_plot
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#translate_feature" class="md-nav__link">
+    translate_feature
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#translate_record" class="md-nav__link">
+    translate_record
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/Edinburgh-Genome-Foundry/Ediacara/edit/main/reference/ediacara/Assembly.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="module-ediacaraassembly">Module ediacara.Assembly</h1>
+<p>None</p>
+<p>None</p>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="s s-Atom">import</span> <span class="s s-Atom">os</span>
+
+<span class="s s-Atom">import</span> <span class="s s-Atom">pandas</span> <span class="s s-Atom">as</span> <span class="s s-Atom">pd</span>
+
+<span class="s s-Atom">from</span> <span class="nv">Bio</span> <span class="s s-Atom">import</span> <span class="nv">SeqFeature</span>
+
+<span class="s s-Atom">from</span> <span class="nv">Bio</span> <span class="s s-Atom">import</span> <span class="nv">SeqIO</span>
+
+<span class="s s-Atom">import</span> <span class="s s-Atom">dna_features_viewer</span>
+
+<span class="s s-Atom">from</span> <span class="p">.</span><span class="nv">Comparator</span> <span class="s s-Atom">import</span> <span class="nv">ComparatorGroup</span>
+
+<span class="s s-Atom">class</span> <span class="nv">AssemblyTranslator</span><span class="p">(</span><span class="s s-Atom">dna_features_viewer</span><span class="p">.</span><span class="nv">BiopythonTranslator</span><span class="p">)</span><span class="s s-Atom">:</span>
+
+    <span class="s2">&quot;&quot;&quot;Custom translator to display only the aligned parts.&quot;&quot;&quot;</span>
+
+    <span class="s s-Atom">def</span> <span class="nf">compute_feature_color</span><span class="p">(</span><span class="s s-Atom">self</span><span class="p">,</span> <span class="s s-Atom">feature</span><span class="p">)</span><span class="s s-Atom">:</span>
+
+        <span class="s s-Atom">ediacara_qualifier</span> <span class="o">=</span> <span class="s2">&quot;ediacara&quot;</span>
+
+        <span class="s s-Atom">if</span> <span class="s s-Atom">feature</span><span class="p">.</span><span class="s s-Atom">qualifiers</span><span class="p">[</span><span class="s s-Atom">ediacara_qualifier</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;wrong_part&quot;</span><span class="s s-Atom">:</span>
+
+            <span class="s s-Atom">return</span> <span class="s2">&quot;#f5685e&quot;</span>
+
+        <span class="s s-Atom">elif</span> <span class="s s-Atom">feature</span><span class="p">.</span><span class="s s-Atom">qualifiers</span><span class="p">[</span><span class="s s-Atom">ediacara_qualifier</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;correct_part&quot;</span><span class="s s-Atom">:</span>
+
+            <span class="s s-Atom">return</span> <span class="s2">&quot;#79d300&quot;</span>
+
+        <span class="s s-Atom">elif</span> <span class="s s-Atom">feature</span><span class="p">.</span><span class="s s-Atom">qualifiers</span><span class="p">[</span><span class="s s-Atom">ediacara_qualifier</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;unknown_part&quot;</span><span class="s s-Atom">:</span>
+
+            <span class="s s-Atom">return</span> <span class="s2">&quot;#FFFFFF&quot;</span>
+
+        <span class="s s-Atom">elif</span> <span class="s s-Atom">feature</span><span class="p">.</span><span class="s s-Atom">qualifiers</span><span class="p">[</span><span class="s s-Atom">ediacara_qualifier</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;reference&quot;</span><span class="s s-Atom">:</span>
+
+            <span class="s s-Atom">return</span> <span class="s2">&quot;#d3d3d3&quot;</span>
+
+        <span class="nn">else</span><span class="p">:</span>
+
+            <span class="s s-Atom">return</span> <span class="s2">&quot;#7245dc&quot;</span>  <span class="s s-Atom">#</span> <span class="s s-Atom">default</span> <span class="s s-Atom">dna_features_viewer</span> <span class="s s-Atom">colour</span>
+
+<span class="s s-Atom">class</span> <span class="nv">AssemblyBatch</span><span class="s s-Atom">:</span>
+
+    <span class="s2">&quot;&quot;&quot;Batch of Assembly class instances.</span>
+
+<span class="s2">    **Parameters**</span>
+
+<span class="s2">    **assemblies**</span>
+
+<span class="s2">    &gt; List of `Assembly` instances.</span>
+
+<span class="s2">    **name**</span>
+
+<span class="s2">    &gt; Name of the assembly analysis project (`str`).</span>
+
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="s s-Atom">def</span> <span class="k">__</span><span class="nf">init__</span><span class="p">(</span><span class="s s-Atom">self</span><span class="p">,</span> <span class="s s-Atom">assemblies</span><span class="p">,</span> <span class="s s-Atom">name=</span><span class="s2">&quot;Unnamed&quot;</span><span class="p">)</span><span class="s s-Atom">:</span>
+
+        <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">assemblies</span> <span class="o">=</span> <span class="s s-Atom">assemblies</span>
+
+        <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">name</span> <span class="o">=</span> <span class="s s-Atom">name</span>
+
+    <span class="s s-Atom">def</span> <span class="nf">perform_all_interpretations_in_group</span><span class="p">(</span><span class="s s-Atom">self</span><span class="p">)</span><span class="s s-Atom">:</span>
+
+        <span class="s s-Atom">for</span> <span class="s s-Atom">assembly</span> <span class="s s-Atom">in</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="nn">assemblies</span><span class="p">:</span>
+
+            <span class="s s-Atom">assembly</span><span class="p">.</span><span class="nf">interpret_alignment</span><span class="p">()</span>
+
+<span class="s s-Atom">class</span> <span class="nv">Assembly</span><span class="s s-Atom">:</span>
+
+    <span class="s2">&quot;&quot;&quot;Compare an assembly sequence to parts and simulated reference.</span>
+
+<span class="s2">    **Parameters**</span>
+
+<span class="s2">    **assembly_path**</span>
+
+<span class="s2">    &gt; Path to the *de novo* assembled FASTA sequence file (`str`).</span>
+
+<span class="s2">    **reference**</span>
+
+<span class="s2">    &gt; Path to reference Genbank file (`str`).</span>
+
+<span class="s2">    **alignment**</span>
+
+<span class="s2">    &gt; Path (`str`) to minimap2 alignment PAF file, created with the `-cx asm5` options.</span>
+
+<span class="s2">    In this, the part and reference sequences are aligned against the de novo sequence.</span>
+
+<span class="s2">    **assembly_plan**</span>
+
+<span class="s2">    &gt; Path of assembly plan CSV file (DNA Cauldron output format, with header line).</span>
+
+<span class="s2">    May contain additional entries, the correct line is chosen by reference sequence ID.</span>
+
+<span class="s2">    **use_file_names_as_ids**</span>
+
+<span class="s2">    &gt; If True, uses the Genbank file name as sequence ID.</span>
+
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="s s-Atom">def</span> <span class="k">__</span><span class="nf">init__</span><span class="p">(</span>
+
+        <span class="s s-Atom">self</span><span class="p">,</span>
+
+        <span class="s s-Atom">assembly_path</span><span class="p">,</span>
+
+        <span class="s s-Atom">reference_path</span><span class="p">,</span>
+
+        <span class="s s-Atom">alignment_path</span><span class="p">,</span>
+
+        <span class="s s-Atom">assembly_plan</span><span class="o">=</span><span class="nv">None</span><span class="p">,</span>
+
+        <span class="s s-Atom">use_file_names_as_ids</span><span class="o">=</span><span class="nv">True</span><span class="p">,</span>
+
+    <span class="p">)</span><span class="s s-Atom">:</span>
+
+        <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">assembly</span> <span class="o">=</span> <span class="nv">SeqIO</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="s s-Atom">handle</span><span class="o">=</span><span class="s s-Atom">assembly_path</span><span class="p">,</span> <span class="s s-Atom">format=</span><span class="s2">&quot;fasta&quot;</span><span class="p">)</span>
+
+        <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">reference</span> <span class="o">=</span> <span class="nv">SeqIO</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="s s-Atom">handle</span><span class="o">=</span><span class="s s-Atom">reference_path</span><span class="p">,</span> <span class="s s-Atom">format=</span><span class="s2">&quot;genbank&quot;</span><span class="p">)</span>
+
+        <span class="s s-Atom">if</span> <span class="s s-Atom">use_file_names_as_ids:</span>
+
+            <span class="s s-Atom">basename</span> <span class="o">=</span> <span class="s s-Atom">os</span><span class="p">.</span><span class="s s-Atom">path</span><span class="p">.</span><span class="nf">basename</span><span class="p">(</span><span class="s s-Atom">reference_path</span><span class="p">)</span>
+
+            <span class="s s-Atom">basename_no_extension</span> <span class="o">=</span> <span class="s s-Atom">os</span><span class="p">.</span><span class="s s-Atom">path</span><span class="p">.</span><span class="nf">splitext</span><span class="p">(</span><span class="s s-Atom">basename</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">reference</span><span class="p">.</span><span class="s s-Atom">id</span> <span class="o">=</span> <span class="s s-Atom">basename_no_extension</span>
+
+        <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">paf</span> <span class="o">=</span> <span class="nv">ComparatorGroup</span><span class="p">.</span><span class="nf">load_paf</span><span class="p">(</span><span class="s s-Atom">alignment_path</span><span class="p">)</span>
+
+        <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">paf</span><span class="p">.</span><span class="s s-Atom">columns</span> <span class="o">=</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">paf</span><span class="p">.</span><span class="s s-Atom">columns</span><span class="p">[:-</span><span class="mi">1</span><span class="p">].</span><span class="nf">to_list</span><span class="p">()</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;CIGAR&quot;</span><span class="p">]</span>  <span class="s s-Atom">#</span> <span class="o">-</span><span class="mi">1</span> <span class="o">is</span> <span class="s s-Atom">last</span>
+
+        <span class="s s-Atom">if</span> <span class="s s-Atom">assembly_plan</span> <span class="o">is</span> <span class="nv">None</span><span class="s s-Atom">:</span>
+
+            <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">assembly_plan</span> <span class="o">=</span> <span class="nv">None</span>
+
+            <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">parts</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">has_assembly_plan</span> <span class="o">=</span> <span class="nv">False</span>
+
+        <span class="nn">else</span><span class="p">:</span>
+
+            <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">has_assembly_plan</span> <span class="o">=</span> <span class="nv">True</span>
+
+            <span class="s s-Atom">plan_df</span> <span class="o">=</span> <span class="s s-Atom">pd</span><span class="p">.</span><span class="nf">read_csv</span><span class="p">(</span><span class="s s-Atom">assembly_plan</span><span class="p">,</span> <span class="s s-Atom">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="s s-Atom">header</span><span class="o">=</span><span class="nv">None</span><span class="p">)</span>  <span class="s s-Atom">#</span> <span class="s s-Atom">skip</span> <span class="s s-Atom">header</span>
+
+            <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">assembly_plan</span> <span class="o">=</span> <span class="s s-Atom">plan_df</span><span class="p">[</span><span class="s s-Atom">plan_df</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">reference</span><span class="p">.</span><span class="s s-Atom">id</span><span class="p">]</span>
+
+            <span class="s s-Atom">if</span> <span class="nf">len</span><span class="p">(</span><span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">assembly_plan</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="s s-Atom">:</span>
+
+                <span class="s s-Atom">raise</span> <span class="nv">ValueError</span><span class="p">(</span><span class="s2">&quot;Error! Assembly plan doesn&#39;t contain the reference!&quot;</span><span class="p">)</span>
+
+            <span class="s s-Atom">if</span> <span class="nf">len</span><span class="p">(</span><span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">assembly_plan</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="s s-Atom">:</span>
+
+                <span class="s s-Atom">raise</span> <span class="nv">ValueError</span><span class="p">(</span>
+
+                    <span class="s2">&quot;Error! More than one assembly plan entry matches the reference!&quot;</span>
+
+                <span class="p">)</span>
+
+            <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">parts</span> <span class="o">=</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">assembly_plan</span><span class="p">.</span><span class="s s-Atom">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">to_list</span><span class="p">()</span>  <span class="s s-Atom">#</span> <span class="s s-Atom">has</span> <span class="s s-Atom">only</span> <span class="s s-Atom">one</span> <span class="s s-Atom">line</span>
+
+    <span class="s s-Atom">def</span> <span class="nf">interpret_alignment</span><span class="p">(</span><span class="s s-Atom">self</span><span class="p">)</span><span class="s s-Atom">:</span>
+
+        <span class="s s-Atom">seq_matches</span> <span class="o">=</span> <span class="mi">0</span>  <span class="s s-Atom">#</span> <span class="s s-Atom">counts</span> <span class="s s-Atom">signed</span> <span class="s s-Atom">matches</span> <span class="s s-Atom">to</span> <span class="s s-Atom">reference</span> <span class="s s-Atom">for</span> <span class="s s-Atom">evaluating</span> <span class="s s-Atom">orientation</span>
+
+        <span class="s s-Atom">for</span> <span class="s s-Atom">index</span><span class="p">,</span> <span class="s s-Atom">row</span> <span class="s s-Atom">in</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">paf</span><span class="p">.</span><span class="nf">iterrows</span><span class="p">()</span><span class="s s-Atom">:</span>
+
+            <span class="s s-Atom">#</span> <span class="nv">May</span> <span class="s s-Atom">be</span> <span class="s s-Atom">useful</span> <span class="s s-Atom">to</span> <span class="s s-Atom">exclude</span> <span class="nn">reference</span><span class="p">:</span>
+
+            <span class="s s-Atom">#</span> <span class="s s-Atom">if</span> <span class="s s-Atom">row</span><span class="p">[</span><span class="s2">&quot;query_name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">reference</span><span class="p">.</span><span class="nn">id</span><span class="p">:</span>
+
+            <span class="s s-Atom">#</span>     <span class="s s-Atom">continue</span>
+
+            <span class="s s-Atom">part_type</span> <span class="o">=</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">evaluate_part_name</span><span class="p">(</span><span class="s s-Atom">row</span><span class="p">[</span><span class="s2">&quot;query_name&quot;</span><span class="p">])</span>
+
+            <span class="s s-Atom">location</span> <span class="o">=</span> <span class="nv">SeqFeature</span><span class="p">.</span><span class="nv">FeatureLocation</span><span class="p">(</span>
+
+                <span class="s s-Atom">row</span><span class="p">[</span><span class="s2">&quot;target_start&quot;</span><span class="p">],</span> <span class="s s-Atom">row</span><span class="p">[</span><span class="s2">&quot;target_end&quot;</span><span class="p">]</span>
+
+            <span class="p">)</span>
+
+            <span class="s s-Atom">feature</span> <span class="o">=</span> <span class="nv">SeqFeature</span><span class="p">.</span><span class="nv">SeqFeature</span><span class="p">(</span>
+
+                <span class="s s-Atom">location</span><span class="o">=</span><span class="s s-Atom">location</span><span class="p">,</span>
+
+                <span class="s s-Atom">type=</span><span class="s2">&quot;misc_feature&quot;</span><span class="p">,</span>
+
+                <span class="s s-Atom">id</span><span class="o">=</span><span class="s s-Atom">row</span><span class="p">[</span><span class="s2">&quot;query_name&quot;</span><span class="p">],</span>
+
+                <span class="s s-Atom">qualifiers=</span><span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="s s-Atom">:</span> <span class="s s-Atom">row</span><span class="p">[</span><span class="s2">&quot;query_name&quot;</span><span class="p">],</span> <span class="s2">&quot;ediacara&quot;</span><span class="s s-Atom">:</span> <span class="s s-Atom">part_type</span><span class="p">},</span>
+
+            <span class="p">)</span>
+
+            <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">assembly</span><span class="p">.</span><span class="s s-Atom">features</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="s s-Atom">feature</span><span class="p">)</span>
+
+            <span class="s s-Atom">if</span> <span class="s s-Atom">part_type</span> <span class="o">==</span> <span class="s2">&quot;reference&quot;</span><span class="s s-Atom">:</span>
+
+                <span class="s s-Atom">if</span> <span class="s s-Atom">row</span><span class="p">[</span><span class="s2">&quot;strand&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;+&quot;</span><span class="s s-Atom">:</span>
+
+                    <span class="s s-Atom">sign</span> <span class="o">=</span> <span class="mi">1</span>
+
+                <span class="nn">else</span><span class="p">:</span>
+
+                    <span class="s s-Atom">sign</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+                <span class="s s-Atom">seq_matches</span> <span class="s s-Atom">+=</span> <span class="s s-Atom">sign</span> <span class="o">*</span> <span class="nf">int</span><span class="p">(</span><span class="s s-Atom">row</span><span class="p">[</span><span class="s2">&quot;mapping_matches&quot;</span><span class="p">])</span>
+
+        <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">reverse_complement</span> <span class="o">=</span> <span class="nv">True</span> <span class="s s-Atom">if</span> <span class="s s-Atom">seq_matches</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="s s-Atom">else</span> <span class="nv">False</span>
+
+        <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">assembly_figure</span> <span class="o">=</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">plot_assembly</span><span class="p">()</span>
+
+    <span class="s s-Atom">def</span> <span class="nf">subset_paf</span><span class="p">(</span><span class="s s-Atom">self</span><span class="p">)</span><span class="s s-Atom">:</span>
+
+        <span class="s s-Atom">selected_columns</span> <span class="o">=</span> <span class="p">[</span>
+
+            <span class="s2">&quot;query_name&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;query_length&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;query_start&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;query_end&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;strand&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;target_start&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;target_end&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;mapping_matches&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;mapping_size&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;mapping_quality&quot;</span><span class="p">,</span>
+
+        <span class="p">]</span>
+
+        <span class="s s-Atom">paf_subset</span> <span class="o">=</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">paf</span><span class="p">[</span><span class="s s-Atom">selected_columns</span><span class="p">]</span>
+
+        <span class="s s-Atom">new_columnnames</span> <span class="o">=</span> <span class="p">[</span>
+
+            <span class="s2">&quot;Name&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;Length&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;Start&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;End&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;Strand&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;T Start&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;T End&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;Matches&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;Size&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;Quality&quot;</span><span class="p">,</span>
+
+        <span class="p">]</span>
+
+        <span class="s s-Atom">paf_subset</span><span class="p">.</span><span class="s s-Atom">columns</span> <span class="o">=</span> <span class="s s-Atom">new_columnnames</span>
+
+        <span class="s s-Atom">return</span> <span class="s s-Atom">paf_subset</span>
+
+    <span class="s s-Atom">def</span> <span class="nf">evaluate_part_name</span><span class="p">(</span><span class="s s-Atom">self</span><span class="p">,</span> <span class="s s-Atom">name</span><span class="p">)</span><span class="s s-Atom">:</span>
+
+        <span class="s s-Atom">if</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">assembly_plan</span> <span class="o">is</span> <span class="nv">None</span><span class="s s-Atom">:</span>
+
+            <span class="s s-Atom">return</span> <span class="s2">&quot;unknown_part&quot;</span>
+
+        <span class="s s-Atom">elif</span> <span class="s s-Atom">name</span> <span class="o">==</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">reference</span><span class="p">.</span><span class="nn">id</span><span class="p">:</span>
+
+            <span class="s s-Atom">return</span> <span class="s2">&quot;reference&quot;</span>
+
+        <span class="s s-Atom">elif</span> <span class="s s-Atom">name</span> <span class="s s-Atom">in</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="nn">parts</span><span class="p">:</span>
+
+            <span class="s s-Atom">return</span> <span class="s2">&quot;correct_part&quot;</span>
+
+        <span class="nn">else</span><span class="p">:</span>
+
+            <span class="s s-Atom">return</span> <span class="s2">&quot;wrong_part&quot;</span>
+
+    <span class="s s-Atom">def</span> <span class="nf">plot_assembly</span><span class="p">(</span><span class="s s-Atom">self</span><span class="p">)</span><span class="s s-Atom">:</span>
+
+        <span class="s s-Atom">graphic_record</span> <span class="o">=</span> <span class="nv">AssemblyTranslator</span><span class="p">().</span><span class="nf">translate_record</span><span class="p">(</span><span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">assembly</span><span class="p">)</span>
+
+        <span class="s s-Atom">ax</span><span class="p">,</span> <span class="k">_</span> <span class="o">=</span> <span class="s s-Atom">graphic_record</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="s s-Atom">figure_width</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="s s-Atom">strand_in_label_threshold</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+
+        <span class="s s-Atom">return</span> <span class="s s-Atom">ax</span>
+</code></pre></div>
+
+</details>
+<h2 id="classes">Classes</h2>
+<h3 id="assembly">Assembly</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Assembly</span><span class="p">(</span>
+    <span class="n">assembly_path</span><span class="p">,</span>
+    <span class="n">reference_path</span><span class="p">,</span>
+    <span class="n">alignment_path</span><span class="p">,</span>
+    <span class="n">assembly_plan</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">use_file_names_as_ids</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="s s-Atom">class</span> <span class="nv">Assembly</span><span class="s s-Atom">:</span>
+
+    <span class="s2">&quot;&quot;&quot;Compare an assembly sequence to parts and simulated reference.</span>
+
+<span class="s2">    **Parameters**</span>
+
+<span class="s2">    **assembly_path**</span>
+
+<span class="s2">    &gt; Path to the *de novo* assembled FASTA sequence file (`str`).</span>
+
+<span class="s2">    **reference**</span>
+
+<span class="s2">    &gt; Path to reference Genbank file (`str`).</span>
+
+<span class="s2">    **alignment**</span>
+
+<span class="s2">    &gt; Path (`str`) to minimap2 alignment PAF file, created with the `-cx asm5` options.</span>
+
+<span class="s2">    In this, the part and reference sequences are aligned against the de novo sequence.</span>
+
+<span class="s2">    **assembly_plan**</span>
+
+<span class="s2">    &gt; Path of assembly plan CSV file (DNA Cauldron output format, with header line).</span>
+
+<span class="s2">    May contain additional entries, the correct line is chosen by reference sequence ID.</span>
+
+<span class="s2">    **use_file_names_as_ids**</span>
+
+<span class="s2">    &gt; If True, uses the Genbank file name as sequence ID.</span>
+
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="s s-Atom">def</span> <span class="k">__</span><span class="nf">init__</span><span class="p">(</span>
+
+        <span class="s s-Atom">self</span><span class="p">,</span>
+
+        <span class="s s-Atom">assembly_path</span><span class="p">,</span>
+
+        <span class="s s-Atom">reference_path</span><span class="p">,</span>
+
+        <span class="s s-Atom">alignment_path</span><span class="p">,</span>
+
+        <span class="s s-Atom">assembly_plan</span><span class="o">=</span><span class="nv">None</span><span class="p">,</span>
+
+        <span class="s s-Atom">use_file_names_as_ids</span><span class="o">=</span><span class="nv">True</span><span class="p">,</span>
+
+    <span class="p">)</span><span class="s s-Atom">:</span>
+
+        <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">assembly</span> <span class="o">=</span> <span class="nv">SeqIO</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="s s-Atom">handle</span><span class="o">=</span><span class="s s-Atom">assembly_path</span><span class="p">,</span> <span class="s s-Atom">format=</span><span class="s2">&quot;fasta&quot;</span><span class="p">)</span>
+
+        <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">reference</span> <span class="o">=</span> <span class="nv">SeqIO</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="s s-Atom">handle</span><span class="o">=</span><span class="s s-Atom">reference_path</span><span class="p">,</span> <span class="s s-Atom">format=</span><span class="s2">&quot;genbank&quot;</span><span class="p">)</span>
+
+        <span class="s s-Atom">if</span> <span class="s s-Atom">use_file_names_as_ids:</span>
+
+            <span class="s s-Atom">basename</span> <span class="o">=</span> <span class="s s-Atom">os</span><span class="p">.</span><span class="s s-Atom">path</span><span class="p">.</span><span class="nf">basename</span><span class="p">(</span><span class="s s-Atom">reference_path</span><span class="p">)</span>
+
+            <span class="s s-Atom">basename_no_extension</span> <span class="o">=</span> <span class="s s-Atom">os</span><span class="p">.</span><span class="s s-Atom">path</span><span class="p">.</span><span class="nf">splitext</span><span class="p">(</span><span class="s s-Atom">basename</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">reference</span><span class="p">.</span><span class="s s-Atom">id</span> <span class="o">=</span> <span class="s s-Atom">basename_no_extension</span>
+
+        <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">paf</span> <span class="o">=</span> <span class="nv">ComparatorGroup</span><span class="p">.</span><span class="nf">load_paf</span><span class="p">(</span><span class="s s-Atom">alignment_path</span><span class="p">)</span>
+
+        <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">paf</span><span class="p">.</span><span class="s s-Atom">columns</span> <span class="o">=</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">paf</span><span class="p">.</span><span class="s s-Atom">columns</span><span class="p">[:-</span><span class="mi">1</span><span class="p">].</span><span class="nf">to_list</span><span class="p">()</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;CIGAR&quot;</span><span class="p">]</span>  <span class="s s-Atom">#</span> <span class="o">-</span><span class="mi">1</span> <span class="o">is</span> <span class="s s-Atom">last</span>
+
+        <span class="s s-Atom">if</span> <span class="s s-Atom">assembly_plan</span> <span class="o">is</span> <span class="nv">None</span><span class="s s-Atom">:</span>
+
+            <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">assembly_plan</span> <span class="o">=</span> <span class="nv">None</span>
+
+            <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">parts</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">has_assembly_plan</span> <span class="o">=</span> <span class="nv">False</span>
+
+        <span class="nn">else</span><span class="p">:</span>
+
+            <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">has_assembly_plan</span> <span class="o">=</span> <span class="nv">True</span>
+
+            <span class="s s-Atom">plan_df</span> <span class="o">=</span> <span class="s s-Atom">pd</span><span class="p">.</span><span class="nf">read_csv</span><span class="p">(</span><span class="s s-Atom">assembly_plan</span><span class="p">,</span> <span class="s s-Atom">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="s s-Atom">header</span><span class="o">=</span><span class="nv">None</span><span class="p">)</span>  <span class="s s-Atom">#</span> <span class="s s-Atom">skip</span> <span class="s s-Atom">header</span>
+
+            <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">assembly_plan</span> <span class="o">=</span> <span class="s s-Atom">plan_df</span><span class="p">[</span><span class="s s-Atom">plan_df</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">reference</span><span class="p">.</span><span class="s s-Atom">id</span><span class="p">]</span>
+
+            <span class="s s-Atom">if</span> <span class="nf">len</span><span class="p">(</span><span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">assembly_plan</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="s s-Atom">:</span>
+
+                <span class="s s-Atom">raise</span> <span class="nv">ValueError</span><span class="p">(</span><span class="s2">&quot;Error! Assembly plan doesn&#39;t contain the reference!&quot;</span><span class="p">)</span>
+
+            <span class="s s-Atom">if</span> <span class="nf">len</span><span class="p">(</span><span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">assembly_plan</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="s s-Atom">:</span>
+
+                <span class="s s-Atom">raise</span> <span class="nv">ValueError</span><span class="p">(</span>
+
+                    <span class="s2">&quot;Error! More than one assembly plan entry matches the reference!&quot;</span>
+
+                <span class="p">)</span>
+
+            <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">parts</span> <span class="o">=</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">assembly_plan</span><span class="p">.</span><span class="s s-Atom">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">to_list</span><span class="p">()</span>  <span class="s s-Atom">#</span> <span class="s s-Atom">has</span> <span class="s s-Atom">only</span> <span class="s s-Atom">one</span> <span class="s s-Atom">line</span>
+
+    <span class="s s-Atom">def</span> <span class="nf">interpret_alignment</span><span class="p">(</span><span class="s s-Atom">self</span><span class="p">)</span><span class="s s-Atom">:</span>
+
+        <span class="s s-Atom">seq_matches</span> <span class="o">=</span> <span class="mi">0</span>  <span class="s s-Atom">#</span> <span class="s s-Atom">counts</span> <span class="s s-Atom">signed</span> <span class="s s-Atom">matches</span> <span class="s s-Atom">to</span> <span class="s s-Atom">reference</span> <span class="s s-Atom">for</span> <span class="s s-Atom">evaluating</span> <span class="s s-Atom">orientation</span>
+
+        <span class="s s-Atom">for</span> <span class="s s-Atom">index</span><span class="p">,</span> <span class="s s-Atom">row</span> <span class="s s-Atom">in</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">paf</span><span class="p">.</span><span class="nf">iterrows</span><span class="p">()</span><span class="s s-Atom">:</span>
+
+            <span class="s s-Atom">#</span> <span class="nv">May</span> <span class="s s-Atom">be</span> <span class="s s-Atom">useful</span> <span class="s s-Atom">to</span> <span class="s s-Atom">exclude</span> <span class="nn">reference</span><span class="p">:</span>
+
+            <span class="s s-Atom">#</span> <span class="s s-Atom">if</span> <span class="s s-Atom">row</span><span class="p">[</span><span class="s2">&quot;query_name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">reference</span><span class="p">.</span><span class="nn">id</span><span class="p">:</span>
+
+            <span class="s s-Atom">#</span>     <span class="s s-Atom">continue</span>
+
+            <span class="s s-Atom">part_type</span> <span class="o">=</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">evaluate_part_name</span><span class="p">(</span><span class="s s-Atom">row</span><span class="p">[</span><span class="s2">&quot;query_name&quot;</span><span class="p">])</span>
+
+            <span class="s s-Atom">location</span> <span class="o">=</span> <span class="nv">SeqFeature</span><span class="p">.</span><span class="nv">FeatureLocation</span><span class="p">(</span>
+
+                <span class="s s-Atom">row</span><span class="p">[</span><span class="s2">&quot;target_start&quot;</span><span class="p">],</span> <span class="s s-Atom">row</span><span class="p">[</span><span class="s2">&quot;target_end&quot;</span><span class="p">]</span>
+
+            <span class="p">)</span>
+
+            <span class="s s-Atom">feature</span> <span class="o">=</span> <span class="nv">SeqFeature</span><span class="p">.</span><span class="nv">SeqFeature</span><span class="p">(</span>
+
+                <span class="s s-Atom">location</span><span class="o">=</span><span class="s s-Atom">location</span><span class="p">,</span>
+
+                <span class="s s-Atom">type=</span><span class="s2">&quot;misc_feature&quot;</span><span class="p">,</span>
+
+                <span class="s s-Atom">id</span><span class="o">=</span><span class="s s-Atom">row</span><span class="p">[</span><span class="s2">&quot;query_name&quot;</span><span class="p">],</span>
+
+                <span class="s s-Atom">qualifiers=</span><span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="s s-Atom">:</span> <span class="s s-Atom">row</span><span class="p">[</span><span class="s2">&quot;query_name&quot;</span><span class="p">],</span> <span class="s2">&quot;ediacara&quot;</span><span class="s s-Atom">:</span> <span class="s s-Atom">part_type</span><span class="p">},</span>
+
+            <span class="p">)</span>
+
+            <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">assembly</span><span class="p">.</span><span class="s s-Atom">features</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="s s-Atom">feature</span><span class="p">)</span>
+
+            <span class="s s-Atom">if</span> <span class="s s-Atom">part_type</span> <span class="o">==</span> <span class="s2">&quot;reference&quot;</span><span class="s s-Atom">:</span>
+
+                <span class="s s-Atom">if</span> <span class="s s-Atom">row</span><span class="p">[</span><span class="s2">&quot;strand&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;+&quot;</span><span class="s s-Atom">:</span>
+
+                    <span class="s s-Atom">sign</span> <span class="o">=</span> <span class="mi">1</span>
+
+                <span class="nn">else</span><span class="p">:</span>
+
+                    <span class="s s-Atom">sign</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+                <span class="s s-Atom">seq_matches</span> <span class="s s-Atom">+=</span> <span class="s s-Atom">sign</span> <span class="o">*</span> <span class="nf">int</span><span class="p">(</span><span class="s s-Atom">row</span><span class="p">[</span><span class="s2">&quot;mapping_matches&quot;</span><span class="p">])</span>
+
+        <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">reverse_complement</span> <span class="o">=</span> <span class="nv">True</span> <span class="s s-Atom">if</span> <span class="s s-Atom">seq_matches</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="s s-Atom">else</span> <span class="nv">False</span>
+
+        <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">assembly_figure</span> <span class="o">=</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">plot_assembly</span><span class="p">()</span>
+
+    <span class="s s-Atom">def</span> <span class="nf">subset_paf</span><span class="p">(</span><span class="s s-Atom">self</span><span class="p">)</span><span class="s s-Atom">:</span>
+
+        <span class="s s-Atom">selected_columns</span> <span class="o">=</span> <span class="p">[</span>
+
+            <span class="s2">&quot;query_name&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;query_length&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;query_start&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;query_end&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;strand&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;target_start&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;target_end&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;mapping_matches&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;mapping_size&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;mapping_quality&quot;</span><span class="p">,</span>
+
+        <span class="p">]</span>
+
+        <span class="s s-Atom">paf_subset</span> <span class="o">=</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">paf</span><span class="p">[</span><span class="s s-Atom">selected_columns</span><span class="p">]</span>
+
+        <span class="s s-Atom">new_columnnames</span> <span class="o">=</span> <span class="p">[</span>
+
+            <span class="s2">&quot;Name&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;Length&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;Start&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;End&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;Strand&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;T Start&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;T End&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;Matches&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;Size&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;Quality&quot;</span><span class="p">,</span>
+
+        <span class="p">]</span>
+
+        <span class="s s-Atom">paf_subset</span><span class="p">.</span><span class="s s-Atom">columns</span> <span class="o">=</span> <span class="s s-Atom">new_columnnames</span>
+
+        <span class="s s-Atom">return</span> <span class="s s-Atom">paf_subset</span>
+
+    <span class="s s-Atom">def</span> <span class="nf">evaluate_part_name</span><span class="p">(</span><span class="s s-Atom">self</span><span class="p">,</span> <span class="s s-Atom">name</span><span class="p">)</span><span class="s s-Atom">:</span>
+
+        <span class="s s-Atom">if</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">assembly_plan</span> <span class="o">is</span> <span class="nv">None</span><span class="s s-Atom">:</span>
+
+            <span class="s s-Atom">return</span> <span class="s2">&quot;unknown_part&quot;</span>
+
+        <span class="s s-Atom">elif</span> <span class="s s-Atom">name</span> <span class="o">==</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">reference</span><span class="p">.</span><span class="nn">id</span><span class="p">:</span>
+
+            <span class="s s-Atom">return</span> <span class="s2">&quot;reference&quot;</span>
+
+        <span class="s s-Atom">elif</span> <span class="s s-Atom">name</span> <span class="s s-Atom">in</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="nn">parts</span><span class="p">:</span>
+
+            <span class="s s-Atom">return</span> <span class="s2">&quot;correct_part&quot;</span>
+
+        <span class="nn">else</span><span class="p">:</span>
+
+            <span class="s s-Atom">return</span> <span class="s2">&quot;wrong_part&quot;</span>
+
+    <span class="s s-Atom">def</span> <span class="nf">plot_assembly</span><span class="p">(</span><span class="s s-Atom">self</span><span class="p">)</span><span class="s s-Atom">:</span>
+
+        <span class="s s-Atom">graphic_record</span> <span class="o">=</span> <span class="nv">AssemblyTranslator</span><span class="p">().</span><span class="nf">translate_record</span><span class="p">(</span><span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">assembly</span><span class="p">)</span>
+
+        <span class="s s-Atom">ax</span><span class="p">,</span> <span class="k">_</span> <span class="o">=</span> <span class="s s-Atom">graphic_record</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="s s-Atom">figure_width</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="s s-Atom">strand_in_label_threshold</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+
+        <span class="s s-Atom">return</span> <span class="s s-Atom">ax</span>
+</code></pre></div>
+
+</details>
+<hr />
+<h4 id="methods">Methods</h4>
+<h4 id="evaluate_part_name">evaluate_part_name</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">evaluate_part_name</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">name</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code>    <span class="nv">def</span> <span class="nv">evaluate_part_name</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">name</span><span class="ss">)</span>:
+
+        <span class="k">if</span> <span class="nv">self</span>.<span class="nv">assembly_plan</span> <span class="nv">is</span> <span class="nv">None</span>:
+
+            <span class="k">return</span> <span class="s2">&quot;</span><span class="s">unknown_part</span><span class="s2">&quot;</span>
+
+        <span class="nv">elif</span> <span class="nv">name</span> <span class="o">==</span> <span class="nv">self</span>.<span class="nv">reference</span>.<span class="nv">id</span>:
+
+            <span class="k">return</span> <span class="s2">&quot;</span><span class="s">reference</span><span class="s2">&quot;</span>
+
+        <span class="nv">elif</span> <span class="nv">name</span> <span class="nv">in</span> <span class="nv">self</span>.<span class="nv">parts</span>:
+
+            <span class="k">return</span> <span class="s2">&quot;</span><span class="s">correct_part</span><span class="s2">&quot;</span>
+
+        <span class="k">else</span>:
+
+            <span class="k">return</span> <span class="s2">&quot;</span><span class="s">wrong_part</span><span class="s2">&quot;</span>
+</code></pre></div>
+
+</details>
+<h4 id="interpret_alignment">interpret_alignment</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">interpret_alignment</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code>    <span class="nv">def</span> <span class="nv">interpret_alignment</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>:
+
+        <span class="nv">seq_matches</span> <span class="o">=</span> <span class="mi">0</span>  # <span class="nv">counts</span> <span class="nv">signed</span> <span class="nv">matches</span> <span class="nv">to</span> <span class="nv">reference</span> <span class="k">for</span> <span class="nv">evaluating</span> <span class="nv">orientation</span>
+
+        <span class="k">for</span> <span class="nv">index</span>, <span class="nv">row</span> <span class="nv">in</span> <span class="nv">self</span>.<span class="nv">paf</span>.<span class="nv">iterrows</span><span class="ss">()</span>:
+
+            # <span class="nv">May</span> <span class="nv">be</span> <span class="nv">useful</span> <span class="nv">to</span> <span class="nv">exclude</span> <span class="nv">reference</span>:
+
+            # <span class="k">if</span> <span class="nv">row</span>[<span class="s2">&quot;</span><span class="s">query_name</span><span class="s2">&quot;</span>] <span class="o">==</span> <span class="nv">self</span>.<span class="nv">reference</span>.<span class="nv">id</span>:
+
+            #     <span class="k">continue</span>
+
+            <span class="nv">part_type</span> <span class="o">=</span> <span class="nv">self</span>.<span class="nv">evaluate_part_name</span><span class="ss">(</span><span class="nv">row</span>[<span class="s2">&quot;</span><span class="s">query_name</span><span class="s2">&quot;</span>]<span class="ss">)</span>
+
+            <span class="nv">location</span> <span class="o">=</span> <span class="nv">SeqFeature</span>.<span class="nv">FeatureLocation</span><span class="ss">(</span>
+
+                <span class="nv">row</span>[<span class="s2">&quot;</span><span class="s">target_start</span><span class="s2">&quot;</span>], <span class="nv">row</span>[<span class="s2">&quot;</span><span class="s">target_end</span><span class="s2">&quot;</span>]
+
+            <span class="ss">)</span>
+
+            <span class="nv">feature</span> <span class="o">=</span> <span class="nv">SeqFeature</span>.<span class="nv">SeqFeature</span><span class="ss">(</span>
+
+                <span class="nv">location</span><span class="o">=</span><span class="nv">location</span>,
+
+                <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">misc_feature</span><span class="s2">&quot;</span>,
+
+                <span class="nv">id</span><span class="o">=</span><span class="nv">row</span>[<span class="s2">&quot;</span><span class="s">query_name</span><span class="s2">&quot;</span>],
+
+                <span class="nv">qualifiers</span><span class="o">=</span>{<span class="s2">&quot;</span><span class="s">label</span><span class="s2">&quot;</span>: <span class="nv">row</span>[<span class="s2">&quot;</span><span class="s">query_name</span><span class="s2">&quot;</span>], <span class="s2">&quot;</span><span class="s">ediacara</span><span class="s2">&quot;</span>: <span class="nv">part_type</span>},
+
+            <span class="ss">)</span>
+
+            <span class="nv">self</span>.<span class="nv">assembly</span>.<span class="nv">features</span>.<span class="nv">append</span><span class="ss">(</span><span class="nv">feature</span><span class="ss">)</span>
+
+            <span class="k">if</span> <span class="nv">part_type</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">reference</span><span class="s2">&quot;</span>:
+
+                <span class="k">if</span> <span class="nv">row</span>[<span class="s2">&quot;</span><span class="s">strand</span><span class="s2">&quot;</span>] <span class="o">==</span> <span class="s2">&quot;</span><span class="s">+</span><span class="s2">&quot;</span>:
+
+                    <span class="nv">sign</span> <span class="o">=</span> <span class="mi">1</span>
+
+                <span class="k">else</span>:
+
+                    <span class="nv">sign</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+                <span class="nv">seq_matches</span> <span class="o">+=</span> <span class="nv">sign</span> <span class="o">*</span> <span class="nv">int</span><span class="ss">(</span><span class="nv">row</span>[<span class="s2">&quot;</span><span class="s">mapping_matches</span><span class="s2">&quot;</span>]<span class="ss">)</span>
+
+        <span class="nv">self</span>.<span class="nv">reverse_complement</span> <span class="o">=</span> <span class="nv">True</span> <span class="k">if</span> <span class="nv">seq_matches</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="nv">False</span>
+
+        <span class="nv">self</span>.<span class="nv">assembly_figure</span> <span class="o">=</span> <span class="nv">self</span>.<span class="nv">plot_assembly</span><span class="ss">()</span>
+</code></pre></div>
+
+</details>
+<h4 id="plot_assembly">plot_assembly</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">plot_assembly</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code>    <span class="nv">def</span> <span class="nv">plot_assembly</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>:
+
+        <span class="nv">graphic_record</span> <span class="o">=</span> <span class="nv">AssemblyTranslator</span><span class="ss">()</span>.<span class="nv">translate_record</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">assembly</span><span class="ss">)</span>
+
+        <span class="nv">ax</span>, <span class="nv">_</span> <span class="o">=</span> <span class="nv">graphic_record</span>.<span class="nv">plot</span><span class="ss">(</span><span class="nv">figure_width</span><span class="o">=</span><span class="mi">8</span>, <span class="nv">strand_in_label_threshold</span><span class="o">=</span><span class="mi">7</span><span class="ss">)</span>
+
+        <span class="k">return</span> <span class="nv">ax</span>
+</code></pre></div>
+
+</details>
+<h4 id="subset_paf">subset_paf</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">subset_paf</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">subset_paf</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">selected_columns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n"></span>
+
+<span class="n">            &quot;query_name&quot;,</span>
+
+<span class="n">            &quot;query_length&quot;,</span>
+
+<span class="n">            &quot;query_start&quot;,</span>
+
+<span class="n">            &quot;query_end&quot;,</span>
+
+<span class="n">            &quot;strand&quot;,</span>
+
+<span class="n">            &quot;target_start&quot;,</span>
+
+<span class="n">            &quot;target_end&quot;,</span>
+
+<span class="n">            &quot;mapping_matches&quot;,</span>
+
+<span class="n">            &quot;mapping_size&quot;,</span>
+
+<span class="n">            &quot;mapping_quality&quot;,</span>
+
+<span class="n">        </span><span class="o">]</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">paf_subset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">paf</span><span class="o">[</span><span class="n">selected_columns</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">new_columnnames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n"></span>
+
+<span class="n">            &quot;Name&quot;,</span>
+
+<span class="n">            &quot;Length&quot;,</span>
+
+<span class="n">            &quot;Start&quot;,</span>
+
+<span class="n">            &quot;End&quot;,</span>
+
+<span class="n">            &quot;Strand&quot;,</span>
+
+<span class="n">            &quot;T Start&quot;,</span>
+
+<span class="n">            &quot;T End&quot;,</span>
+
+<span class="n">            &quot;Matches&quot;,</span>
+
+<span class="n">            &quot;Size&quot;,</span>
+
+<span class="n">            &quot;Quality&quot;,</span>
+
+<span class="n">        </span><span class="o">]</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">paf_subset</span><span class="p">.</span><span class="n">columns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new_columnnames</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">paf_subset</span><span class="w"></span>
+</code></pre></div>
+
+</details>
+<h3 id="assemblybatch">AssemblyBatch</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">AssemblyBatch</span><span class="p">(</span>
+    <span class="n">assemblies</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Unnamed&#39;</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="n">class</span> <span class="n">AssemblyBatch</span><span class="o">:</span>
+
+    <span class="s2">&quot;</span><span class="se">&quot;&quot;</span><span class="s2">Batch of Assembly class instances.</span>
+
+<span class="s2">    **Parameters**</span>
+
+<span class="s2">    **assemblies**</span>
+
+<span class="s2">    &gt; List of `Assembly` instances.</span>
+
+<span class="s2">    **name**</span>
+
+<span class="s2">    &gt; Name of the assembly analysis project (`str`).</span>
+
+<span class="s2">    </span><span class="se">&quot;&quot;</span><span class="s2">&quot;</span>
+
+    <span class="n">def</span> <span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">assemblies</span><span class="p">,</span> <span class="k">name</span><span class="o">=</span><span class="s2">&quot;Unnamed&quot;</span><span class="p">)</span><span class="o">:</span>
+
+        <span class="n">self</span><span class="p">.</span><span class="n">assemblies</span> <span class="o">=</span> <span class="n">assemblies</span>
+
+        <span class="n">self</span><span class="p">.</span><span class="k">name</span> <span class="o">=</span> <span class="k">name</span>
+
+    <span class="n">def</span> <span class="n">perform_all_interpretations_in_group</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="o">:</span>
+
+        <span class="k">for</span> <span class="n">assembly</span> <span class="k">in</span> <span class="n">self</span><span class="p">.</span><span class="n">assemblies</span><span class="o">:</span>
+
+            <span class="n">assembly</span><span class="p">.</span><span class="n">interpret_alignment</span><span class="p">()</span>
+</code></pre></div>
+
+</details>
+<hr />
+<h4 id="methods_1">Methods</h4>
+<h4 id="perform_all_interpretations_in_group">perform_all_interpretations_in_group</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">perform_all_interpretations_in_group</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code>    <span class="nv">def</span> <span class="nv">perform_all_interpretations_in_group</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>:
+
+        <span class="k">for</span> <span class="nv">assembly</span> <span class="nv">in</span> <span class="nv">self</span>.<span class="nv">assemblies</span>:
+
+            <span class="nv">assembly</span>.<span class="nv">interpret_alignment</span><span class="ss">()</span>
+</code></pre></div>
+
+</details>
+<h3 id="assemblytranslator">AssemblyTranslator</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">AssemblyTranslator</span><span class="p">(</span>
+    <span class="n">features_filters</span><span class="o">=</span><span class="p">(),</span>
+    <span class="n">features_properties</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">AssemblyTranslator</span><span class="p">(</span><span class="n">dna_features_viewer</span><span class="p">.</span><span class="n">BiopythonTranslator</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">    </span><span class="ss">&quot;&quot;&quot;Custom translator to display only the aligned parts.&quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">compute_feature_color</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">feature</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ediacara_qualifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;ediacara&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">feature</span><span class="p">.</span><span class="n">qualifiers</span><span class="o">[</span><span class="n">ediacara_qualifier</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">&quot;wrong_part&quot;</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="ss">&quot;#f5685e&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">elif</span><span class="w"> </span><span class="n">feature</span><span class="p">.</span><span class="n">qualifiers</span><span class="o">[</span><span class="n">ediacara_qualifier</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">&quot;correct_part&quot;</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="ss">&quot;#79d300&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">elif</span><span class="w"> </span><span class="n">feature</span><span class="p">.</span><span class="n">qualifiers</span><span class="o">[</span><span class="n">ediacara_qualifier</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">&quot;unknown_part&quot;</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="ss">&quot;#FFFFFF&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">elif</span><span class="w"> </span><span class="n">feature</span><span class="p">.</span><span class="n">qualifiers</span><span class="o">[</span><span class="n">ediacara_qualifier</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">&quot;reference&quot;</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="ss">&quot;#d3d3d3&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="ss">&quot;#7245dc&quot;</span><span class="w">  </span><span class="err">#</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="n">dna_features_viewer</span><span class="w"> </span><span class="n">colour</span><span class="w"></span>
+</code></pre></div>
+
+</details>
+<hr />
+<h4 id="ancestors-in-mro">Ancestors (in MRO)</h4>
+<ul>
+<li>dna_features_viewer.BiopythonTranslator.BiopythonTranslator.BiopythonTranslator</li>
+<li>dna_features_viewer.BiopythonTranslator.BiopythonTranslatorBase.BiopythonTranslatorBase</li>
+</ul>
+<h4 id="class-variables">Class variables</h4>
+<div class="codehilite"><pre><span></span><code><span class="n">default_feature_color</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">graphic_record_parameters</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">ignored_features_types</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">label_fields</span>
+</code></pre></div>
+
+<h4 id="static-methods">Static methods</h4>
+<h4 id="quick_class_plot">quick_class_plot</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">quick_class_plot</span><span class="p">(</span>
+    <span class="n">record</span><span class="p">,</span>
+    <span class="n">figure_width</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Allows super quick and dirty plotting of Biopython records.</p>
+<p>This is really meant for use in a Jupyter/Ipython notebook with
+the "%matplotlib inline" setting.</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>from dna_features_viewer import BiopythonTranslator
+BiopythonTranslator.quick_plot(my_record)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code>    <span class="nd">@classmethod</span>
+
+    <span class="k">def</span> <span class="nf">quick_class_plot</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">record</span><span class="p">,</span> <span class="n">figure_width</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Allows super quick and dirty plotting of Biopython records.</span>
+
+<span class="sd">        This is really meant for use in a Jupyter/Ipython notebook with</span>
+
+<span class="sd">        the &quot;%matplotlib inline&quot; setting.</span>
+
+<span class="sd">        &gt;&gt;&gt; from dna_features_viewer import BiopythonTranslator</span>
+
+<span class="sd">        &gt;&gt;&gt; BiopythonTranslator.quick_plot(my_record)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">graphic_record</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span><span class="o">.</span><span class="n">translate_record</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+
+        <span class="n">ax</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">graphic_record</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figure_width</span><span class="o">=</span><span class="n">figure_width</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">ax</span>
+</code></pre></div>
+
+</details>
+<h4 id="methods_2">Methods</h4>
+<h4 id="compute_feature_box_color">compute_feature_box_color</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">compute_feature_box_color</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">feature</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Compute a box_color for this feature.</p>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code>    <span class="nv">def</span> <span class="nv">compute_feature_box_color</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">feature</span><span class="ss">)</span>:
+
+        <span class="s2">&quot;&quot;&quot;</span><span class="s">Compute a box_color for this feature.</span><span class="s2">&quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="s">auto</span><span class="s2">&quot;</span>
+</code></pre></div>
+
+</details>
+<h4 id="compute_feature_box_linewidth">compute_feature_box_linewidth</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">compute_feature_box_linewidth</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">feature</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Compute a box_linewidth for this feature.</p>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code>    <span class="nv">def</span> <span class="nv">compute_feature_box_linewidth</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">feature</span><span class="ss">)</span>:
+
+        <span class="s2">&quot;&quot;&quot;</span><span class="s">Compute a box_linewidth for this feature.</span><span class="s2">&quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="mi">0</span>.<span class="mi">3</span>
+</code></pre></div>
+
+</details>
+<h4 id="compute_feature_color">compute_feature_color</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">compute_feature_color</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">feature</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Compute a color for this feature.</p>
+<p>If the feature has a <code>color</code> qualifier it will be used. Otherwise,
+the classe's <code>default_feature_color</code> is used.</p>
+<p>To change the behaviour, create a subclass of <code>BiopythonTranslator</code>
+and overwrite this method.</p>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">compute_feature_color</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">feature</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ediacara_qualifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;ediacara&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">feature</span><span class="p">.</span><span class="n">qualifiers</span><span class="o">[</span><span class="n">ediacara_qualifier</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">&quot;wrong_part&quot;</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="ss">&quot;#f5685e&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">elif</span><span class="w"> </span><span class="n">feature</span><span class="p">.</span><span class="n">qualifiers</span><span class="o">[</span><span class="n">ediacara_qualifier</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">&quot;correct_part&quot;</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="ss">&quot;#79d300&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">elif</span><span class="w"> </span><span class="n">feature</span><span class="p">.</span><span class="n">qualifiers</span><span class="o">[</span><span class="n">ediacara_qualifier</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">&quot;unknown_part&quot;</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="ss">&quot;#FFFFFF&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">elif</span><span class="w"> </span><span class="n">feature</span><span class="p">.</span><span class="n">qualifiers</span><span class="o">[</span><span class="n">ediacara_qualifier</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">&quot;reference&quot;</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="ss">&quot;#d3d3d3&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="ss">&quot;#7245dc&quot;</span><span class="w">  </span><span class="err">#</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="n">dna_features_viewer</span><span class="w"> </span><span class="n">colour</span><span class="w"></span>
+</code></pre></div>
+
+</details>
+<h4 id="compute_feature_fontdict">compute_feature_fontdict</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">compute_feature_fontdict</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">feature</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Compute a font dict for this feature.</p>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code>    <span class="nv">def</span> <span class="nv">compute_feature_fontdict</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">feature</span><span class="ss">)</span>:
+
+        <span class="s2">&quot;&quot;&quot;</span><span class="s">Compute a font dict for this feature.</span><span class="s2">&quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="nv">None</span>
+</code></pre></div>
+
+</details>
+<h4 id="compute_feature_html">compute_feature_html</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">compute_feature_html</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">feature</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Gets the 'label' of the feature.</p>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code>    <span class="nv">def</span> <span class="nv">compute_feature_html</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">feature</span><span class="ss">)</span>:
+
+        <span class="s2">&quot;&quot;&quot;</span><span class="s">Gets the &#39;label&#39; of the feature.</span><span class="s2">&quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="nv">self</span>.<span class="nv">compute_feature_label</span><span class="ss">(</span><span class="nv">feature</span><span class="ss">)</span>
+</code></pre></div>
+
+</details>
+<h4 id="compute_feature_label">compute_feature_label</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">compute_feature_label</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">feature</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Compute the label of the feature.</p>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">compute_feature_label</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">feature</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot;Compute the label of the feature.&quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">feature</span><span class="p">.</span><span class="n">type</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="nl">label_fields</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">feature</span><span class="p">.</span><span class="n">qualifiers</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="nf">len</span><span class="p">(</span><span class="n">feature</span><span class="p">.</span><span class="n">qualifiers</span><span class="o">[</span><span class="n">key</span><span class="o">]</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">feature</span><span class="p">.</span><span class="n">qualifiers</span><span class="o">[</span><span class="n">key</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">                </span><span class="k">break</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;|&quot;</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="n">label</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">label</span><span class="w"></span>
+</code></pre></div>
+
+</details>
+<h4 id="compute_feature_label_link_color">compute_feature_label_link_color</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">compute_feature_label_link_color</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">feature</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Compute the color of the line linking the label to its feature.</p>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code>    <span class="nv">def</span> <span class="nv">compute_feature_label_link_color</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">feature</span><span class="ss">)</span>:
+
+        <span class="s2">&quot;&quot;&quot;</span><span class="s">Compute the color of the line linking the label to its feature.</span><span class="s2">&quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="s">black</span><span class="s2">&quot;</span>
+</code></pre></div>
+
+</details>
+<h4 id="compute_feature_legend_text">compute_feature_legend_text</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">compute_feature_legend_text</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">feature</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code>    <span class="nv">def</span> <span class="nv">compute_feature_legend_text</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">feature</span><span class="ss">)</span>:
+
+        <span class="k">return</span> <span class="nv">None</span>
+</code></pre></div>
+
+</details>
+<h4 id="compute_feature_linewidth">compute_feature_linewidth</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">compute_feature_linewidth</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">feature</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Compute the edge width of the feature's arrow/rectangle.</p>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code>    <span class="nv">def</span> <span class="nv">compute_feature_linewidth</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">feature</span><span class="ss">)</span>:
+
+        <span class="s2">&quot;&quot;&quot;</span><span class="s">Compute the edge width of the feature&#39;s arrow/rectangle.</span><span class="s2">&quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="mi">1</span>.<span class="mi">0</span>
+</code></pre></div>
+
+</details>
+<h4 id="compute_filtered_features">compute_filtered_features</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">compute_filtered_features</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">features</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Return the list of features minus the ignored ones.</p>
+<p>By the method keeps any feature whose type is not in
+ignored_features_types and for which all filter(f) pass.</p>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code>    <span class="nv">def</span> <span class="nv">compute_filtered_features</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">features</span><span class="ss">)</span>:
+
+        <span class="s2">&quot;&quot;&quot;</span><span class="s">Return the list of features minus the ignored ones.</span>
+
+        <span class="nv">By</span> <span class="nv">the</span> <span class="nv">method</span> <span class="nv">keeps</span> <span class="nv">any</span> <span class="nv">feature</span> <span class="nv">whose</span> <span class="nv">type</span> <span class="nv">is</span> <span class="nv">not</span> <span class="nv">in</span>
+
+        <span class="nv">ignored_features_types</span> <span class="nv">and</span> <span class="k">for</span> <span class="nv">which</span> <span class="nv">all</span> <span class="nv">filter</span><span class="ss">(</span><span class="nv">f</span><span class="ss">)</span> <span class="nv">pass</span>.
+
+        <span class="s2">&quot;&quot;&quot;</span>
+
+        <span class="k">return</span> [
+
+            <span class="nv">f</span>
+
+            <span class="k">for</span> <span class="nv">f</span> <span class="nv">in</span> <span class="nv">features</span>
+
+            <span class="k">if</span> <span class="nv">all</span><span class="ss">(</span>[<span class="nv">fl</span><span class="ss">(</span><span class="nv">f</span><span class="ss">)</span> <span class="k">for</span> <span class="nv">fl</span> <span class="nv">in</span> <span class="nv">self</span>.<span class="nv">features_filters</span>]<span class="ss">)</span>
+
+            <span class="nv">and</span> <span class="nv">f</span>.<span class="nv">type</span> <span class="nv">not</span> <span class="nv">in</span> <span class="nv">self</span>.<span class="nv">ignored_features_types</span>
+
+        ]
+</code></pre></div>
+
+</details>
+<h4 id="quick_plot">quick_plot</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">quick_plot</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">record</span><span class="p">,</span>
+    <span class="n">figure_width</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Allows super quick and dirty plotting of Biopython records.</p>
+<p>This is really meant for use in a Jupyter/Ipython notebook with
+the "%matplotlib inline" setting.</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>from dna_features_viewer import BiopythonTranslator
+BiopythonTranslator.quick_plot(my_record)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code>    <span class="k">def</span> <span class="nf">quick_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record</span><span class="p">,</span> <span class="n">figure_width</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Allows super quick and dirty plotting of Biopython records.</span>
+
+<span class="sd">        This is really meant for use in a Jupyter/Ipython notebook with</span>
+
+<span class="sd">        the &quot;%matplotlib inline&quot; setting.</span>
+
+<span class="sd">        &gt;&gt;&gt; from dna_features_viewer import BiopythonTranslator</span>
+
+<span class="sd">        &gt;&gt;&gt; BiopythonTranslator.quick_plot(my_record)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">graphic_record</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">translate_record</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+
+        <span class="n">ax</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">graphic_record</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figure_width</span><span class="o">=</span><span class="n">figure_width</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">ax</span>
+</code></pre></div>
+
+</details>
+<h4 id="translate_feature">translate_feature</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">translate_feature</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">feature</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Translate a Biopython feature into a Dna Features Viewer feature.</p>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code>    <span class="nv">def</span> <span class="nv">translate_feature</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">feature</span><span class="ss">)</span>:
+
+        <span class="s2">&quot;&quot;&quot;</span><span class="s">Translate a Biopython feature into a Dna Features Viewer feature.</span><span class="s2">&quot;&quot;&quot;</span>
+
+        <span class="nv">properties</span> <span class="o">=</span> <span class="nv">dict</span><span class="ss">(</span>
+
+            <span class="nv">label</span><span class="o">=</span><span class="nv">self</span>.<span class="nv">compute_feature_label</span><span class="ss">(</span><span class="nv">feature</span><span class="ss">)</span>,
+
+            <span class="nv">color</span><span class="o">=</span><span class="nv">self</span>.<span class="nv">compute_feature_color</span><span class="ss">(</span><span class="nv">feature</span><span class="ss">)</span>,
+
+            <span class="nv">html</span><span class="o">=</span><span class="nv">self</span>.<span class="nv">compute_feature_html</span><span class="ss">(</span><span class="nv">feature</span><span class="ss">)</span>,
+
+            <span class="nv">fontdict</span><span class="o">=</span><span class="nv">self</span>.<span class="nv">compute_feature_fontdict</span><span class="ss">(</span><span class="nv">feature</span><span class="ss">)</span>,
+
+            <span class="nv">box_linewidth</span><span class="o">=</span><span class="nv">self</span>.<span class="nv">compute_feature_box_linewidth</span><span class="ss">(</span><span class="nv">feature</span><span class="ss">)</span>,
+
+            <span class="nv">box_color</span><span class="o">=</span><span class="nv">self</span>.<span class="nv">compute_feature_box_color</span><span class="ss">(</span><span class="nv">feature</span><span class="ss">)</span>,
+
+            <span class="nv">linewidth</span><span class="o">=</span><span class="nv">self</span>.<span class="nv">compute_feature_linewidth</span><span class="ss">(</span><span class="nv">feature</span><span class="ss">)</span>,
+
+            <span class="nv">label_link_color</span><span class="o">=</span><span class="nv">self</span>.<span class="nv">compute_feature_label_link_color</span><span class="ss">(</span><span class="nv">feature</span><span class="ss">)</span>,
+
+            <span class="nv">legend_text</span><span class="o">=</span><span class="nv">self</span>.<span class="nv">compute_feature_legend_text</span><span class="ss">(</span><span class="nv">feature</span><span class="ss">)</span>,
+
+        <span class="ss">)</span>
+
+        <span class="k">if</span> <span class="nv">self</span>.<span class="nv">features_properties</span> <span class="nv">is</span> <span class="nv">not</span> <span class="nv">None</span>:
+
+            <span class="nv">other_properties</span> <span class="o">=</span> <span class="nv">self</span>.<span class="nv">features_properties</span>
+
+            <span class="k">if</span> <span class="nv">hasattr</span><span class="ss">(</span><span class="nv">other_properties</span>, <span class="s2">&quot;</span><span class="s">__call__</span><span class="s2">&quot;</span><span class="ss">)</span>:
+
+                <span class="nv">other_properties</span> <span class="o">=</span> <span class="nv">other_properties</span><span class="ss">(</span><span class="nv">feature</span><span class="ss">)</span>
+
+            <span class="nv">properties</span>.<span class="nv">update</span><span class="ss">(</span><span class="nv">other_properties</span><span class="ss">)</span>
+
+        <span class="k">return</span> <span class="nv">GraphicFeature</span><span class="ss">(</span>
+
+            <span class="nv">start</span><span class="o">=</span><span class="nv">feature</span>.<span class="nv">location</span>.<span class="nv">start</span>,
+
+            <span class="k">end</span><span class="o">=</span><span class="nv">feature</span>.<span class="nv">location</span>.<span class="k">end</span>,
+
+            <span class="nv">strand</span><span class="o">=</span><span class="nv">feature</span>.<span class="nv">location</span>.<span class="nv">strand</span>,
+
+            <span class="o">**</span><span class="nv">properties</span>
+
+        <span class="ss">)</span>
+</code></pre></div>
+
+</details>
+<h4 id="translate_record">translate_record</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">translate_record</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">record</span><span class="p">,</span>
+    <span class="n">record_class</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">filetype</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Create a new GraphicRecord from a BioPython Record object.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>record</td>
+<td>None</td>
+<td>A BioPython Record object or the path to a Genbank or a GFF file.</td>
+<td>None</td>
+</tr>
+<tr>
+<td>record_class</td>
+<td>None</td>
+<td>The graphic record class to use, e.g. GraphicRecord (default) or</td>
+<td></td>
+</tr>
+<tr>
+<td>CircularGraphicRecord. Strings 'circular' and 'linear' can also be</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>provided.</td>
+<td>None</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>filetype</td>
+<td>None</td>
+<td>Used only when a Genbank or a GFF file is provided; one of "genbank"</td>
+<td></td>
+</tr>
+<tr>
+<td>or "gff" to be used. Default None infers from file extension.</td>
+<td>None</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">translate_record</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">record</span><span class="p">,</span><span class="w"> </span><span class="n">record_class</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">filetype</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot;Create a new GraphicRecord from a BioPython Record object.</span>
+
+<span class="ss">        Parameters</span>
+
+<span class="ss">        ----------</span>
+
+<span class="ss">        record</span>
+
+<span class="ss">          A BioPython Record object or the path to a Genbank or a GFF file.</span>
+
+<span class="ss">        record_class</span>
+
+<span class="ss">          The graphic record class to use, e.g. GraphicRecord (default) or</span>
+
+<span class="ss">          CircularGraphicRecord. Strings &#39;circular&#39; and &#39;linear&#39; can also be</span>
+
+<span class="ss">          provided.</span>
+
+<span class="ss">        filetype</span>
+
+<span class="ss">          Used only when a Genbank or a GFF file is provided; one of &quot;</span><span class="n">genbank</span><span class="ss">&quot;</span>
+
+<span class="ss">          or &quot;</span><span class="n">gff</span><span class="ss">&quot; to be used. Default None infers from file extension.</span>
+
+<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">classes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+
+<span class="w">            </span><span class="ss">&quot;linear&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">GraphicRecord</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="ss">&quot;circular&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">CircularGraphicRecord</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">None</span><span class="err">:</span><span class="w"> </span><span class="n">GraphicRecord</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="err">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">record_class</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nl">classes</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">record_class</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">classes</span><span class="o">[</span><span class="n">record_class</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">record</span><span class="p">,</span><span class="w"> </span><span class="nf">str</span><span class="p">)</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">hasattr</span><span class="p">(</span><span class="n">record</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;read&quot;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">record</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">load_record</span><span class="p">(</span><span class="n">record</span><span class="p">,</span><span class="w"> </span><span class="n">filetype</span><span class="o">=</span><span class="n">filetype</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">filtered_features</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">compute_filtered_features</span><span class="p">(</span><span class="n">record</span><span class="p">.</span><span class="n">features</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">record_class</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">sequence_length</span><span class="o">=</span><span class="nf">len</span><span class="p">(</span><span class="n">record</span><span class="p">),</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">sequence</span><span class="o">=</span><span class="nf">str</span><span class="p">(</span><span class="n">record</span><span class="p">.</span><span class="n">seq</span><span class="p">),</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">features</span><span class="o">=[</span><span class="n"></span>
+
+<span class="n">                self.translate_feature(feature)</span>
+
+<span class="n">                for feature in filtered_features</span>
+
+<span class="n">                if feature.location is not None</span>
+
+<span class="n">            </span><span class="o">]</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="o">**</span><span class="n">self</span><span class="p">.</span><span class="n">graphic_record_parameters</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+
+</details>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../.." title="Home" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Home
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../Comparator/" title="Comparator" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Comparator
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Powered by
+        <a href="http://timothycrosley.github.io/portray">portray.</a>
+        You too can
+        <a href="http://timothycrosley.github.io/portray">
+          portray</a>
+        your Python project well using automatic documentation.
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.4fc53ad4.min.js"></script>
+      
+    
+  </body>
+</html>
