@@ -16,9 +16,9 @@ Ediacara helps interpreting sequencing data of assembled DNA constructs (plasmid
 pip install --upgrade git+https://github.com/Edinburgh-Genome-Foundry/Ediacara.git@main
 ```
 
-Using Ediacara requires the plasmid reference sequences (Genbank), the alignments in [PAF format](https://lh3.github.io/minimap2/minimap2.html#10), and a TSV file of coverage (depth) counts. Optionally, the user can also specify consensus (or *de novo* assembly) files that will be compared with the references.
+## Usage
 
-[Badread](https://github.com/rrwick/Badread) is a long read simulator that generates fastq files from reference sequences.
+Using Ediacara requires the plasmid reference sequences (Genbank), the alignments in [PAF format](https://lh3.github.io/minimap2/minimap2.html#10), and a TSV file of coverage (depth) counts. Optionally, the user can also specify consensus (or *de novo* assembly) files that will be compared with the references.
 
 [Minimap2](https://lh3.github.io/minimap2/) can create SAM or PAF alignments from fastq and reference fasta files.
 [`paftools.js`](https://github.com/lh3/minimap2/blob/master/misc/README.md) can convert from SAM to PAF.
@@ -26,12 +26,12 @@ The TSV file is the output of `samtools depth -aa`.
 
 [Canu](https://canu.readthedocs.io) can create an assembly file from filtered FASTQ reads that align best to the reference.
 
-## Usage
+If we don't have sequencing data, [Badread](https://github.com/rrwick/Badread) can be used to simulate fastq files from reference sequences.
 
 An example for creating alignments in the terminal, for a reference named `ABC_1`:
 
 ```bash
-# badread simulate --reference ABC_1.fa --quantity 50x --length 1500,500 > ABC_1.fastq
+# badread simulate --reference ABC_1.fa --quantity 100x --length 5000,500 > ABC_1.fastq
 minimap2 -a ABC_1.fa ABC_1.fastq > ABC_1.sam
 samtools sort -O sam -T sample.sort -o ABC_1_sorted.sam ABC_1.sam
 samtools depth -aa ABC_1_sorted.sam > ABC_1.tsv
