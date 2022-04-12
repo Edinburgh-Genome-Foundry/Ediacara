@@ -123,8 +123,21 @@ def write_sequencinggroup_report(target, sequencinggroup):
                 )
             )
 
+            def tr_modifier_for_vcf_table(tr):
+                tds = list(tr.find_all("td"))
+                if len(tds) == 0:
+                    return
+                true_positive = tds[-1]  # last column shows call
+                if true_positive.text == "1":
+                    add_css_class(tr, "negative")
+                else:
+                    add_css_class(tr, "positive")
+
             comparator.vcf_table_html = dataframe_to_html(
                 vcf_table, extra_classes=("definition",)
+            )
+            comparator.vcf_table_html = style_table_rows(
+                comparator.vcf_table_html, tr_modifier_for_vcf_table
             )
 
             if hasattr(comparator, "is_comparison_successful"):

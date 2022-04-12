@@ -418,6 +418,7 @@ class Comparator:
         vcf_table = pandas.DataFrame(
             vcf_dict, columns=["LOC", "REF", "ALT", "TYPE", "DP", "RO", "AO"]
         )  # also set the order of the columns
+        vcf_table["T"] = 1
 
         return vcf_table
 
