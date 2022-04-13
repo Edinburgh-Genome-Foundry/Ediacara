@@ -419,6 +419,12 @@ class Comparator:
             vcf_dict, columns=["LOC", "REF", "ALT", "TYPE", "DP", "RO", "AO"]
         )  # also set the order of the columns
         vcf_table["T"] = 1
+        for index, row in vcf_table.iterrows():
+            # mutations at repeats were shown to be systemic sequencing errors, and can be ignored
+            # match 5 consecutive repeats
+            result = re.search(r"((\w)\2{4,})", row["REF"])
+            if result is not None:
+                vcf_table.loc[index, "T"] = 0
 
         return vcf_table
 

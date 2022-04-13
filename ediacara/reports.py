@@ -130,8 +130,8 @@ def write_sequencinggroup_report(target, sequencinggroup):
                 true_positive = tds[-1]  # last column shows call
                 if true_positive.text == "1":
                     add_css_class(tr, "negative")
-                else:
-                    add_css_class(tr, "positive")
+                # else:
+                #     add_css_class(tr, "positive")
 
             comparator.vcf_table_html = dataframe_to_html(
                 vcf_table, extra_classes=("definition",)
