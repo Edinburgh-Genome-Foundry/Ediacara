@@ -34,24 +34,38 @@ class CustomTranslator(dna_features_viewer.BiopythonTranslator):
 
     def compute_filtered_features(self, features):
         """Display only selected features."""
+        has_dnacauldron_annotation = False
         filtered_features = []
         for feature in features:
-            # 4-letter overhangs:
-            try:  # may not have a 'label', count 4 to include overhang annotations
-                if (len(feature.qualifiers.get("label", "")[0]) == 4):
+            # DNA Cauldron annotations:
+            try:
+                if ("From " in str(feature.qualifiers.get("note", ""))):
                     filtered_features += [feature]
             except:
-                # DNA Cauldron annotations:
-                try:
-                    if ("From " in str(feature.qualifiers.get("note", ""))):
+                pass
+
+        if len(filtered_features) == 0:  # no DNA Cauldron annotations
+            # Keep up to n longest features:
+            n = 10
+            if len(features) > n:
+                feature_lengths = []
+                for feature in features:
+                    feature_lengths += [len(feature.location)]
+                feature_lengths.sort(reverse=True)
+                max_length = feature_lengths[n]
+                for feature in features:
+                    if len(feature.location) > max_length:
+                        filtered_features += [feature]
+            else:
+                filtered_features = features
+        else:
+            # add 4-letter overhang annotations:
+            for feature in features:
+                try:  # may not have a 'label'
+                    if (len(feature.qualifiers.get("label", "")[0]) == 4):
                         filtered_features += [feature]
                 except:
                     pass
-
-        # Keep up to n features
-        n = 20
-        if len(features) > n:
-            filtered_features = filtered_features[0:n]
 
         return filtered_features
 
