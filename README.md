@@ -16,6 +16,12 @@ Ediacara helps interpreting sequencing data of assembled DNA constructs (plasmid
 pip install --upgrade git+https://github.com/Edinburgh-Genome-Foundry/Ediacara.git@main
 ```
 
+The plotting feature requires NCBI BLAST+. On Ubuntu, install it with:
+
+```bash
+apt-get install ncbi-blast+
+```
+
 ## Usage
 
 Using Ediacara requires the plasmid reference sequences (Genbank), the alignments in [PAF format](https://lh3.github.io/minimap2/minimap2.html#10), and a TSV file of coverage (depth) counts. Optionally, the user can also specify consensus (or *de novo* assembly) files that will be compared with the references.
