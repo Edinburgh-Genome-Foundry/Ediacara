@@ -39,7 +39,7 @@ class CustomTranslator(dna_features_viewer.BiopythonTranslator):
         for feature in features:
             # DNA Cauldron annotations:
             try:
-                if ("From " in str(feature.qualifiers.get("note", ""))):
+                if "From " in str(feature.qualifiers.get("note", "")):
                     filtered_features += [feature]
             except:
                 pass
@@ -62,7 +62,7 @@ class CustomTranslator(dna_features_viewer.BiopythonTranslator):
             # add 4-letter overhang annotations:
             for feature in features:
                 try:  # may not have a 'label'
-                    if (len(feature.qualifiers.get("label", "")[0]) == 4):
+                    if len(feature.qualifiers.get("label", "")[0]) == 4:
                         filtered_features += [feature]
                 except:
                     pass
@@ -193,8 +193,7 @@ class ComparatorGroup:
                     selected_reads += [name]
 
         # Filter for selected reads ..
-        subset_paf_filtered = self.paf[self.paf["query_name"].isin(
-            selected_reads)]
+        subset_paf_filtered = self.paf[self.paf["query_name"].isin(selected_reads)]
         # ..then get only the reads aligning to reference:
         subset_paf_final = subset_paf_filtered[
             subset_paf_filtered["target_name"] == reference_name
@@ -334,14 +333,12 @@ class ComparatorGroup:
                 paf_lines = f_input.read().splitlines()
                 for paf_line in paf_lines:
                     paf_line = paf_line.split("\t")  # PAF is tab separated
-                    row = paf_line[0:12] + \
-                        [";".join(paf_line[12:-1])] + [paf_line[-1]]
+                    row = paf_line[0:12] + [";".join(paf_line[12:-1])] + [paf_line[-1]]
                     rows += [row]
             paf = pandas.DataFrame(rows)
             # Set numeric columns:
             numeric_columns = [1, 2, 3, 6, 7, 8, 9, 10, 11]  # see list below
-            paf[numeric_columns] = paf[numeric_columns].apply(
-                pandas.to_numeric)
+            paf[numeric_columns] = paf[numeric_columns].apply(pandas.to_numeric)
 
         # First 12 columns are defined by the format:
         columns_12 = [
@@ -400,8 +397,7 @@ class Comparator:
         self.paf = alignment["paf"]
         self.tsv = alignment["tsv"]
         self.coverage_cutoff = 0.5  # fraction of median coverage
-        self.coverage_cutoff_pct = int(
-            self.coverage_cutoff * 100)  # for PDF report
+        self.coverage_cutoff_pct = int(self.coverage_cutoff * 100)  # for PDF report
         self.reference_length = len(self.record)
         self.has_warnings = False
         self.has_errors = False
@@ -448,9 +444,14 @@ class Comparator:
         vcf_table["T"] = 1
         for index, row in vcf_table.iterrows():
             # mutations at repeats were shown to be systemic sequencing errors, and can be ignored
-            # match 5 consecutive repeats
+            # match 5 consecutive repeats:
             result = re.search(r"((\w)\2{4,})", row["REF"])
             if result is not None:
+                vcf_table.loc[index, "T"] = 0
+                continue
+
+            # ignore if ALT < 50%: mutation is not real or sample is polymorphic
+            if row["AO"] < row["DP"] * 0.5:
                 vcf_table.loc[index, "T"] = 0
 
         return vcf_table
@@ -479,8 +480,7 @@ class Comparator:
             read_insert_dict.keys()
         )
         # imprecise rounding, but ok for our purposes:
-        self.pct_big_insert = round(
-            fraction_of_big_inserts * 100, 1)  # pct multiplier
+        self.pct_big_insert = round(fraction_of_big_inserts * 100, 1)  # pct multiplier
 
     def calculate_stats(self):
         """Calculate statistics for the coverage plot, used in plot_coverage()."""
@@ -544,8 +544,7 @@ class Comparator:
                 self.record
             )
 
-        graphic_record.plot(ax=ax1, with_ruler=False,
-                            strand_in_label_threshold=4)
+        graphic_record.plot(ax=ax1, with_ruler=False, strand_in_label_threshold=4)
 
         # Plot coverage
         ax2.fill_between(self.xx, self.yy, alpha=0.8)
