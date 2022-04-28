@@ -521,6 +521,9 @@ class Comparator:
             self.zero_coverage_positions_string = "-"  # looks better in the pdf report
         else:
             self.has_warnings = True
+            self.longest_range = self.get_biggest_consecutive_range(zero_indices)
+            if self.longest_range > 50:  # bp cutoff to fail sample
+                self.has_errors = True
 
         # This section creates a list of low coverage position to be reported
         indices = [
@@ -733,3 +736,28 @@ class Comparator:
             record for record in input_seq_iterator if record.name in read_names
         )
         SeqIO.write(seq_iterator, target, "fastq")
+
+    @staticmethod
+    def get_biggest_consecutive_range(numbers):
+        """Get the longest range in a list of numbers.
+
+
+        **Parameters**
+
+        **numbers**
+        > A sorted list of integers (`list`).
+        """
+        longest = 1
+        previous_number = numbers[0]
+        range_length = 1
+        for index, number in enumerate(numbers[1:]):
+            if number == previous_number + 1:
+                range_length += 1
+                longest = range_length
+            else:
+                if range_length > longest:
+                    longest = range_length
+                range_length = 0
+            previous_number = number
+
+        return longest
