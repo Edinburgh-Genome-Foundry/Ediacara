@@ -80,6 +80,8 @@ each comparatorgroup in sequencinggroup.comparatorgroups
 
     img#diff-figure(src="{{ comparator.figure_data }}")
 
+    p Positions with zero coverage: #[span.red {{ comparator.zero_coverage_positions_string }} ]
+
     p Positions with low coverage (<{{ comparator.coverage_cutoff_pct }}%): #[span.red {{ comparator.low_coverage_positions_string }} ]
 
     if comparator.high_error_positions_string

@@ -506,6 +506,22 @@ class Comparator:
             self.has_big_insert = False
             self.has_reads_with_insert = False
 
+        # This section creates a list of zero coverage position to be reported
+        zero_indices = [i for i, value in enumerate(self.yy) if value == 0]  # zero cov.
+        G_zero = (
+            list(x)
+            for _, x in itertools.groupby(
+                zero_indices, lambda x, c=itertools.count(): next(c) - x
+            )
+        )
+        self.zero_coverage_positions_string = ", ".join(
+            "-".join(map(str, (g[0], g[-1])[: len(g)])) for g in G_zero
+        )
+        if self.zero_coverage_positions_string == "":
+            self.zero_coverage_positions_string = "-"  # looks better in the pdf report
+        else:
+            self.has_warnings = True
+
         # This section creates a list of low coverage position to be reported
         indices = [
             i
