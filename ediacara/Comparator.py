@@ -539,8 +539,6 @@ class Comparator:
         )
         if self.low_coverage_positions_string == "":
             self.low_coverage_positions_string = "-"  # looks better in the pdf report
-        else:
-            self.has_warnings = True
 
     def plot_coverage(self):
         """Plot the reference with the coverage and weak reads."""
