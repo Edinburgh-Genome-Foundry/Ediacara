@@ -540,6 +540,8 @@ class Comparator:
             / len(unaligned_interval_sizes)
             * 100  # report as percent
         )
+        if self.insert_pct_above_cutoff > 50:  # more than half of reads has big insert
+            self.has_errors = True
 
         self.unaligned_interval_sizes = unaligned_interval_sizes
 
