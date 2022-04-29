@@ -495,17 +495,6 @@ class Comparator:
             self.is_uncertain = False
             self.has_low_coverage = False
 
-        self.find_big_inserts()
-        if self.pct_big_insert >= 50:  # at least half of reads have big insert
-            self.has_errors = True
-            self.has_big_insert = True
-        if self.pct_big_insert >= 5:  # five pct has big insert
-            self.has_warnings = True
-            self.has_reads_with_insert = True
-        else:
-            self.has_big_insert = False
-            self.has_reads_with_insert = False
-
         # This section creates a list of zero coverage position to be reported
         zero_indices = [i for i, value in enumerate(self.yy) if value == 0]  # zero cov.
         G_zero = (

@@ -87,17 +87,6 @@ each comparatorgroup in sequencinggroup.comparatorgroups
     if comparator.high_error_positions_string
       p Positions with bad coverage: #[span.red {{ comparator.high_error_positions_string }} ]
 
-    if comparator.has_reads_with_insert
-      if comparator.has_big_insert
-        p
-          strong #[span.red ☒] {{ comparator.pct_big_insert }}% of reads have an insert >50 bp!
-      else
-        p
-          strong #[span.yellow ⚠] {{ comparator.pct_big_insert }}% of reads have an insert >50 bp!
-    else
-      p
-        <b> #[span.green ☑] {{ comparator.pct_big_insert }}</b>% of reads have an insert >50 bp.
-
     if comparator.has_consensus
       h3 Comparison with reference
 
