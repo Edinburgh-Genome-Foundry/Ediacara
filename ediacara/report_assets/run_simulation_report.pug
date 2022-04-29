@@ -84,8 +84,9 @@ each comparatorgroup in sequencinggroup.comparatorgroups
 
     p Positions with low coverage (<{{ comparator.coverage_cutoff_pct }}%): #[span.red {{ comparator.low_coverage_positions_string }} ]
 
-    if comparator.high_error_positions_string
-      p Positions with bad coverage: #[span.red {{ comparator.high_error_positions_string }} ]
+    p Longest unaligned interval in each read (cumulative):
+
+    img#diff-figure(src="{{ comparator.insert_plot_data }}")
 
     if comparator.has_consensus
       h3 Comparison with reference

@@ -104,6 +104,9 @@ def write_sequencinggroup_report(target, sequencinggroup):
         )
         for comparator in comparatorgroup.comparators:
             comparator.figure_data = pdf_tools.figure_data(comparator.fig, fmt="svg")
+            comparator.insert_plot_data = pdf_tools.figure_data(
+                comparator.insert_plot, fmt="svg"
+            )
 
             # Keep first few only:
             if comparator.vcf_table.shape[0] > sequencinggroup.vcf_cutoff:  # 0 for rows

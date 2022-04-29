@@ -418,6 +418,8 @@ class Comparator:
         > Optional. Path to a consensus FASTA file (`str`).
         """
         self.fig = self.plot_coverage()
+        self.insert_plot = self.plot_inserts()
+
         if assembly_path is not None:
             self.comparison_figure = self.compare_with_assembly(
                 assembly_path=assembly_path
@@ -524,14 +526,15 @@ class Comparator:
                 alignment_intervals = alignment_intervals | interval
 
             read_interval = P.closed(100, row["query_length"])  # ignore first 100 bases
-            unaligned_intervals = read_interval - alignment_intervals
-            discretized_unaligned_intervals = self.discretize(unaligned_intervals)
+            discretized_alignment_intervals = self.discretize(alignment_intervals)
 
-            size = self.get_size_of_longest_interval(discretized_unaligned_intervals)
+            unaligned_intervals = read_interval - discretized_alignment_intervals
+
+            size = self.get_size_of_longest_interval(unaligned_intervals)
             #     read_lengths += [row["query_length"]]
             unaligned_interval_sizes += [size]
 
-        return unaligned_interval_sizes
+        self.unaligned_interval_sizes = unaligned_interval_sizes
 
     def calculate_stats(self):
         """Calculate statistics for the coverage plot, used in plot_coverage()."""
@@ -545,8 +548,6 @@ class Comparator:
         else:
             self.is_uncertain = False
             self.has_low_coverage = False
-
-        ## CALULATE INSERTS HERE
 
         # This section creates a list of zero coverage position to be reported
         zero_indices = [i for i, value in enumerate(self.yy) if value == 0]  # zero cov.
@@ -630,6 +631,25 @@ class Comparator:
             linestyle="--",
             linewidth=0.8,
         )
+
+        return fig
+
+    def plot_inserts(self):
+        """Plot the longest unaligned interval in each read (cumulative)."""
+
+        if not hasattr(self, "unaligned_interval_sizes"):
+            ## Calculate unaligned interval (insert) sizes in reads:
+            self.get_unaligned_interval_sizes()
+
+        fig, ax = plt.subplots(1, 1, figsize=(2.5, 1))
+        ax.step(
+            sorted(self.unaligned_interval_sizes),
+            range(len(self.unaligned_interval_sizes)),
+            color="red",
+        )
+        ax.axvline(x=50, color="grey")  # line at 50 bp for guide
+        ax.set_ylabel("Reads")
+        ax.set_xlabel("Interval (insert) length [bp]")
 
         return fig
 
