@@ -84,7 +84,7 @@ each comparatorgroup in sequencinggroup.comparatorgroups
 
     p Positions with low coverage (<{{ comparator.coverage_cutoff_pct }}%): #[span.red {{ comparator.low_coverage_positions_string }} ]
 
-    p Longest unaligned interval in each read (cumulative):
+    p Cumulative plot of longest unaligned interval in each read ({{ comparator.insert_pct_above_cutoff }}% above cutoff. mode: {{ comparator.insert_mode }} bp):
 
     img#diff-figure(src="{{ comparator.insert_plot_data }}")
 

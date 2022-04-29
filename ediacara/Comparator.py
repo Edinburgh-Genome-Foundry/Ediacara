@@ -534,6 +534,13 @@ class Comparator:
             #     read_lengths += [row["query_length"]]
             unaligned_interval_sizes += [size]
 
+        self.insert_mode = statistics.mode(unaligned_interval_sizes)
+        self.insert_pct_above_cutoff = int(
+            sum(i > 100 for i in unaligned_interval_sizes)  # 100 bp cutoff
+            / len(unaligned_interval_sizes)
+            * 100  # report as percent
+        )
+
         self.unaligned_interval_sizes = unaligned_interval_sizes
 
     def calculate_stats(self):
@@ -647,7 +654,7 @@ class Comparator:
             range(len(self.unaligned_interval_sizes)),
             color="red",
         )
-        ax.axvline(x=50, color="grey")  # line at 50 bp for guide
+        ax.axvline(x=100, color="grey")  # line at 100 bp for guide
         ax.set_ylabel("Reads")
         ax.set_xlabel("Interval (insert) length [bp]")
 
