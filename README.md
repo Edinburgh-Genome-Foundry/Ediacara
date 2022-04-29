@@ -73,8 +73,13 @@ comparator_group.perform_all_comparisons(assembly_paths=assembly_paths)
 edi.write_comparatorgroup_report("report_ABC.pdf", comparator_group)
 ```
 
-If we want to investigate which of the parts are in the construct, we can align the part sequences
-against the consensus or de novo sequence and create PDF report:
+<p align="center">
+<img alt="Ediacara" title="Ediacara" src="images/analysis_screenshot.png" width="360">
+</p>
+
+This page of the report shows a missing part ('feature_14'). The presence of unaligned read segments suggest that there is another ~1.6 kbp sequence in its place (this was the part's carrier plasmid in this case). The correct section also contains a point mutation as seen in the red row of the variant call table. Suspected false positives (systematic sequencing errors) are shown in grey.
+
+If we want to investigate which of the parts are present in the construct, we can align the part sequences against the consensus or de novo sequence, and create PDF report:
 
 ```python
 assembly = edi.Assembly(
@@ -89,6 +94,12 @@ assemblybatch.perform_all_interpretations_in_group()
 
 edi.write_assembly_analysis_report("review_report_pdf", assemblybatch)
 ```
+
+<p align="center">
+<img alt="Ediacara" title="Ediacara" src="images/review_screenshot.png" width="360">
+</p>
+
+The plot shows alignment regions as annotations: green annotations (genetic parts) are expected in the construct; red annotations show other parts that align to the construct. Grey shows the alignment of the reference expected sequence for the plasmid. In this case, we have no errors as the green segments cover the whole sequence, and the reference aligns fully as well.
 
 ## Versioning
 
