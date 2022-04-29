@@ -24,5 +24,6 @@ setup(
         "geneblocks",
         "cyvcf2",
         "pdf_reports",
+        "portion",
     ],
 )

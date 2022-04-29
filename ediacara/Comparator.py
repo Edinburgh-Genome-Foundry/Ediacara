@@ -5,8 +5,9 @@ import statistics
 import matplotlib.pyplot as plt
 import numpy
 import pandas
-
+import portion as P
 from weighted_levenshtein import lev
+
 from Bio import SeqIO
 import cyvcf2
 
@@ -482,6 +483,56 @@ class Comparator:
         # imprecise rounding, but ok for our purposes:
         self.pct_big_insert = round(fraction_of_big_inserts * 100, 1)  # pct multiplier
 
+    @staticmethod
+    def discretize(i):
+        # see https://github.com/AlexandreDecan/portion/issues/24
+        first_step = lambda s: (
+            P.OPEN,
+            (s.lower - 1 if s.left is P.CLOSED else s.lower),
+            (s.upper + 1 if s.right is P.CLOSED else s.upper),
+            P.OPEN,
+        )
+        second_step = lambda s: (
+            P.CLOSED,
+            (s.lower + 1 if s.left is P.OPEN else s.lower),
+            (s.upper - 1 if s.right is P.OPEN else s.upper),
+            P.CLOSED,
+        )
+        return i.apply(first_step).apply(second_step)
+
+    @staticmethod
+    def get_size_of_longest_interval(interval):
+        if interval.empty:
+            return 0
+
+        max_length = 0
+        for subinterval in interval._intervals:
+            subinterval_length = subinterval.upper - subinterval.lower
+            if subinterval_length > max_length:
+                max_length = subinterval_length
+
+        return max_length
+
+    def get_unaligned_interval_sizes(self):
+        grouped = self.paf.groupby("query_name")
+        unaligned_interval_sizes = []
+        # read_lengths = []
+        for name, group in grouped:
+            alignment_intervals = P.empty()
+            for index, row in group.iterrows():
+                interval = P.closed(row["query_start"], row["query_end"])
+                alignment_intervals = alignment_intervals | interval
+
+            read_interval = P.closed(100, row["query_length"])  # ignore first 100 bases
+            unaligned_intervals = read_interval - alignment_intervals
+            discretized_unaligned_intervals = self.discretize(unaligned_intervals)
+
+            size = self.get_size_of_longest_interval(discretized_unaligned_intervals)
+            #     read_lengths += [row["query_length"]]
+            unaligned_interval_sizes += [size]
+
+        return unaligned_interval_sizes
+
     def calculate_stats(self):
         """Calculate statistics for the coverage plot, used in plot_coverage()."""
         self.xx = numpy.arange(len(self.record.seq))  # for the plot x axis
@@ -494,6 +545,8 @@ class Comparator:
         else:
             self.is_uncertain = False
             self.has_low_coverage = False
+
+        ## CALULATE INSERTS HERE
 
         # This section creates a list of zero coverage position to be reported
         zero_indices = [i for i, value in enumerate(self.yy) if value == 0]  # zero cov.
