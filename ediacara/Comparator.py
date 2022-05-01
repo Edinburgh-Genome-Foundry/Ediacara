@@ -534,7 +534,10 @@ class Comparator:
             #     read_lengths += [row["query_length"]]
             unaligned_interval_sizes += [size]
 
-        self.insert_mode = statistics.mode(unaligned_interval_sizes)
+        # Get mode, but there may be no unique mode:
+        self.insert_mode = max(
+            [p[0] for p in statistics._counts(unaligned_interval_sizes)]
+        )
         self.insert_pct_above_cutoff = int(
             sum(i > 100 for i in unaligned_interval_sizes)  # 100 bp cutoff
             / len(unaligned_interval_sizes)
