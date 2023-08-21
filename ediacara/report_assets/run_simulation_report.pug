@@ -130,6 +130,9 @@ p.
   #[span.red ☒ / {{ sequencinggroup.result_keywords.error }} ] : errors were detected in the construct<br>
   #[span.grey ⍰ / {{ sequencinggroup.result_keywords.uncertain }} ] : sequencing problems, insufficient reads<br>
 
+p.
+  Depending on settings and input data, some of the described plots may not be in the report.
+
 p
   strong Coverage
 p.
@@ -150,7 +153,7 @@ p.
   and annotated with changes compared to the consensus obtained from the reads
   (unless a note tells otherwise). For example, <code>+G</code> means that the reference
   file has an extra G compared to the DNA sample, in other words, the DNA has a G deletion.
-  If a VCF file of a variant call is provided, then a VCF table is also displayed.
+  A VCF (variant call format) table is also displayed.
   Both the reported and the VCF table positions are zero-based,
   but the VCF table reports the position of the variation, rather than the nucleotide.
   Note that the reported depths (DP) may be lower than the ones in the coverage plot,
@@ -163,7 +166,7 @@ p.
     <li>DP: Total read depth at the locus</li>
     <li>RO: Reference allele observation count</li>
     <li>AO: Alternate allele observations</li>
-  </ul> 
+  </ul>
 
   An additional column T is provided to mark entries (1) that are deemed true mutations. 
   Inconclusive mutations at repeats (homopolymers) were shown to be systematic sequencing errors, and can be ignored.
