@@ -100,7 +100,8 @@ class Assembly:
             plan_df = pd.read_csv(assembly_plan, skiprows=1, header=None)  # skip header
             self.assembly_plan = plan_df[plan_df[0] == self.reference.id]
             if len(self.assembly_plan) == 0:
-                raise ValueError("Error! Assembly plan doesn't contain the reference!")
+                raise ValueError("Error! Assembly plan doesn't contain the reference! "
+                        "(Have you ensured that the plan contains a header line?)")
             if len(self.assembly_plan) > 1:
                 raise ValueError(
                     "Error! More than one assembly plan entry matches the reference!"
