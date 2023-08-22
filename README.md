@@ -105,9 +105,9 @@ The plot shows alignment regions as annotations: green annotations (genetic part
 
 Ediacara uses the [semantic versioning](https://semver.org) scheme.
 
-## Copyright
+## License = GPLv3+
 
-Copyright 2021 Edinburgh Genome Foundry
+Copyright 2021 Edinburgh Genome Foundry, University of Edinburgh
 
 Ediacara was written at the [Edinburgh Genome Foundry](https://edinburgh-genome-foundry.github.io/)
-by [Peter Vegh](https://github.com/veghp).
+by [Peter Vegh](https://github.com/veghp), and is released under the GPLv3 license.

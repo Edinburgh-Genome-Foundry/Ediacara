@@ -1,3 +1,13 @@
+# Copyright 2021 Edinburgh Genome Foundry, University of Edinburgh
+#
+# This file is part of Ediacara.
+#
+# Ediacara is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+#
+# Ediacara is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with Ediacara. If not, see <https://www.gnu.org/licenses/>.
+
 import os
 
 import pandas as pd
@@ -100,8 +110,10 @@ class Assembly:
             plan_df = pd.read_csv(assembly_plan, skiprows=1, header=None)  # skip header
             self.assembly_plan = plan_df[plan_df[0] == self.reference.id]
             if len(self.assembly_plan) == 0:
-                raise ValueError("Error! Assembly plan doesn't contain the reference! "
-                        "(Have you ensured that the plan contains a header line?)")
+                raise ValueError(
+                    "Error! Assembly plan doesn't contain the reference! "
+                    "(Have you ensured that the plan contains a header line?)"
+                )
             if len(self.assembly_plan) > 1:
                 raise ValueError(
                     "Error! More than one assembly plan entry matches the reference!"

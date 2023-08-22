@@ -11,7 +11,8 @@ setup(
     description="EGF's alignment reporter",
     long_description=open("pypi-readme.rst").read(),
     long_description_content_type="text/x-rst",
-    keywords="biology",
+    license="GPLv3+",
+    keywords="biology, sequencing",
     packages=find_packages(exclude="docs"),
     include_package_data=True,
     install_requires=[
