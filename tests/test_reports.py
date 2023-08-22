@@ -73,7 +73,9 @@ def test_write_sequencinggroup_report(tmpdir):
         comparatorgroups += [comparator_group]
 
     # Create PDF report
-    sequencinggroup = edi.SequencingGroup(comparatorgroups, name=params_projectname)
+    sequencinggroup = edi.SequencingGroup(comparatorgroups,
+                                          name=params_projectname,
+                                          low_depth_cutoff=30)
     sequencinggroup.perform_all_comparisons_in_sequencinggroup()
     edi.write_sequencinggroup_report(target=pdf_file, sequencinggroup=sequencinggroup)
 

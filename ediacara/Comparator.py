@@ -25,7 +25,7 @@ import dna_features_viewer
 import geneblocks
 
 
-vcf_selected_info_keytable = {
+vcf_selected_info_keytable =  {
     "DP": "Total read depth at the locus",
     "RO": "Reference allele observation count",
     "AO": "Alternate allele observations",
@@ -38,7 +38,6 @@ result_keywords = {
     "warning": "WARNING",
     "uncertain": "LOW_COVERAGE",
 }
-
 
 class CustomTranslator(dna_features_viewer.BiopythonTranslator):
     """Custom translator used in the coverage plot."""
@@ -94,11 +93,12 @@ class SequencingGroup:
     > Name of the sequencing project (`str`).
     """
 
-    def __init__(self, comparatorgroups, name="Unnamed"):
+    def __init__(self, comparatorgroups, name="Unnamed", low_depth_cutoff=30):
         self.comparatorgroups = comparatorgroups
         self.name = name
         self.vcf_cutoff = 20  # max number of VCF entries to display in report
-        self.result_keywords = result_keywords
+        self.result_keywords = result_keywords,
+        self.low_depth_cutoff = low_depth_cutoff  # see Comparator class
 
     def perform_all_comparisons_in_sequencinggroup(self):
         self.number_of_reads = 0
@@ -140,6 +140,7 @@ class ComparatorGroup:
         barcode="barcode",
         assembly_paths=None,
         vcf_paths=None,
+        low_depth_cutoff=30
     ):
         self.references = references
         self.paf = alignments["paf"]
@@ -148,6 +149,7 @@ class ComparatorGroup:
         self.barcode = barcode
         self.assembly_paths = assembly_paths
         self.vcf_paths = vcf_paths
+        self.low_depth_cutoff = low_depth_cutoff  # see Comparator class
 
     def create_comparator(self, reference_name):
         """Create a Comparator instance from one of the loaded references.
@@ -417,6 +419,7 @@ class Comparator:
         self.dnacauldron = True  # for plotting
         self.has_consensus = False  # for consensus sequence comparison
         self.is_uncertain = True  # for sequencing data quality, used in report
+        self.low_depth_cutoff = 30  # for marking low-depth, value from literature
 
     def perform_comparison(self, assembly_path=None, vcf_path=None):
         """Plot coverage and compare reference with a consensus sequence.
@@ -564,7 +567,7 @@ class Comparator:
         self.yy = self.tsv["depth"].to_list()  # for plotting coverage
         self.median_yy = statistics.median(self.yy)
 
-        if self.median_yy < 30:  # a good cutoff for low-depth sequencing
+        if self.median_yy < self.low_depth_cutoff:
             self.has_low_coverage = True
             self.has_warnings = True
         else:
