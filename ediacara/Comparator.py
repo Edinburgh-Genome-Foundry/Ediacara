@@ -25,7 +25,7 @@ import dna_features_viewer
 import geneblocks
 
 
-vcf_selected_info_keytable =  {
+vcf_selected_info_keytable = {
     "DP": "Total read depth at the locus",
     "RO": "Reference allele observation count",
     "AO": "Alternate allele observations",
@@ -38,6 +38,7 @@ result_keywords = {
     "warning": "WARNING",
     "uncertain": "LOW_COVERAGE",
 }
+
 
 class CustomTranslator(dna_features_viewer.BiopythonTranslator):
     """Custom translator used in the coverage plot."""
@@ -97,7 +98,7 @@ class SequencingGroup:
         self.comparatorgroups = comparatorgroups
         self.name = name
         self.vcf_cutoff = 20  # max number of VCF entries to display in report
-        self.result_keywords = result_keywords,
+        self.result_keywords = (result_keywords,)
         self.low_depth_cutoff = low_depth_cutoff  # see Comparator class
 
     def perform_all_comparisons_in_sequencinggroup(self):
@@ -140,7 +141,7 @@ class ComparatorGroup:
         barcode="barcode",
         assembly_paths=None,
         vcf_paths=None,
-        low_depth_cutoff=30
+        low_depth_cutoff=30,
     ):
         self.references = references
         self.paf = alignments["paf"]
@@ -547,10 +548,21 @@ class Comparator:
             #     read_lengths += [row["query_length"]]
             unaligned_interval_sizes += [size]
 
-        # Get mode, but there may be no unique mode:
-        self.insert_mode = max(
-            [p[0] for p in statistics._counts(unaligned_interval_sizes)]
+        # Get largest mode value, but handle case with no unique mode:
+        occurrence = max(
+            list(map(unaligned_interval_sizes.count, unaligned_interval_sizes))
         )
+        self.insert_mode = max(
+            list(
+                set(
+                    filter(
+                        lambda x: unaligned_interval_sizes.count(x) == occurrence,
+                        unaligned_interval_sizes,
+                    )
+                )
+            )
+        )
+
         self.insert_pct_above_cutoff = int(
             sum(i > 100 for i in unaligned_interval_sizes)  # 100 bp cutoff
             / len(unaligned_interval_sizes)
