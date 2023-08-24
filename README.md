@@ -7,13 +7,12 @@
 ![version](https://img.shields.io/badge/current_version-0.2.2-blue)
 [![build](https://github.com/Edinburgh-Genome-Foundry/Ediacara/actions/workflows/build.yml/badge.svg)](https://github.com/Edinburgh-Genome-Foundry/Ediacara/actions/workflows/build.yml)
 
-Ediacara helps interpreting sequencing data of assembled DNA constructs (plasmids). It's used in the [Sequeduct pipeline](https://github.com/Edinburgh-Genome-Foundry/Sequeduct/).
+Ediacara helps interpreting sequencing data of assembled DNA constructs (plasmids). It's used in the [Sequeduct pipeline](https://github.com/Edinburgh-Genome-Foundry/Sequeduct/). See also the [demonstration data and results](https://github.com/Edinburgh-Genome-Foundry/Sequeduct_demo).
 
 ## Install
 
 ```bash
-# pip install ediacara
-pip install --upgrade git+https://github.com/Edinburgh-Genome-Foundry/Ediacara.git@main
+pip install ediacara
 ```
 
 The plotting feature requires NCBI BLAST+. On Ubuntu, install it with:
